@@ -1,0 +1,23 @@
+<po-button [p-label]="labelCriar" (p-click)="criarVagas()"> </po-button>
+
+<div *ngIf="(vagas$ | async) as vaga; else carregar">
+    <po-table
+    [p-items]="vaga"
+    [p-columns]="colunaVaga"
+    [p-actions]="acoes"
+    [p-show-more-disabled]="false"
+    (p-show-more)="mostrarMais()">
+    </po-table>
+</div>
+
+<ng-template #carregar>
+    <app-carregando></app-carregando>
+</ng-template>
+
+<app-vaga-modal
+*ngIf="mostrarModal"
+[novoRegistro]="novoRegistro"
+[titulo]="titulo"
+[vagaSelecionada]="VagaSelecionada"
+(modaFechadoOuSalvo)="aoFecharModal($event)">
+</app-vaga-modal>

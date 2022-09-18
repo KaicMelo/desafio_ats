@@ -1,0 +1,58 @@
+{
+  "candidatos": [
+    {
+      "candidato": "Kaic Melo Santos",
+      "id": 1
+    },
+    {
+      "candidato": "Jean Carlos",
+      "id": 2
+    },
+    {
+      "candidato": "Emilly Nayane",
+      "id": 3
+    },
+    {
+      "candidato": "Iara de Melo Costa",
+      "id": 4
+    },
+    {
+      "candidato": "Luciano dos Santos",
+      "id": 5
+    },
+    {
+      "candidato": "Mayara de Melo Costa",
+      "id": 6
+    },
+    {
+      "candidato": "Maria Luisa",
+      "id": 7
+    },
+    {
+      "candidato": "Gabriel Farias",
+      "id": 8
+    },
+    {
+      "candidato": "Maria Luisa",
+      "id": 9
+    },
+    {
+      "candidato": "Kely Souza Santos",
+      "id": 14
+    }
+  ],
+  "vagas": [
+    {
+      "vaga": "Analista 1",
+      "id": 1
+    },
+    {
+      "vaga": "Comercial reservado",
+      "id": 2
+    },
+    {
+      "vaga": "Financeiro",
+      "id": 4
+    }
+  ]
+}

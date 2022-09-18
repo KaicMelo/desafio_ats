@@ -1,0 +1,19 @@
+<div class="po-row">
+
+  <div class="po-md-6" *ngIf="(listaDeCandidatos$ | async) as candidato; else carregar">
+    <app-selecionar [vagas]="listaDeCandidatos" [label]="candidatoTitulo" (valorFormulario)="obterCandidatoValor($event)"></app-selecionar>
+  </div>
+
+  <div class="po-md-6" *ngIf="(listaDeVagas$ | async) as vagas; else carregar">
+    <app-selecionar [vagas]="listaDeVagas" [label]="vagaTitulo" (valorFormulario)="obterVagasValor($event)"></app-selecionar>
+  </div>
+  
+  <po-button class="po-md-12" [p-label]="salvarCandidato" (p-click)="onClick()"> </po-button>
+
+</div>
+
+<po-divider></po-divider>
+
+<ng-template #carregar>
+  <app-carregando></app-carregando>
+</ng-template>

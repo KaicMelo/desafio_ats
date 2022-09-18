@@ -1,0 +1,23 @@
+<po-button [p-label]="labelCriar" (p-click)="criarCandidato()"> </po-button>
+
+<div *ngIf="(candidatos$ | async) as candidato; else carregar">
+    <po-table
+    [p-items]="candidato"
+    [p-columns]="colunaCandidato"
+    [p-actions]="acoes"
+    [p-show-more-disabled]="false"
+    (p-show-more)="mostrarMais()">
+    </po-table>
+</div>
+
+<ng-template #carregar>
+    <app-carregando></app-carregando>
+</ng-template>
+
+<app-candidato-modal
+*ngIf="mostrarModal"
+[novoRegistro]="novoRegistro"
+[titulo]="titulo"
+[candidatoSelecionado]="candidatoSelecionado"
+(modaFechadoOuSalvo)="aoFecharModal($event)">
+</app-candidato-modal>

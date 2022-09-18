@@ -1,0 +1,8 @@
+<po-modal #modal [p-primary-action]="confirmar" [p-secondary-action]="fechar" [p-title]="titulo" [p-hide-close]="true">
+    <div class="po-row" *ngIf="novoRegistro">
+        <po-input class="po-lg-12" name="input" [p-label]="nomeCandidato" [(ngModel)]="inputCandidato"> </po-input>
+    </div>
+    <div class="po-row" *ngIf="!novoRegistro">
+        <po-input class="po-lg-12" name="input" [p-label]="nomeCandidato" [(ngModel)]="candidatoSelecionado.candidato"> </po-input>
+    </div>
+</po-modal>
