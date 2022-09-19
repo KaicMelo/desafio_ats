@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {
   PoTableAction,
   PoTableColumn,
@@ -26,7 +27,7 @@ export class VagasComponent implements OnInit {
 
   readonly colunaVaga: Array<PoTableColumn> = [
     { property: 'id', label: 'Numero da Vaga' },
-    { property: 'vaga', label: 'Vagas' }
+    { property: 'vacancy', label: 'Vagas' }
   ];
 
   readonly acoes: Array<PoTableAction> = [
@@ -54,9 +55,7 @@ export class VagasComponent implements OnInit {
 
     this.mostrarModal = true;
   }
-
-  mostrarMais() {}
-
+  
   aoFecharModal(candidato: string) {
     this.mostrarModal = false;
 
@@ -67,13 +66,27 @@ export class VagasComponent implements OnInit {
   editarVaga(vagas: Vagas) {
     this.titulo = 'Alterar Vaga';
     this.VagaSelecionada = vagas;
+    this.novoRegistro = false;
 
     this.mostrarModal = true;
   }
   deletarVaga(vagas: Vagas) {
-    this.vagasService.deletarVagas(vagas.id).subscribe((r) => {
-      this.poNotification.success('Deletado com sucesso');
-      this.vagas$ = this.vagasService.listaVagas();
+    Swal.fire({
+      title: 'Gostaria de deletar Vaga?',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: 'Cancelar',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.vagasService
+          .deletarVagas(vagas.id)
+          .subscribe((r) => {
+            this.vagas$ =
+              this.vagasService.listaVagas();
+            Swal.fire('Deletado', '', 'success');
+          });
+      }
     });
   }
 }

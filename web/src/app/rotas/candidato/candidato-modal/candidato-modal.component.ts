@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { CandidatoService } from '../services/candidato.service';
 import {
   Component,
@@ -54,23 +55,59 @@ export class CandidatoModalComponent implements OnInit {
 
   salvarCandidato() {
     if (this.novoRegistro) {
+      this.carregandoBotaoSalvar(true);
+
       this.candidatoService
-        .salvarCandidatos({ candidato: this.inputCandidato })
-        .subscribe((r) => {
-          this.poNotification.success('Salvo com sucesso');
-          this.modaFechadoOuSalvo.emit('salvar');
-          this.poModal.close();
-        });
+        .salvarCandidatos({ candidate: this.inputCandidato })
+        .subscribe(
+          (r) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Salvo com sucesso',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            this.modaFechadoOuSalvo.emit('salvar');
+            this.poModal.close();
+
+            this.carregandoBotaoSalvar(false);
+          },
+          (err) => {
+            this.carregandoBotaoSalvar(false);
+            this.poNotification.warning('Preencha o campo corretamente');
+          }
+        );
     } else {
+      this.carregandoBotaoSalvar(true);
+
       this.candidatoService
         .editarCandidatos(this.candidatoSelecionado.id, {
-          candidato: this.candidatoSelecionado.candidato,
+          candidate: this.candidatoSelecionado.candidate,
         })
-        .subscribe((r) => {
-          this.poNotification.success('Atualizado com sucesso');
-          this.modaFechadoOuSalvo.emit('salvar');
-          this.poModal.close();
-        });
+        .subscribe(
+          (r) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Salvo com sucesso',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            this.modaFechadoOuSalvo.emit('salvar');
+            this.poModal.close();
+            this.carregandoBotaoSalvar(false);
+          },
+          (err) => {
+            this.carregandoBotaoSalvar(false);
+            this.poNotification.warning('Preencha o campo corretamente');
+          }
+        );
     }
+  }
+
+  carregandoBotaoSalvar(status: boolean) {
+    this.confirmar.disabled = status;
+    this.confirmar.loading = status;
   }
 }

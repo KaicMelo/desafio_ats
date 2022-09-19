@@ -1,0 +1,542 @@
+{
+	"info": {
+		"_postman_id": "a0712d88-9096-4203-af7b-275b2bc23980",
+		"name": "Desafio ATS - Automação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23415246"
+	},
+	"item": [
+		{
+			"name": "Vagas",
+			"item": [
+				{
+					"name": "Lista de vagas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test('Resposta esta em formato válido', () => {\r",
+									"\r",
+									"    var schema = { \r",
+									"        type:'array',\r",
+									"        items:{\r",
+									"            type:'object',\r",
+									"            required:['id','vacancy'],\r",
+									"            properties :{\r",
+									"                id: {\r",
+									"                    type:'integer'\r",
+									"                },\r",
+									"                vacancy: {\r",
+									"                    type:'string'\r",
+									"                },\r",
+									"            }\r",
+									"        }\r",
+									"      };\r",
+									"     pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/vagas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"vagas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar vagas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 201\", () => {\r",
+									"    pm.globals.set(\"last_vacancy_id\",response);\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vacancy\": \"Analista de Desenvolvimento Software\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/vagas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"vagas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar vagas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vacancy\": \"Especialista em Desenvolvimento Software\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/vagas/{{last_vacancy_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"vagas",
+								"{{last_vacancy_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar vagas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/vagas/{{last_vacancy_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"vagas",
+								"{{last_vacancy_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidato",
+			"item": [
+				{
+					"name": "Lista de candidatos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test('Resposta esta em formato válido', () => {\r",
+									"\r",
+									"    var schema = { \r",
+									"        type:'array',\r",
+									"        items:{\r",
+									"            type:'object',\r",
+									"            required:['id','candidate'],\r",
+									"            properties :{\r",
+									"                id: {\r",
+									"                    type:'integer'\r",
+									"                },\r",
+									"                candidato: {\r",
+									"                    type:'string'\r",
+									"                },\r",
+									"            }\r",
+									"        }\r",
+									"      };\r",
+									"     pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/candidatos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"candidatos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar de candidato",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 201\", () => {\r",
+									"    pm.globals.set(\"last_candidate_id\",response);\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"candidate\": \"Kaic Melo Teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/candidatos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"candidatos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar de candidato",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"candidate\": \"Kaic Melo Teste Atualizado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/candidatos/{{last_candidate_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"candidatos",
+								"{{last_candidate_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Candidato",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/candidatos/{{last_candidate_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"candidatos",
+								"{{last_candidate_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lista de Candidatados",
+			"item": [
+				{
+					"name": "Lista de Candidatados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test('Resposta esta em formato válido', () => {\r",
+									"\r",
+									"    var schema = {\r",
+									"        type: 'array',\r",
+									"        items: {\r",
+									"            type: 'object',\r",
+									"            required: ['id', 'candidate_id', 'vacancy_id'],\r",
+									"            properties: {\r",
+									"                id: {\r",
+									"                    type: 'integer'\r",
+									"                },\r",
+									"                candidate_id: {\r",
+									"                    type: 'integer'\r",
+									"                },\r",
+									"                vacancy_id: {\r",
+									"                    type: 'integer'\r",
+									"                }\r",
+									"            }\r",
+									"        }\r",
+									"    };\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/lista_candidatados",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lista_candidatados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Candidatado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 201\", () => {\r",
+									"    pm.globals.set(\"last_subscribers_list_id\",response);\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vacancy_id\": 1,\r\n    \"candidate_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/lista_candidatados",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lista_candidatados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Candidatado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/lista_candidatados/{{last_subscribers_list_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lista_candidatados",
+								"{{last_subscribers_list_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

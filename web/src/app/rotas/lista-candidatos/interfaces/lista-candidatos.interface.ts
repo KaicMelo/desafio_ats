@@ -1,4 +1,4 @@
 export interface Candidato {
     id?: any;
-    candidate: string;
+    candidato: string;
 }

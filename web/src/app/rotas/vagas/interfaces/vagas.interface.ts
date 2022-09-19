@@ -1,4 +1,4 @@
 export interface Vagas {
     id?: any;
-    vaga: string;
+    vacancy: string;
 }

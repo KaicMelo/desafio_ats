@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Candidato } from './interfaces/candidato.interface';
 import { CandidatoService } from './services/candidato.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,7 +26,7 @@ export class CandidatoComponent implements OnInit {
 
   readonly colunaCandidato: Array<PoTableColumn> = [
     { property: 'id', label: 'Numero do Candidato' },
-    { property: 'candidato', label: 'Candidato' },
+    { property: 'candidate', label: 'Candidato' },
   ];
 
   readonly acoes: Array<PoTableAction> = [
@@ -63,19 +64,31 @@ export class CandidatoComponent implements OnInit {
     }
   }
 
-  mostrarMais() {}
-
   editarCandidato(candidato: Candidato) {
     this.titulo = 'Alterar Candidato';
+    this.novoRegistro = false;
     this.candidatoSelecionado = candidato;
 
     this.mostrarModal = true;
   }
 
   deletarCandidato(candidato: Candidato) {
-    this.candidatoService.deletarCandidatos(candidato.id).subscribe((r) => {
-      this.poNotification.success('Deletado com sucesso');
-      this.candidatos$ = this.candidatoService.listaCandidatos();
+    Swal.fire({
+      title: 'Gostaria de deletar candidatura?',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: 'Cancelar',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.candidatoService
+          .deletarCandidatos(candidato.id)
+          .subscribe((r) => {
+            this.candidatos$ =
+              this.candidatoService.listaCandidatos();
+            Swal.fire('Deletado', '', 'success');
+          });
+      }
     });
   }
 }

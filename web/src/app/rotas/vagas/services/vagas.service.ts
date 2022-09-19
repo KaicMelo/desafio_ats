@@ -21,7 +21,7 @@ export class VagasService {
     return this.http.post(`${this.API}/vagas`, req);
   }
   editarVagas(id: number, req: Vagas) {
-    return this.http.patch(`${this.API}/vagas/${id}`, req);
+    return this.http.put(`${this.API}/vagas/${id}`, req);
   }
   deletarVagas(id: number) {
     return this.http.delete(`${this.API}/vagas/${id}`);

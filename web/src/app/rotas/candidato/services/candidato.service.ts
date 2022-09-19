@@ -19,7 +19,7 @@ export class CandidatoService {
     return this.http.post(`${this.API}/candidatos`, req);
   }
   editarCandidatos(id: number, req: Candidato) {
-    return this.http.patch(`${this.API}/candidatos/${id}`, req);
+    return this.http.put(`${this.API}/candidatos/${id}`, req);
   }
   deletarCandidatos(id: number) {
     return this.http.delete(`${this.API}/candidatos/${id}`);

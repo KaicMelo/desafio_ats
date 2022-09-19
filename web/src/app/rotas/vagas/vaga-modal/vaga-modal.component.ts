@@ -1,6 +1,11 @@
+import Swal from 'sweetalert2';
 import { VagasService } from './../services/vagas.service';
 import { Vagas } from './../interfaces/vagas.interface';
-import { PoModalComponent, PoNotificationService, PoModalAction } from '@po-ui/ng-components';
+import {
+  PoModalComponent,
+  PoNotificationService,
+  PoModalAction,
+} from '@po-ui/ng-components';
 import {
   Component,
   OnInit,
@@ -50,24 +55,52 @@ export class VagaModalComponent implements OnInit {
 
   salvarVaga() {
     if (this.novoRegistro) {
-      this.vagasService
-        .salvarVagas({ vaga: this.inputVaga })
-        .subscribe((r) => {
-          this.poNotification.success('Salvo com sucesso');
+      this.carregandoBotaoSalvar(true);
+      this.vagasService.salvarVagas({ vacancy: this.inputVaga }).subscribe(
+        (r) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Salvo com sucesso',
+            showConfirmButton: false,
+            timer: 1500,
+          });
           this.modaFechadoOuSalvo.emit('salvar');
           this.poModal.close();
-        });
+          this.carregandoBotaoSalvar(false);
+        },
+        (err) => {
+          this.carregandoBotaoSalvar(false);
+          this.poNotification.warning('Preencha o campo corretamente');
+        }
+      );
     } else {
+      this.carregandoBotaoSalvar(true);
       this.vagasService
         .editarVagas(this.vagaSelecionada.id, {
-          vaga: this.vagaSelecionada.vaga,
+          vacancy: this.vagaSelecionada.vacancy,
         })
-        .subscribe((r) => {
-          this.poNotification.success('Atualizado com sucesso');
-          this.modaFechadoOuSalvo.emit('salvar');
-          this.poModal.close();
-        });
+        .subscribe(
+          (r) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Salvo com sucesso',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            
+            this.modaFechadoOuSalvo.emit('salvar');
+            this.poModal.close();
+            this.carregandoBotaoSalvar(true);
+          },
+          (err) => {
+            this.carregandoBotaoSalvar(false);
+            this.poNotification.warning('Preencha o campo corretamente');
+          }
+        );
     }
   }
-
+  carregandoBotaoSalvar(status: boolean) {
+    this.confirmar.disabled = status;
+    this.confirmar.loading = status;
+  }
 }

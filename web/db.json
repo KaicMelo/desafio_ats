@@ -53,6 +53,37 @@
     {
       "vaga": "Financeiro",
       "id": 4
+    },
+    {
+      "vaga": "Gerente",
+      "id": 5
+    }
+  ],
+  "lista_candidatados": [
+    {
+      "candidato_id": 1,
+      "vaga_id": 1,
+      "id": 1
+    },
+    {
+      "candidato_id": 1,
+      "vaga_id": 1,
+      "id": 2
+    },
+    {
+      "candidato_id": 2,
+      "vaga_id": 2,
+      "id": 3
+    },
+    {
+      "candidato_id": 2,
+      "vaga_id": 4,
+      "id": 4
+    },
+    {
+      "candidato_id": 1,
+      "vaga_id": 5,
+      "id": 5
     }
   ]
 }
