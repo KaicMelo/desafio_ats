@@ -18,6 +18,8 @@ Executar os seguintes comandos na raiz ## SERVE:
 - npm run prod
 
 ## TDD
+- Baixe Postman desktop
+- Importe o arquivo localizado na pasta serve/Desafio ATS - Automação.postman_collection.json e rode os testes
 
 ## FRONTEND
 

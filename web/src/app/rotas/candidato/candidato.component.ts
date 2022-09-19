@@ -74,7 +74,7 @@ export class CandidatoComponent implements OnInit {
 
   deletarCandidato(candidato: Candidato) {
     Swal.fire({
-      title: 'Gostaria de deletar candidatura?',
+      title: 'Gostaria de deletar Candidato?',
       showDenyButton: true,
       confirmButtonText: 'Deletar',
       denyButtonText: 'Cancelar',
