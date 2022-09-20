@@ -23,6 +23,11 @@ const routes: Routes = [
       import('./rotas/vagas/vagas.module').then((m) => m.VagasModule),
   },
   {
+    path: 'candidatados',
+    loadChildren: () =>
+      import('./rotas/candidatados/candidatados.module').then((m) => m.CandidatadoModule),
+  },
+  {
     path: 'curriculo',
     loadChildren: () =>
       import('./rotas/curriculo/curriculo.module').then((m) => m.CurriculoModule),

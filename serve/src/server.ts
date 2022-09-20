@@ -25,6 +25,7 @@ app.put('/vagas/:id', vacanciesController.update);
 app.delete('/vagas/:id', vacanciesController.destroy);
 
 app.get('/lista_candidatados', subscribersListController.index);
+app.get('/lista_candidatados/lista_nomes', subscribersListController.candidateAndVacancyJoin);
 app.post('/lista_candidatados', subscribersListController.store);
 app.delete('/lista_candidatados/:id', subscribersListController.destroy);
 

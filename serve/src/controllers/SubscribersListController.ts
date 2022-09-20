@@ -11,7 +11,16 @@ class SubscribersListController {
       return res.status(400).json({ message: "subscrição não encontradas" });
     }
 
-    return res.json(subscription);
+    return res.json(subscription).status(200);
+  }
+  async candidateAndVacancyJoin(req: Request, res: Response) {
+    const subscription = await subscribersListModel.indexCandidateAndVacancyJoin();
+    
+    if (!subscription) {
+      return res.status(400).json({ message: "subscrição não encontradas" });
+    }
+
+    return res.json(subscription).status(200);
   }
   async store(req: Request, res: Response) {
     const subscription: any = req.body;

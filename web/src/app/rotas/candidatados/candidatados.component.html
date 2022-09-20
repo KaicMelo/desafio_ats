@@ -1,0 +1,17 @@
+<div *ngIf="(candidatados$ | async) as candidatados; else carregar">
+    <div *ngFor="let candidatado of candidatados">
+
+        <po-widget class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200" [p-title]="candidatado.candidate">
+            <div class="po-lg-12">
+                <p><strong>Candidatado a </strong>
+                    <span *ngFor="let candidatadosVacancy of candidatado.vacancy">
+                        <p>{{ candidatadosVacancy.nome }}</p>
+                    </span>
+                </p>
+            </div>
+        </po-widget>
+    </div>
+</div>
+<ng-template #carregar>
+    <app-carregando></app-carregando>
+</ng-template>
