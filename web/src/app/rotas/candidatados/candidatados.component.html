@@ -1,15 +1,24 @@
 <div *ngIf="(candidatados$ | async) as candidatados; else carregar">
     <div *ngFor="let candidatado of candidatados">
 
-        <po-widget class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200" [p-title]="candidatado.candidate">
-            <div class="po-lg-12">
-                <p><strong>Candidatado a </strong>
+        <po-widget class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200" p-title="Agrupado por candidatados">
+            <div class="po-row">
+                <div class="po-lg-12">
+                    <h3><strong>{{candidatado.candidate}}</strong></h3>
+                </div>
+            </div>
+            <div class="po-row">
+                <div class="po-lg-12">
                     <span *ngFor="let candidatadosVacancy of candidatado.vacancy">
-                        <p>{{ candidatadosVacancy.nome }}</p>
+                        <h3>{{ candidatadosVacancy.nome }}.</h3>
                     </span>
-                </p>
+
+                </div>
             </div>
         </po-widget>
+    </div>
+    <div *ngIf="candidatados == 0">
+        <h2>Nenhum dado encontrado</h2>
     </div>
 </div>
 <ng-template #carregar>

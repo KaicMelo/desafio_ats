@@ -17,19 +17,20 @@
 <po-divider></po-divider>
 <div class="po-row">
 
-<div class="po-md-12" *ngIf="(listaCandidatatos$ | async) as listaCandidatatos; else carregar">
-  <div *ngFor="let listaCandidatato of listaCandidatatos">
-    <po-widget class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" p-title="Candidato"
-      p-primary-label="Deletar Candidatura"
-      (p-primary-action)="deletarCandidatura(listaCandidatato.id)"
-      >
-      <div class="po-lg-12">
-        <p><strong>Candidato:</strong> {{ listaCandidatato.candidate }}</p>
-        <p><strong>Vaga:</strong> {{ listaCandidatato.vacancy }}</p>
-      </div>
-    </po-widget>
+  <div class="po-md-12" *ngIf="(listaCandidatatos$ | async) as listaCandidatatos; else carregar">
+    <div *ngFor="let listaCandidatato of listaCandidatatos">
+      <po-widget class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" p-title="Candidato"
+        p-primary-label="Deletar Candidatura" (p-primary-action)="deletarCandidatura(listaCandidatato.id)">
+        <div class="po-lg-12">
+          <p><strong>Candidato:</strong> {{ listaCandidatato.candidate }}</p>
+          <p><strong>Vaga:</strong> {{ listaCandidatato.vacancy }}</p>
+        </div>
+      </po-widget>
+    </div>
+    <div *ngIf="listaCandidatatos == 0">
+      <h2>Nenhum dado encontrado</h2>
+    </div>
   </div>
-</div>
 </div>
 
 

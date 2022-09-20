@@ -1,7 +1,7 @@
 import { CandidatadosService } from './services/candidatados.service';
 import { Component, OnInit } from '@angular/core';
 import { Candidatados } from './interface/candidatados.interface';
-import { map, switchMap, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-candidatados',
@@ -35,14 +35,10 @@ export class CandidatadosComponent implements OnInit {
           });
         }
       }
-      console.log(saida)
       return saida;
     })
   );
   constructor(private candidatadosService: CandidatadosService) {}
 
-  listaCandidatados: any = [];
-  quantityObject = 0;
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

@@ -1,12 +1,12 @@
-import Knex from "knex";
+import { Knex } from "knex";
 
 export async function up(knex: Knex) {
   return knex.schema.createTable("ats_subscribers_list", (table) => {
     table.increments("id").primary();
     table.integer("vacancy_id").unsigned();
-    table.foreign('ats_vacancies').references('ats_vacancies.id');
+    table.foreign('vacancy_id').references('id').inTable('ats_vacancies').onDelete('CASCADE');
     table.integer("candidate_id").unsigned();
-    table.foreign('ats_candidates').references('ats_candidates.id');
+    table.foreign('candidate_id').references('id').inTable('ats_candidates').onDelete('CASCADE');
   });
 }
 

@@ -14,6 +14,7 @@ DB_PASSWORD=senha_do_banco
 Executar os seguintes comandos na raiz ## SERVE:
 - npm i
 - npm run migrate
+- npm run seed
 - npm run build
 - npm run prod
 
