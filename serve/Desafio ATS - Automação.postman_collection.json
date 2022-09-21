@@ -264,6 +264,180 @@
 			]
 		},
 		{
+			"name": "Curriculo",
+			"item": [
+				{
+					"name": "Lista curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/curriculo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"curriculo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 201\", () => {\r",
+									"    pm.globals.set(\"last_resume_id\",response);\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Rua Danças Húngaras\",\r\n    \"address_number\": 33,\r\n    \"candidate_id\": 1,\r\n    \"email\": \"kaic.melo@totvs.com.br\",\r\n    \"phone\": \"11932446811\",\r\n    \"state\": \"São Paulo\",\r\n    \"wage\": 6000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/curriculo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"curriculo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Responsta tem o status 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Rua Manguari\",\r\n    \"address_number\": 501,\r\n    \"candidate_id\": 1,\r\n    \"email\": \"kaic.melo@totvs.com.br\",\r\n    \"phone\": \"11932446811\",\r\n    \"state\": \"São Paulo\",\r\n    \"wage\": 6000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/curriculo/{{last_resume_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"curriculo",
+								"{{last_resume_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Verificar se a reposta esta em formato Json', () => {\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/curriculo/{{last_resume_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"curriculo",
+								"{{last_resume_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Lista de Candidatados",
 			"item": [
 				{
