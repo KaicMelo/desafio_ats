@@ -71,6 +71,8 @@ export class ListaCandidatosComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
+      }, (error) => {
+        error.status == 402?this.poNotification.warning('Usuário já se cadastrou para essa vaga'):null
       });
   }
 

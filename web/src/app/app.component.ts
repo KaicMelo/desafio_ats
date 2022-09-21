@@ -17,7 +17,7 @@ export class AppComponent {
     { label: 'Candidato', action: () => this.router.navigate(['candidato']) },
     { label: 'Vagas', action: () => this.router.navigate(['vagas']) },
     { label: 'Candidatados a uma vaga', action: () => this.router.navigate(['candidatados']) },
-    { label: 'Curriculo', action: () => this.router.navigate(['curriculo']) },
+    { label: 'Currículo', action: () => this.router.navigate(['curriculo']) },
   ];
 
   private onClick() {

@@ -7,11 +7,13 @@ app.use(cors({origin: '*'}))
 
 import CandidateController from './controllers/candidateController';
 import VacanciesController from './controllers/vacanciesController';
-import SubscribersListController from './controllers/SubscribersListController';
+import SubscribersListController from './controllers/subscribersListController';
+import ResumeController from './controllers/resumeController';
 
 const candidateController = new CandidateController();
 const vacanciesController = new VacanciesController();
 const subscribersListController = new SubscribersListController();
+const resumeController = new ResumeController();
 
 
 app.get('/candidatos', candidateController.index);
@@ -29,6 +31,9 @@ app.get('/lista_candidatados/lista_nomes', subscribersListController.candidateAn
 app.post('/lista_candidatados', subscribersListController.store);
 app.delete('/lista_candidatados/:id', subscribersListController.destroy);
 
+app.get("/curriculo", resumeController.indexWithResume);
+app.post("/curriculo", resumeController.store);
+app.put("/curriculo/:id", resumeController.update);
+app.delete("/curriculo/:id", resumeController.destroy);
 
-app.listen(3333)
-// app.listen(process.env.SERVE_PORT)
+app.listen(process.env.SERVE_PORT)

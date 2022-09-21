@@ -6,7 +6,7 @@ const subscribersListModel = new SubscribersListModel();
 class SubscribersListController {
   async index(req: Request, res: Response) {
     const subscription = await subscribersListModel.index();
-    
+
     if (!subscription) {
       return res.status(400).json({ message: "subscrição não encontradas" });
     }
@@ -14,8 +14,9 @@ class SubscribersListController {
     return res.json(subscription).status(200);
   }
   async candidateAndVacancyJoin(req: Request, res: Response) {
-    const subscription = await subscribersListModel.indexCandidateAndVacancyJoin();
-    
+    const subscription =
+      await subscribersListModel.indexCandidateAndVacancyJoin();
+
     if (!subscription) {
       return res.status(400).json({ message: "subscrição não encontradas" });
     }
@@ -29,6 +30,12 @@ class SubscribersListController {
 
     if (erros) {
       return res.status(401).json("Erro no corpo da requisição");
+    }
+
+    const check = await subscribersListModel.checkIfExist(subscription);
+    
+    if (check.length) {
+      return res.status(402).json("Usuário ja candidatado");
     }
 
     const response = await subscribersListModel.store(subscription);
