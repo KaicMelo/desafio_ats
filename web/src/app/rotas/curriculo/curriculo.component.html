@@ -1,1 +1,19 @@
-<p>Aguardando Desenvolvimento!</p>
+<div *ngIf="(candidatos$ | async) as candidato; else carregar">
+    <po-table
+    [p-items]="candidato"
+    [p-columns]="colunaCandidato"
+    [p-actions]="acoes">
+    </po-table>
+</div>
+
+<ng-template #carregar>
+    <app-carregando></app-carregando>
+</ng-template>
+
+<app-curriculo-modal
+    *ngIf="mostrarModal"
+    [novoRegistro]="novoRegistro"
+    [titulo]="titulo"
+    [candidatoSelecionado]="candidatoSelecionado"
+    (modaFechadoOuSalvo)="aoFecharModal($event)">
+</app-curriculo-modal>

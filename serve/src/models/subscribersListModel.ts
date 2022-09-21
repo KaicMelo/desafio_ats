@@ -28,6 +28,9 @@ class subscribersListModel {
   async destroy(id: any) {
     return knex("ats_subscribers_list").where("id", id).delete();
   }
+  async checkIfExist(subscribersList: any) {
+    return knex("ats_subscribers_list").where("vacancy_id", subscribersList.vacancy_id).andWhere("candidate_id", subscribersList.candidate_id);
+  }
 }
 
 export default subscribersListModel;

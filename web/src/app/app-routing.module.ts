@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./rotas/curriculo/curriculo.module').then((m) => m.CurriculoModule),
   },
+  {
+    path: '**',
+    redirectTo:'inicio'
+  }
 ];
 
 @NgModule({
