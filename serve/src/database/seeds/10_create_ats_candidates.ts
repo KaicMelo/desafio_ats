@@ -6,15 +6,6 @@ export async function seed(knex: Knex) {
     },
     {
       candidate: "Gustavo Maranho",
-    },
-    {
-      candidate: "Taka",
-    },
-    {
-      candidate: "Graziella",
-    },
-    {
-      candidate: "Renan",
-    },
+    }
   ]);
 }
