@@ -5,7 +5,7 @@ export class Candidatura {
 
   listarCardCandidatura(nomeCandidato: string,nomeVaga: string){
     const card = `#${nomeCandidato}-${nomeVaga}`.replace(/ /g, "");
-    cy.get(card).contains(nomeCandidato).should("be.visible");
+    cy.get(card,{timeout:this.timeOut}).contains(nomeCandidato).should("be.visible");
   }
 
   naoListarCardCandidatura(nomeCandidato: string,nomeVaga: string){
