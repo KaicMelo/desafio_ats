@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,19 @@ export class CandidatoService {
   API = environment.API;
 
   constructor(private http: HttpClient) {}
+
+  listaCandidatosToSelect(): Observable<Candidato[]> {
+    return this.http
+      .get<Observable<Candidato[]>>(`${this.API}/candidatos`)
+      .pipe(
+        map((candidatos: any) =>
+          candidatos.map((candidato: any) => ({
+            label: candidato.candidate,
+            value: candidato.id,
+          }))
+        )
+      );
+  }
 
   listaCandidatos(): Observable<Candidato[]> {
     return this.http.get<Candidato[]>(`${this.API}/candidatos`);

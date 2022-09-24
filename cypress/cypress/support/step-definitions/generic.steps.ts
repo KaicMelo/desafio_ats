@@ -10,9 +10,9 @@ When("acesso o modulo {string}", (rotas: string) => {
   generic.acessarDesafioAts(rotas);
 });
 
-// Then("devo visualizar mensagem para preencher o campo corretamente", function () {
-//     candidato.mensagemPreenchaCampoCorretamente();
-//   });
+Then("devo visualizar mensagem para preencher o campo corretamente", function () {
+  generic.mensagemPreenchaCampoCorretamente();
+  });
 Then("devo visualizar mensagem de deletado com sucesso", function () {
   generic.mensagemDeletadoComSucesso();
   });

@@ -41,4 +41,9 @@ export class CandidatadosComponent implements OnInit {
   constructor(private candidatadosService: CandidatadosService) {}
 
   ngOnInit(): void {}
+
+  createClass(createId: any) {
+    const newClass = `${createId[0].candidate}-${createId[0].vacancy[0].nome}`;
+    return newClass.replace(/ /g, '');
+  }
 }

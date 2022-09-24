@@ -34,8 +34,11 @@ And("altero o nome do vaga e salvo", () => {
   vagas.alterarNomeVagaSalvar(nomeVagaAlternativo);
 });
 
-And("clico em deletar vaga", () => {
+And("clico em deletar vaga alterada", () => {
   vagas.cliqueEmDeletarVaga(nomeVagaAlternativo);
+});
+And("clico em deletar vaga", () => {
+  vagas.cliqueEmDeletarVaga(nomeVaga);
 });
 And("confirmo deletar vaga", () => {
   vagas.confirmarDeletarVaga();

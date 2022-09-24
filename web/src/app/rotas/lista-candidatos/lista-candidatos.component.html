@@ -4,12 +4,12 @@
 
 <div class="po-row">
   <div class="po-md-6" *ngIf="(listaDeCandidatos$ | async) as candidato; else carregar">
-    <app-selecionar [vagas]="listaDeCandidatos" [label]="candidatoTitulo" (valorFormulario)="candidatoValor = $event">
+    <app-selecionar [vagas]="candidato" [label]="candidatoTitulo" (valorFormulario)="candidatoValor = $event">
     </app-selecionar>
   </div>
 
   <div class="po-md-6" *ngIf="(listaDeVagas$ | async) as vagas; else carregar">
-    <app-selecionar [vagas]="listaDeVagas" [label]="vagaTitulo" (valorFormulario)="vagasValor = $event">
+    <app-selecionar [vagas]="vagas" [label]="vagaTitulo" (valorFormulario)="vagasValor = $event">
     </app-selecionar>
   </div>
 

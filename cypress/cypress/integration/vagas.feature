@@ -22,7 +22,7 @@ Funcionalidade: Vagas
 
     Cenario: Excluir vaga
         Quando acesso o modulo "vagas"
-        E clico em deletar vaga
+        E clico em deletar vaga alterada
         E confirmo deletar vaga
         Então devo visualizar mensagem de vaga deletado com sucesso
         E não devo visualizar o registro na lista

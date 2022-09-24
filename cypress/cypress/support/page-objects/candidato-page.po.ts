@@ -47,9 +47,7 @@ export class Candidato {
   mensagemCandidatoCadastradoComSucesso() {
     cy.get(".swal2-popup").should("be.visible");
   }
-  mensagemPreenchaCampoCorretamente() {
-    cy.get(".po-toaster-message").should("be.visible");
-  }
+
   mensagemCandidatoDeletadoSucesso() {
     cy.get(".swal2-popup").contains("Deletado").should("be.visible");
   }

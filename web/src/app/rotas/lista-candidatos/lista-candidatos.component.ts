@@ -1,7 +1,5 @@
 import { PoNotificationService } from '@po-ui/ng-components';
 import { ListaCandidatoService } from './services/lista-candidato.service';
-import { Vagas } from './../vagas/interfaces/vagas.interface';
-import { Candidato } from './../candidato/interfaces/candidato.interface';
 import { CandidatoService } from './../candidato/services/candidato.service';
 import { VagasService } from './../vagas/services/vagas.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,8 +11,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./lista-candidatos.component.css'],
 })
 export class ListaCandidatosComponent implements OnInit {
-  public listaDeVagas$ = this.vagasService.listaVagas();
-  public listaDeCandidatos$ = this.candidatoService.listaCandidatos();
+  public listaDeVagas$ = this.vagasService.listaVagasToSelect();
+  public listaDeCandidatos$ = this.candidatoService.listaCandidatosToSelect();
+
   public listaCandidatatos$ = this.listaCandidatadosService.listaCandidatados();
 
   listaDeCandidatos: any[] = [];
@@ -34,21 +33,7 @@ export class ListaCandidatosComponent implements OnInit {
     private poNotification: PoNotificationService
   ) {}
 
-  ngOnInit(): void {
-    this.vagasService.listaVagas().subscribe((vagas) => {
-      vagas.map((vaga: Vagas) => {
-        this.listaDeVagas.push({ label: vaga.vacancy, value: vaga.id });
-      });
-    });
-    this.candidatoService.listaCandidatos().subscribe((vagas) => {
-      vagas.map((candidato: Candidato) => {
-        this.listaDeCandidatos.push({
-          label: candidato.candidate,
-          value: candidato.id,
-        });
-      });
-    });
-  }
+  ngOnInit(): void {}
 
   salvarCandidatura() {
     if (!this.candidatoValor)
@@ -59,21 +44,28 @@ export class ListaCandidatosComponent implements OnInit {
     this.listaCandidatadosService
       .salvarCandidatados({
         vacancy_id: this.vagasValor,
-        candidate_id: this.candidatoValor ,
+        candidate_id: this.candidatoValor,
       })
-      .subscribe((r) => {
-        this.listaCandidatatos$ =
-          this.listaCandidatadosService.listaCandidatados();
+      .subscribe(
+        (r) => {
+          this.listaCandidatatos$ =
+            this.listaCandidatadosService.listaCandidatados();
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Salvo com sucesso',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }, (error) => {
-        error.status == 402?this.poNotification.warning('Usuário já se cadastrou para essa vaga'):null
-      });
+          Swal.fire({
+            icon: 'success',
+            title: 'Salvo com sucesso',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        },
+        (error) => {
+          error.status == 402
+            ? this.poNotification.warning(
+                'Usuário já se cadastrou para essa vaga'
+              )
+            : null;
+        }
+      );
   }
 
   deletarCandidatura(req: any) {
@@ -96,8 +88,8 @@ export class ListaCandidatosComponent implements OnInit {
     });
   }
 
-  createId(createId:any){
-    const string = `${createId.candidate}-${createId.vacancy}`
-    return string.replace(/ /g, "")
+  createId(createId: any) {
+    const newId = `${createId.candidate}-${createId.vacancy}`;
+    return newId.replace(/ /g, '');
   }
 }

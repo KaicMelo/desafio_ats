@@ -3,7 +3,8 @@
 <div *ngIf="(candidatados$ | async) as candidatados; else carregar">
     <div *ngFor="let candidatado of candidatados">
 
-        <po-widget class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200" p-title="Agrupado por candidatados">
+        <po-widget [id]="createClass(candidatados)" class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200"
+            p-title="Agrupado por candidatados">
             <div class="po-row">
                 <div class="po-lg-12">
                     <h3><strong>{{candidatado.candidate}}</strong></h3>
