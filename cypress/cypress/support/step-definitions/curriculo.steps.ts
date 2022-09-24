@@ -1,5 +1,5 @@
 import { Curriculo } from "../page-objects/curriculo-page.po";
-import { When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { Then, And } from "cypress-cucumber-preprocessor/steps";
 
 const curriculo = new Curriculo();
 let nomeCandidato = "";

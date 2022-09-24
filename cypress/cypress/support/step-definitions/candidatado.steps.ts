@@ -2,6 +2,7 @@ import { Candidato } from "../page-objects/candidato-page.po";
 import { When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 const candidato = new Candidato();
+
 let nomeCandidato = "";
 let nomeAlternativo = "";
 

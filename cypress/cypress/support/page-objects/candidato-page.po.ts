@@ -1,6 +1,5 @@
 /// <reference types="Cypress" />
 
-const url: any = Cypress.config("baseUrl");
 export class Candidato {
   timeOut: number = 3000;
 
