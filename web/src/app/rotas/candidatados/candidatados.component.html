@@ -1,3 +1,5 @@
+<h2>Listagem de candidatos candidatados a uma vaga</h2>
+<po-divider></po-divider>
 <div *ngIf="(candidatados$ | async) as candidatados; else carregar">
     <div *ngFor="let candidatado of candidatados">
 

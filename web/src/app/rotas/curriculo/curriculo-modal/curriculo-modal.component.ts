@@ -88,8 +88,6 @@ export class CurriculoModalComponent implements OnInit {
       label: 'Numero Endereço',
       type: 'number',
       gridColumns: 6,
-      maxValue: 10000,
-      errorMessage: 'Invalid number.',
     },
     {
       property: 'state',

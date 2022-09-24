@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CurriculoModalModule } from './curriculo-modal/curriculo-modal.module';
 import { CarregandoModule } from './../../componentes/carregando/carregando.module';
-import { PoTableModule, PoNotificationModule } from '@po-ui/ng-components';
+import { PoTableModule, PoNotificationModule, PoDividerModule } from '@po-ui/ng-components';
 import { CurriculoRoutingModule } from './curriculo-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,7 @@ import { CurriculoComponent } from './curriculo.component';
     CarregandoModule,
     CurriculoModalModule,
     HttpClientModule,
+    PoDividerModule,
     PoNotificationModule
   ]
 })

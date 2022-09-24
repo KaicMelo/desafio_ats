@@ -95,4 +95,9 @@ export class ListaCandidatosComponent implements OnInit {
       }
     });
   }
+
+  createId(createId:any){
+    const string = `${createId.candidate}-${createId.vacancy}`
+    return string.replace(/ /g, "")
+  }
 }
