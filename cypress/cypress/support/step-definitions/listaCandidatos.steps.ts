@@ -1,6 +1,8 @@
+import { Generic } from './../page-objects/generic-page.po';
 import { ListaCandidatos } from "../page-objects/listaCandidatos-page.po";
 import { Then, And } from "cypress-cucumber-preprocessor/steps";
 
+const generic = new Generic();
 const listaCandidatos = new ListaCandidatos();
 let nomeCandidato = "";
 let nomeVaga = "";
@@ -19,15 +21,16 @@ And("seleciono vaga e me candidato", function () {
   listaCandidatos.selecionoVaga(nomeVaga);
 });
 Then("devo visualizar mensagem de candidatado cadastrado com sucesso", function () {
-  listaCandidatos.mensagemCandidatoCandidatadoSucesso();
+  generic.mensagemDeSucesso('Salvo com sucesso');
 });
 Then("devo visualizar mensagem de candidatado já cadastrado", function () {
-  listaCandidatos.mensagemCandidatoJaCandidatado();
+  generic.mensagemDeAlerta('Usuário já se cadastrou para essa vaga');
 });
 
 And("deleto candidato cadandidatado", function () {
   listaCandidatos.DeletarCandidatoCandidatado(nomeCandidato,nomeVaga);
 });
 And("confirmo deletar candidatura", function () {
-  listaCandidatos.confirmarDeletarCandidatura();
+  generic.confirmarDeletar();
+  generic.mensagemDeSucesso("Deletado");
 });

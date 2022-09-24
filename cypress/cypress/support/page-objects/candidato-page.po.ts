@@ -1,53 +1,44 @@
 /// <reference types="Cypress" />
 
+import { UtilsSelectors } from './generic-po/selectors/utils.selectors';
+import { CandidatoSelectors } from "./generic-po/selectors/candidato.selectors";
+
 export class Candidato {
   timeOut: number = 3000;
 
   clicarEmCriarCandidato() {
-    cy.get("#criar_novo_candidato > .po-button").click({ force: true });
+    cy.get(CandidatoSelectors.criarNovoCandidato).click({ force: true });
   }
   preencherNomeCandidadoSalvar(nome: string) {
-    cy.get(".po-input").type(nome);
-    cy.get(".po-button-modal-first-action > .po-button").click();
+    cy.get(UtilsSelectors.poInput).type(nome);
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
   cliqueEmEditarCandidato(nome: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-    .contains("tr", nome)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+    .contains(UtilsSelectors.tr, nome)
     .then((row: any) => {
       cy.get(row[0].children[0]).click();
-      cy.get(".po-popup-container > :nth-child(1)").click();
+      cy.get(UtilsSelectors.vagaCandidatoEditarRegistro).click();
     });
   } 
   salvarSemPreencherNomeCandidado() {
-    cy.get(".po-button-modal-first-action > .po-button").click();
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
   alterarNomeCandidatoSalvar(nomeAlternativo: string) {
-    cy.get(".po-input").clear();
-    cy.get(".po-input").type(nomeAlternativo);
-    cy.get(".po-button-modal-first-action > .po-button").click();
+    cy.get(UtilsSelectors.poInput).clear();
+    cy.get(UtilsSelectors.poInput).type(nomeAlternativo);
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
   cliqueEmDeletarCandidato(nomeAlternativo: string) { 
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeAlternativo)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeAlternativo)
       .then((row: any) => {
         cy.get(row[0].children[0]).click();
-        cy.get(".po-popup-container > :nth-child(2)").click();
+        cy.get(UtilsSelectors.vagaCandidatoDeletarRegistro).click();
       });
   }
 
   naoDevoVerRegistroNaTabela(nomeAlternativo: string) {
-    cy.get(".po-table").contains("tr", nomeAlternativo).should("not.exist");
-  }
-  confirmarDeletarUsuario() {
-    cy.get(".swal2-confirm").click().wait(200);
-    cy.get(".swal2-confirm").click(); 
-  }
-
-  mensagemCandidatoCadastradoComSucesso() {
-    cy.get(".swal2-popup").should("be.visible");
-  }
-
-  mensagemCandidatoDeletadoSucesso() {
-    cy.get(".swal2-popup").contains("Deletado").should("be.visible");
+    cy.get(UtilsSelectors.poTable).contains(UtilsSelectors.tr, nomeAlternativo).should("not.exist");
   }
 }

@@ -1,55 +1,49 @@
 /// <reference types="Cypress" />
 
+import { VagasSelectors } from "./generic-po/selectors/vagas.selectors";
+import { UtilsSelectors } from "./generic-po/selectors/utils.selectors";
+
 export class Vagas {
   timeOut: number = 3000;
 
   clicarEmCriarVaga() {
-    cy.get("#criar_nova_vaga > .po-button").click({ force: true });
+    cy.get(VagasSelectors.criarNovaVaga).click({ force: true });
   }
   preencherNomeVagaSalvar(nomeVaga: string) {
-    cy.get(".po-input").type(nomeVaga);
-    cy.get(".po-button-modal-first-action > .po-button").click();
-  }
-  mensagemVagaCadastradaComSucesso() {
-    cy.get(".swal2-popup").should("be.visible");
+    cy.get(UtilsSelectors.poInput).type(nomeVaga);
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
 
   naoPreencherNomeVagaSalvar() {
-    cy.get(".po-button-modal-first-action > .po-button").click();
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
 
   cliqueEmEditarVaga(nomeVaga: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-    .contains("tr", nomeVaga)
-    .then((row: any) => {
-      cy.get(row[0].children[0]).click();
-      cy.get(".po-popup-container > :nth-child(1)").click();
-    });
-  }
-
-  alterarNomeVagaSalvar(nomeVagaAlternativo: string) {
-    cy.get(".po-input").clear();
-    cy.get(".po-input").type(nomeVagaAlternativo);
-    cy.get(".po-button-modal-first-action > .po-button").click();
-  }
-
-  cliqueEmDeletarVaga(nomeVagaAlternativo: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeVagaAlternativo)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeVaga)
       .then((row: any) => {
         cy.get(row[0].children[0]).click();
-        cy.get(".po-popup-container > :nth-child(2)").click();
+        cy.get(UtilsSelectors.vagaCandidatoEditarRegistro).click();
       });
   }
 
-  confirmarDeletarVaga(){
-    cy.get(".swal2-confirm").click().wait(200);
-    cy.get(".swal2-confirm").click();
+  alterarNomeVagaSalvar(nomeVagaAlternativo: string) {
+    cy.get(UtilsSelectors.poInput).clear();
+    cy.get(UtilsSelectors.poInput).type(nomeVagaAlternativo);
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
-  mensagemVagaDeletadaSucesso(){
-    cy.get(".swal2-popup").contains("Deletado").should("be.visible");
+
+  cliqueEmDeletarVaga(nomeVagaAlternativo: string) {
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeVagaAlternativo)
+      .then((row: any) => {
+        cy.get(row[0].children[0]).click();
+        cy.get(UtilsSelectors.vagaCandidatoDeletarRegistro).click();
+      });
   }
-  naoDevoVerRegistroNaTabela(nomeVagaAlternativo: string){
-    cy.get(".po-table").contains("tr", nomeVagaAlternativo).should("not.exist");
+  naoDevoVerRegistroNaTabela(nomeVagaAlternativo: string) {
+    cy.get(UtilsSelectors.poTable)
+      .contains(UtilsSelectors.tr, nomeVagaAlternativo)
+      .should("not.exist");
   }
 }

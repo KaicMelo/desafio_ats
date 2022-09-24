@@ -1,85 +1,57 @@
 /// <reference types="Cypress" />
 
+import { CurriculoSelectors } from "./generic-po/selectors/curriculo.selectors";
+import { UtilsSelectors } from "./generic-po/selectors/utils.selectors";
+
 export class Curriculo {
   timeOut: number = 30000;
 
   clicarEmCriarCurriculo(nomeVaga: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeVaga)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeVaga)
       .then((row: any) => {
         cy.get(row[0].children[0]).click();
-        cy.get(".po-popup-container > :nth-child(1)").click();
+        cy.get(UtilsSelectors.curriculoCadastrarRegistro).click();
       });
   }
   preencherCurriculoSalvar() {
-    cy.get(".po-field-container > .po-row > :nth-child(1)").click();
+    cy.get(CurriculoSelectors.formOpcaoHomem).click();
+    cy.get(CurriculoSelectors.formDataNascimento).type("16/06/1995");
+    cy.get(CurriculoSelectors.formPretencaoSalarial).type("3000");
+    cy.get(CurriculoSelectors.formEmail).type("teste@totvs.com.br");
+    cy.get(CurriculoSelectors.formTelefone).type("11956321452");
+    cy.get(CurriculoSelectors.formEndereco).type("Rua da Glória");
+    cy.get(CurriculoSelectors.formNumero).type("501");
+    cy.get(CurriculoSelectors.formSelectEstado).click();
+    cy.get(CurriculoSelectors.formOpcaoSaoPaulo).click();
+    cy.get(CurriculoSelectors.formTextArea).type("Descrição para testar currículo");
     cy.get(
-      ".po-field-container-content > .po-field-icon-container-right > .po-icon"
-    ).type("16/06/1995");
-    cy.get(
-      ".po-md-3 > po-field-container > .po-field-container > .po-field-container-content > .po-input"
-    ).type("3000");
-    cy.get(
-      '[ng-reflect-name="email"] > po-field-container > .po-field-container > .po-field-container-content > .po-input'
-    ).type("teste@totvs.com.br");
-    cy.get(
-      '[ng-reflect-name="phone"] > po-field-container > .po-field-container > .po-field-container-content > .po-input'
-    ).type("11956321452");
-    cy.get(
-      '[ng-reflect-name="address"] > po-field-container > .po-field-container > .po-field-container-content > .po-input'
-    ).type("Rua da Glória");
-    cy.get(
-      "po-number.po-sm-6 > po-field-container > .po-field-container > .po-field-container-content > .po-input"
-    ).type("501");
-    cy.get(
-      "po-select.po-sm-6 > po-field-container > .po-field-container > .po-select-container > .po-select-button"
+      CurriculoSelectors.formSelectHobbies
     ).click();
     cy.get(
-      "po-select.po-sm-6 > po-field-container > .po-field-container > .po-select-container > .po-select-content > :nth-child(2) > .po-select-item"
+      CurriculoSelectors.formOpcaoAssistirFilme
     ).click();
-    cy.get(".po-textarea").type("Descrição para testar currículo");
-    cy.get(
-      "po-select.po-sm-12 > po-field-container > .po-field-container > .po-select-container > .po-select-button"
-    ).click();
-    cy.get(
-      "po-select.po-sm-12 > po-field-container > .po-field-container > .po-select-container > .po-select-content > :nth-child(2) > .po-select-item"
-    ).click();
-    cy.get(".po-button-modal-first-action > .po-button").click();
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
-  mensagemCurriculoCadastradoComSucesso() {
-    cy.get(".swal2-popup").should("be.visible");
-  }
-
   cliqueVisualizarCurriculo(nomeCandidato: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeCandidato)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeCandidato)
       .then((row: any) => {
         cy.get(row[0].children[0]).click();
-        cy.get(".po-popup-container > :nth-child(2)").click();
+        cy.get(UtilsSelectors.curriculoVisualizarRegistro).click();
       });
   }
-  mensagemCurriculoNaoCadastrado() {
-    cy.get(".po-toaster-message")
-      .contains("Voçê não possui currículo. Clique em cadastrar currículo")
-      .should("be.visible");
-  }
-  mensagemCurriculoNaoCadastradoParaDeletar() {
-    cy.get(".po-toaster-message")
-      .contains("Voçê não possui currículo para deletar")
-      .should("be.visible");
-  }
-
   cliqueDeletarCurriculo(nomeCandidato: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeCandidato)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeCandidato)
       .then((row: any) => {
         cy.get(row[0].children[0]).click();
-        cy.get(".po-popup-container > :nth-child(3)").click();
+        cy.get(CurriculoSelectors.deletarRegistro).click();
       });
   }
   candidatoNaoContemCurriculoCadastrado(nomeCandidato: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeCandidato)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeCandidato)
       .then((row: any) => {
         cy.get(row[0].children[3])
           .contains("Não tem Currículo")
@@ -87,58 +59,33 @@ export class Curriculo {
       });
   }
   candidatoContemCurriculoCadastrado(nomeCandidato: string) {
-    cy.get(".po-table", { timeout: this.timeOut })
-      .contains("tr", nomeCandidato)
+    cy.get(UtilsSelectors.poTable, { timeout: this.timeOut })
+      .contains(UtilsSelectors.tr, nomeCandidato)
       .then((row: any) => {
         cy.get(row[0].children[3])
           .contains("Tem Currículo")
           .should("be.visible");
       });
   }
-  alterarCurriculoSalvar(nomeAlternativo: string) {
-    cy.get(".po-field-container > .po-row > :nth-child(1)").click();
-    cy.get(
-      ".po-field-container-content > .po-field-icon-container-right > .po-icon"
-    ).type("16/06/1994");
-    cy.get(
-      ".po-md-3 > po-field-container > .po-field-container > .po-field-container-content > .po-input"
-    ).type("4000");
-    cy.get(
-      '[ng-reflect-name="email"] > po-field-container > .po-field-container > .po-field-container-content > .po-input'
-    ).type("test_email@totvs.com.br");
-    cy.get(
-      '[ng-reflect-name="phone"] > po-field-container > .po-field-container > .po-field-container-content > .po-input'
-    ).type("1196324789");
-    cy.get(
-      '[ng-reflect-name="address"] > po-field-container > .po-field-container > .po-field-container-content > .po-input'
-    ).type("Av. Braz Leme");
-    cy.get(
-      "po-number.po-sm-6 > po-field-container > .po-field-container > .po-field-container-content > .po-input"
-    ).clear();
-    cy.get(
-      "po-number.po-sm-6 > po-field-container > .po-field-container > .po-field-container-content > .po-input"
-    ).type("1000");
-    cy.get(
-      "po-select.po-sm-6 > po-field-container > .po-field-container > .po-select-container > .po-select-button"
-    ).click();
-    cy.get(
-      "po-select.po-sm-6 > po-field-container > .po-field-container > .po-select-container > .po-select-content > :nth-child(2) > .po-select-item"
-    ).click();
-    cy.get(".po-textarea").type("Alterando descrição");
-    cy.get(
-      "po-select.po-sm-12 > po-field-container > .po-field-container > .po-select-container > .po-select-button"
-    ).click();
-    cy.get(
-      "po-select.po-sm-12 > po-field-container > .po-field-container > .po-select-container > .po-select-content > :nth-child(3) > .po-select-item"
-    ).click();
-    cy.get(".po-button-modal-first-action > .po-button").click();
-  }
-
-  confirmarDeletarCurriculo(){
-    cy.get(".swal2-confirm").click().wait(200);
-    cy.get(".swal2-confirm").click(); 
-  }
-  mensagemCurriculoDeletadoSucesso(){
-    cy.get(".swal2-popup").should("be.visible");
+  alterarCurriculoSalvar() {
+    cy.get(CurriculoSelectors.formOpcaoHomem).click();
+    cy.get(CurriculoSelectors.formDataNascimento).type("16/06/1994");
+    cy.get(CurriculoSelectors.formPretencaoSalarial).clear();
+    cy.get(CurriculoSelectors.formPretencaoSalarial).type("4000");
+    cy.get(CurriculoSelectors.formEmail).clear();
+    cy.get(CurriculoSelectors.formEmail).type("test_email@totvs.com.br");
+    cy.get(CurriculoSelectors.formTelefone).clear();
+    cy.get(CurriculoSelectors.formTelefone).type("1196324789");
+    cy.get(CurriculoSelectors.formEndereco).clear();
+    cy.get(CurriculoSelectors.formEndereco).type("Av. Braz Leme");
+    cy.get(CurriculoSelectors.formNumero).clear();
+    cy.get(CurriculoSelectors.formNumero).type("1000");
+    cy.get(CurriculoSelectors.formSelectEstado).click();
+    cy.get(CurriculoSelectors.formOpcaoSaoPaulo).click();
+    cy.get(CurriculoSelectors.formTextArea).clear();
+    cy.get(CurriculoSelectors.formTextArea).type("Alterando descrição");
+    cy.get(CurriculoSelectors.formSelectHobbies).click();
+    cy.get(CurriculoSelectors.formOpcaoAssistirFilme).click();
+    cy.get(UtilsSelectors.primeiraAcaoBotaoSalvar).click();
   }
 }

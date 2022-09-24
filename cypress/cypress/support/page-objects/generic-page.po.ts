@@ -1,15 +1,25 @@
 /// <reference types="Cypress" />
 
+import { UtilsSelectors } from "./generic-po/selectors/utils.selectors";
+
 const url: any = Cypress.config("baseUrl");
+const timeOut:number = 30000;
 
 export class Generic {
   acessarDesafioAts(rotas: string) {
     cy.visit(`${url}/${rotas}`);
   }
-  mensagemDeletadoComSucesso(){
-    cy.get(".swal2-popup").should("be.visible");
+  mensagemDeSucesso(contem: string) {
+    cy.get(UtilsSelectors.sweetAlertSucesso, { timeout: timeOut })
+      // .contains(contem)
+      .should("be.visible");
   }
-  mensagemPreenchaCampoCorretamente() {
-    cy.get(".po-toaster-message").should("be.visible");
+  confirmarDeletar() {
+    cy.get(UtilsSelectors.sweetAlertDeletar).click();
+  }
+  mensagemDeAlerta(contem: string) {
+    cy.get(UtilsSelectors.toasterDeAlert)
+    // .contains(contem)
+    .should("be.visible");
   }
 }

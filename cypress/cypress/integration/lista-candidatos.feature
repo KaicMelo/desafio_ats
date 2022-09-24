@@ -32,4 +32,16 @@ Funcionalidade: Lista de Candidatados
         E confirmo deletar candidatura
         Então devo visualizar mensagem de deletado com sucesso
 
-    
+    Cenario: Excluir candidato
+        Quando acesso o modulo "candidato"
+        E clico em deletar candidato
+        E confirmo deletar usuario
+        Então devo visualizar mensagem de candidato deletado com sucesso
+        E não devo visualizar o registro na lista
+
+    Cenario: Excluir vaga
+        Quando acesso o modulo "vagas"
+        E clico em deletar vaga
+        E confirmo deletar vaga
+        Então devo visualizar mensagem de vaga deletado com sucesso
+        E não devo visualizar o registro na lista

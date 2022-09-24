@@ -1,6 +1,8 @@
+import { Generic } from './../page-objects/generic-page.po';
 import { Candidato } from "../page-objects/candidato-page.po";
 import { When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
+const generic = new Generic();
 const candidato = new Candidato();
 
 let nomeCandidato = "";
@@ -22,7 +24,7 @@ And("preencho o nome do candidato e salvo", function () {
 Then(
   "devo visualizar mensagem de candidato cadastrado com sucesso",
   function () {
-    candidato.mensagemCandidatoCadastradoComSucesso();
+    generic.mensagemDeSucesso("Salvo com sucesso");
   }
 );
 
@@ -36,7 +38,8 @@ And("altero o nome do candidato e salvo", function () {
   candidato.alterarNomeCandidatoSalvar(nomeAlternativo);
 });
 And("confirmo deletar usuario", function () {
-  candidato.confirmarDeletarUsuario();
+  generic.confirmarDeletar();
+  generic.mensagemDeSucesso("Deletado");
 });
 And("não devo visualizar o registro na lista", function () {
   candidato.naoDevoVerRegistroNaTabela(nomeAlternativo);
@@ -50,5 +53,5 @@ And("clico em deletar candidato", function () {
 });
 
 Then("devo visualizar mensagem de candidato deletado com sucesso", function () {
-  candidato.mensagemCandidatoDeletadoSucesso();
+  generic.mensagemDeSucesso("Deletado");
 });
