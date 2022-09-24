@@ -1,4 +1,4 @@
-import { PoWidgetModule } from '@po-ui/ng-components';
+import { PoWidgetModule, PoDividerModule } from '@po-ui/ng-components';
 import { CarregandoModule } from './../../componentes/carregando/carregando.module';
 import { CandidatadosRoutingModule } from './candidato-routing.module';
 import { NgModule } from '@angular/core';
@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     CandidatadosRoutingModule,
     HttpClientModule,
     CarregandoModule,
+    PoDividerModule,
     PoWidgetModule
   ]
 })

@@ -1,12 +1,15 @@
-<div class="po-row">
+  <h2>O candidatado se candidata a uma vaga</h2>
+  <po-divider>
+</po-divider>
 
+<div class="po-row">
   <div class="po-md-6" *ngIf="(listaDeCandidatos$ | async) as candidato; else carregar">
-    <app-selecionar [vagas]="listaDeCandidatos" [label]="candidatoTitulo" (valorFormulario)="candidatoValor = $event">
+    <app-selecionar [vagas]="candidato" [label]="candidatoTitulo" (valorFormulario)="candidatoValor = $event">
     </app-selecionar>
   </div>
 
   <div class="po-md-6" *ngIf="(listaDeVagas$ | async) as vagas; else carregar">
-    <app-selecionar [vagas]="listaDeVagas" [label]="vagaTitulo" (valorFormulario)="vagasValor = $event">
+    <app-selecionar [vagas]="vagas" [label]="vagaTitulo" (valorFormulario)="vagasValor = $event">
     </app-selecionar>
   </div>
 
@@ -17,9 +20,9 @@
 <po-divider></po-divider>
 <div class="po-row">
 
-  <div class="po-md-12" *ngIf="(listaCandidatatos$ | async) as listaCandidatatos; else carregar">
+  <div id="lista_candidatados" class="po-md-12" *ngIf="(listaCandidatatos$ | async) as listaCandidatatos; else carregar">
     <div *ngFor="let listaCandidatato of listaCandidatatos">
-      <po-widget class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" p-title="Candidato"
+      <po-widget [id]="createId(listaCandidatato)" class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" p-title="Candidato"
         p-primary-label="Deletar Candidatura" (p-primary-action)="deletarCandidatura(listaCandidatato.id)">
         <div class="po-lg-12">
           <p><strong>Candidato:</strong> {{ listaCandidatato.candidate }}</p>

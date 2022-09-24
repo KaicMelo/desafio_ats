@@ -1,4 +1,7 @@
-<po-button [p-label]="labelCriar" (p-click)="criarCandidato()"> </po-button>
+<h2>CRUD de candidatos</h2>
+<po-divider>
+</po-divider>
+<po-button id="criar_novo_candidato" [p-label]="labelCriar" (p-click)="criarCandidato()"> </po-button>
 
 <div *ngIf="(candidatos$ | async) as candidato; else carregar">
     <po-table

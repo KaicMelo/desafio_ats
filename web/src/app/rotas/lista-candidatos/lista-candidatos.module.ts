@@ -24,6 +24,7 @@ import { ListaCandidatosComponent } from './lista-candidatos.component';
     SelecionarModule,
     PoNotificationModule,
     PoWidgetModule,
+    PoDividerModule,
     ListaCandidatosRoutingModule
   ]
 })

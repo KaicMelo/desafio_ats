@@ -25,8 +25,10 @@ export class CandidatadosComponent implements OnInit {
         }
 
         if (!candidatadosIgual) {
+          let newClass = `${candidatados[i].candidate}-${candidatados[i].vacancy}`
           saida.push({
             candidate: candidatados[i].candidate,
+            classeTag: newClass.replace(/ /g, ''),
             vacancy: [
               {
                 nome: candidatados[i].vacancy,
@@ -41,4 +43,5 @@ export class CandidatadosComponent implements OnInit {
   constructor(private candidatadosService: CandidatadosService) {}
 
   ngOnInit(): void {}
+
 }

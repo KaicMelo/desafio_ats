@@ -80,7 +80,7 @@ export class CurriculoComponent implements OnInit {
   visualizarCurriculo(req: Curriculo) {
     if (req.has_resume == 'false') {
       this.poNotification.warning(
-        'Voçê já não possui currículo. Clique em cadastrar currículo'
+        'Voçê não possui currículo. Clique em cadastrar currículo'
       );
       return;
     }
