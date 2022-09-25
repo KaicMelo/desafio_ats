@@ -5,7 +5,6 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "tsnd src/server.ts",
-    "start": "ts-node --fast ./src/server.ts",
     "prod": "node ./dist/server.js",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports",
     "migrate": "npx knex migrate:latest",

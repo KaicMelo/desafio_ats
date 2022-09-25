@@ -4,23 +4,23 @@
 
 Conexão MySQL:
 - Crie um banco de dados
-- Adione as configurações do banco no ".env" na pasta raiz do serve
+- Adione as configurações do banco no ".env" na pasta raiz da pasta serve/
 
 DB_HOST=host_do_banco
 DB_DATABASE=seu_banco_de_dados
 DB_USERNAME=usuario_do_banco
 DB_PASSWORD=senha_do_banco
 
-Executar os seguintes comandos na raiz ## SERVE:
+Executar os seguintes comandos na raiz ## SERVE/:
 - npm i
 - npm run migrate
 - npm run seed
 - npm run build
 - npm run prod
 
-## TDD BACKEND
+## BDD BACKEND
 - Baixe Postman desktop
-- Importe o arquivo localizado na pasta serve/Desafio ATS - Automação.postman_collection.json e rode os testes
+- Importe o arquivo localizado na pasta "serve/Desafio ATS - Automação.postman_collection.json" e rode os testes
 
 ## FRONTEND
 
@@ -30,3 +30,9 @@ Executar os seguintes comandos na raiz ## WEB:
 
 ## NAVEGADOR
 http://localhost:4200
+
+## BDD FRONTEND
+
+Executar os seguintes comandos na raiz ## cypress:
+- npm run open
+- E rode os teste
