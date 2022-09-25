@@ -75,6 +75,7 @@ export class VagasComponent implements OnInit {
       title: 'Gostaria de deletar Vaga?',
       showDenyButton: true,
       confirmButtonText: 'Deletar',
+      confirmButtonColor: "var(--color-blue)",
       denyButtonText: 'Cancelar',
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
@@ -84,7 +85,12 @@ export class VagasComponent implements OnInit {
           .subscribe((r) => {
             this.vagas$ =
               this.vagasService.listaVagas();
-            Swal.fire('Deletado', '', 'success');
+              Swal.fire({
+                confirmButtonColor: "var(--color-blue)",
+                icon: 'success',
+                title: 'Deletado',
+                timer: 2000
+              });
           });
       }
     });

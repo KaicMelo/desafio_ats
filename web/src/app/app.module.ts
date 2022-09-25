@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { PoModule } from '@po-ui/ng-components';
+import { PoModule, PoMenuModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
 import { VagasModule } from './rotas/vagas/vagas.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,7 @@ import { ListaCandidatosModule } from './rotas/lista-candidatos/lista-candidatos
     CandidatoModule,
     CurriculoModule,
     ListaCandidatosModule,
+    PoMenuModule,
     VagasModule,
     RouterModule
   ],
