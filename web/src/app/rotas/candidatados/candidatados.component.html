@@ -1,4 +1,6 @@
-<h2>Listagem de candidatos candidatados a uma vaga</h2>
+<div class="po-table-no-data po-text-center">
+    <h3 class="po-text-center header-descricao">Listagem de candidatos candidatados a uma vaga</h3>
+</div>
 <po-divider></po-divider>
 <div *ngIf="(candidatados$ | async) as candidatados; else carregar">
     <div *ngFor="let candidatado of candidatados">
@@ -20,8 +22,8 @@
             </div>
         </po-widget>
     </div>
-    <div *ngIf="candidatados == 0">
-        <h2>Nenhum dado encontrado</h2>
+    <div class="po-table-no-data po-text-center" *ngIf="candidatados == 0">
+        <span>Nenhum dado encontrado</span>
     </div>
 </div>
 <ng-template #carregar>

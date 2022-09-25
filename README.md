@@ -33,6 +33,6 @@ http://localhost:4200
 
 ## BDD FRONTEND
 
-Executar os seguintes comandos na raiz ## cypress:
+Executar os seguintes comandos na raiz ## CYPRESS:
 - npm run open
-- E rode os teste
+- Rode os testes
