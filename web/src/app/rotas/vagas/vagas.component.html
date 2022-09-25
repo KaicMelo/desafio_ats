@@ -1,13 +1,12 @@
-<h2>CRUD de vagas</h2>
+<div class="po-table-no-data po-text-center">
+    <h3 class="po-text-center header-descricao">CRUD de vagas</h3>
+</div>
 <po-divider>
 </po-divider>
 <po-button id="criar_nova_vaga" [p-label]="labelCriar" (p-click)="criarVagas()"> </po-button>
 
 <div *ngIf="(vagas$ | async) as vaga; else carregar">
-    <po-table
-    [p-items]="vaga"
-    [p-columns]="colunaVaga"
-    [p-actions]="acoes">
+    <po-table [p-items]="vaga" [p-columns]="colunaVaga" [p-actions]="acoes">
     </po-table>
 </div>
 
@@ -15,10 +14,6 @@
     <app-carregando></app-carregando>
 </ng-template>
 
-<app-vaga-modal
-*ngIf="mostrarModal"
-[novoRegistro]="novoRegistro"
-[titulo]="titulo"
-[vagaSelecionada]="VagaSelecionada"
-(modaFechadoOuSalvo)="aoFecharModal($event)">
+<app-vaga-modal *ngIf="mostrarModal" [novoRegistro]="novoRegistro" [titulo]="titulo" [vagaSelecionada]="VagaSelecionada"
+    (modaFechadoOuSalvo)="aoFecharModal($event)">
 </app-vaga-modal>

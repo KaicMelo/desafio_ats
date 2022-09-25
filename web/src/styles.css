@@ -15,16 +15,16 @@
     --color-brand-01-lightest: #f2eaf6;
     --color-brand-01-lighter: #d9c2e5;
     --color-brand-01-light: #bd94d1;
-    --color-brand-01-base: #753399;
-    --color-brand-01-dark: #5b1c7d;
-    --color-brand-01-darker: #400e58;
-    --color-brand-01-darkest: #260538;
-    --color-brand-02-base: #b92f72;
-    --color-brand-03-base: #ffd464;
-    --color-neutral-dark-70: #4a5c60;
-    --color-neutral-dark-80: #2c3739;
-    --color-neutral-dark-90: #1d2426;
-    --color-neutral-dark-95: #0b0e0e;
+    --color-brand-01-base: #039697a8;
+    --color-brand-01-dark: #039697a8;
+    --color-brand-01-darker: #039697a8;
+    --color-brand-01-darkest: #039697a8;
+    --color-brand-02-base: #039697a8;
+    --color-brand-03-base: #039697a8;
+    --color-neutral-dark-70: #039697a8;
+    --color-neutral-dark-80: #039697a8;
+    --color-neutral-dark-90: #039697a8;
+    --color-neutral-dark-95: #039697a8;
     --color-neutral-light-10: #eceeee;
     --color-neutral-light-20: #dadedf;
     --color-neutral-light-30: #b6bdbf;
@@ -32,6 +32,10 @@
     --color-neutral-light-05: #fbfbfb;
     --color-neutral-mid-40: #9da7a9;
     --color-neutral-mid-60: #6e7c7f;
+    --color-blue: #039697; 
+    --color-background-header: #00c2cb;
+    --color-border-input:#e4e4e4;
+    --color-red:#df3d3d;
   }
   
   /*------------------------------------*\
@@ -39,10 +43,10 @@
   \*------------------------------------*/
   :root {
     --color-action-default: var(--color-brand-01-base);
-    --color-action-hover: var(--color-brand-01-dark);
-    --color-action-pressed: var(--color-brand-01-darker);
-    --color-action-disabled: var(--color-neutral-light-30);
-    --color-action-focus: var(--color-brand-01-darkest);
+    --color-action-hover: #039697a8
+    --color-action-pressed: #039697a8
+    --color-action-disabled: #039697a8
+    --color-action-focus: #039697a8
   }
   
   /*------------------------------------*\
@@ -60,10 +64,10 @@
     --color-primary-alpha-50: rgba(201, 53, 125, 0.5);
   
     /* Botão primário, Links, Cor da borda do input selecionado, Cor da borda do botão secundário */
-    --color-primary: #c9357d;
+    --color-primary: var(--color-blue);
   
     /* Hover do Botão primário, Links, Cor da borda do botão secundário */
-    --color-primary-dark-20: #9d2c67;
+    --color-primary-dark-20: #039697a8;
   
     /* Pressed do Botão primário, Links, Cor da borda do botão secundário */
     --color-primary-dark-40: #8b255a;
@@ -324,7 +328,7 @@
   
     /* pressed */
     --color-pressed: var(--color-action-pressed);
-    --background-pressed: var(--color-secondary-light-40);
+    --background-pressed: #039697a8
   
     /* disabled */
     --text-color-disabled: var(--color-neutral-dark-70);
@@ -340,8 +344,8 @@
   
   :root {
     --color-button-background-color: var(--background-color); /*Deprecated v16.x.x utilizar --background-color*/
-    --color-button-border: var(--color); /*Deprecated v16.x.x utilizar --color*/
-    --color-button-color: var(--color); /*Deprecated v16.x.x utilizar --color*/
+    --color-button-border: var(--color-blue); /*Deprecated v16.x.x utilizar --color*/
+    --color-button-color: var(--color-blue); /*Deprecated v16.x.x utilizar --color teste*/
     --color-button-box-shadow: var(--shadow);
   
     --color-button-background-color-hover: var(--background-hover); /*Deprecated v16.x.x utilizar --background-hover*/
@@ -362,14 +366,14 @@
     /**
     * Button Primary
     */
-    --color-button-background-color-primary: var(--color); /*Deprecated v16.x.x utilizar --background-color*/
+    --color-button-background-color-primary: var(--color-blue); /*Deprecated v16.x.x utilizar --background-color*/
     --color-button-border-primary: var(--border-color); /*Deprecated v16.x.x utilizar --border-color*/
     --color-button-color-primary: var(--text-color); /*Deprecated v16.x.x utilizar --color*/
   
-    --color-button-background-color-primary-hover: var(--color-hover); /*Deprecated v16.x.x utilizar --color-hover*/
+    --color-button-background-color-primary-hover: #039697a8; /*Deprecated v16.x.x utilizar --color-hover*/
     --color-button-color-primary-hover: var(--text-color); /*Deprecated v16.x.x utilizar --text-color*/
   
-    --color-button-background-color-primary-pressed: var(--color-pressed); /*Deprecated v16.x.x utilizar --color-pressed*/
+    --color-button-background-color-primary-pressed: #039697a8; /*Deprecated v16.x.x utilizar --color-pressed*/
     --color-button-color-primary-pressed: var(--text-color); /*Deprecated v16.x.x utilizar --color-pressed*/
   
     --color-button-background-color-primary-disabled: var(
@@ -1401,5 +1405,12 @@
     --color-toaster-border-color-info: var(--color-feedback-info-lighter);
     --color-toaster-icon-background-color-info: var(--color-feedback-info-base);
     --color-toaster-icon-color-info: var(--color-white);
+  }
+
+  .header-descricao {
+    background: #00827126;
+    color: #00000075;
+    padding: 20px;
+    border-radius: 0 20px 0 20px;
   }
   

@@ -1,13 +1,12 @@
-<h2>CRUD de candidatos</h2>
+<div class="po-table-no-data po-text-center">
+    <h3 class="po-text-center header-descricao">CRUD de candidatos</h3>
+</div>
 <po-divider>
 </po-divider>
 <po-button id="criar_novo_candidato" [p-label]="labelCriar" (p-click)="criarCandidato()"> </po-button>
 
 <div *ngIf="(candidatos$ | async) as candidato; else carregar">
-    <po-table
-    [p-items]="candidato"
-    [p-columns]="colunaCandidato"
-    [p-actions]="acoes">
+    <po-table [p-items]="candidato" [p-columns]="colunaCandidato" [p-actions]="acoes">
     </po-table>
 </div>
 
@@ -15,10 +14,6 @@
     <app-carregando></app-carregando>
 </ng-template>
 
-<app-candidato-modal
-*ngIf="mostrarModal"
-[novoRegistro]="novoRegistro"
-[titulo]="titulo"
-[candidatoSelecionado]="candidatoSelecionado"
-(modaFechadoOuSalvo)="aoFecharModal($event)">
+<app-candidato-modal *ngIf="mostrarModal" [novoRegistro]="novoRegistro" [titulo]="titulo"
+    [candidatoSelecionado]="candidatoSelecionado" (modaFechadoOuSalvo)="aoFecharModal($event)">
 </app-candidato-modal>

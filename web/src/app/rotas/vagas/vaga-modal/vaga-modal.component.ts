@@ -83,6 +83,7 @@ export class VagaModalComponent implements OnInit {
           (r) => {
             Swal.fire({
               icon: 'success',
+              confirmButtonColor: "var(--color-blue)",
               title: 'Salvo com sucesso',
               showConfirmButton: false,
               timer: 1500,

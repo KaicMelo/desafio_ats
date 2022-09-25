@@ -72,6 +72,7 @@ export class ListaCandidatosComponent implements OnInit {
     Swal.fire({
       title: 'Gostaria de deletar candidatura?',
       showDenyButton: true,
+      confirmButtonColor: "var(--color-blue)",
       confirmButtonText: 'Deletar',
       denyButtonText: 'Cancelar',
     }).then((result) => {
@@ -82,7 +83,12 @@ export class ListaCandidatosComponent implements OnInit {
           .subscribe((r) => {
             this.listaCandidatatos$ =
               this.listaCandidatadosService.listaCandidatados();
-            Swal.fire('Deletado', '', 'success');
+              Swal.fire({
+                confirmButtonColor: "var(--color-blue)",
+                icon: 'success',
+                title: 'Deletado',
+                timer: 2000
+              });
           });
       }
     });
