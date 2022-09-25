@@ -56,6 +56,7 @@ export class CurriculoModalComponent implements OnInit {
     },
     {
       property: 'wage',
+      label: 'Pretenção Salarial',
       type: 'currency',
       gridColumns: 3,
       gridSmColumns: 12,
