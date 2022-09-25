@@ -100,6 +100,7 @@ export class CurriculoComponent implements OnInit {
     Swal.fire({
       title: 'Gostaria de deletar Curriculo?',
       showDenyButton: true,
+      confirmButtonColor: "var(--color-blue)",
       confirmButtonText: 'Deletar',
       denyButtonText: 'Cancelar',
     }).then((result: any) => {
@@ -109,7 +110,12 @@ export class CurriculoComponent implements OnInit {
           .deletarCurriculo(curriculo.resume_id)
           .subscribe((r) => {
             this.candidatos$ = this.curriculoService.listaCurriculo();
-            Swal.fire('Deletado', '', 'success');
+            Swal.fire({
+              confirmButtonColor: "var(--color-blue)",
+              icon: 'success',
+              title: 'Deletado',
+              timer: 2000
+            });
           });
       }
     });

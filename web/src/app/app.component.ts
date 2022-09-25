@@ -13,14 +13,30 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Inicio', action: () => this.router.navigate(['inicio']) },
-    { label: 'Candidato', action: () => this.router.navigate(['candidato']) },
+    {
+      label: 'Candidato se candidata',
+      icon:'po-icon-home',
+      shortLabel: 'Se Candidato',
+      action: () => this.router.navigate(['inicio']),
+    },
+    {
+      label: 'Candidato',
+      icon: 'po-icon-clock',
+      shortLabel: 'Se Candidato',
+      action: () => this.router.navigate(['candidato']),
+    },
     { label: 'Vagas', action: () => this.router.navigate(['vagas']) },
-    { label: 'Candidaturas', action: () => this.router.navigate(['candidaturas']) },
-    { label: 'Currículo', action: () => this.router.navigate(['curriculo']) },
+    {
+      label: 'Candidaturas',
+      icon: 'po-icon-clock',
+      shortLabel: 'Se Candidato',
+      action: () => this.router.navigate(['candidaturas']),
+    },
+    {
+      label: 'Currículo',
+      icon: 'po-icon-clock',
+      shortLabel: 'Se Candidato',
+      action: () => this.router.navigate(['curriculo']),
+    },
   ];
-
-  private onClick() {
-    alert('Clicked in menu item');
-  }
 }
