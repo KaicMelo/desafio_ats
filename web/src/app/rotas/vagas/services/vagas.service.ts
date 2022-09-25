@@ -1,5 +1,4 @@
-import { PoRadioGroupOption } from '@po-ui/ng-components';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Vagas } from './../interfaces/vagas.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -13,6 +12,19 @@ export class VagasService {
   API = environment.API;
 
   constructor(private http: HttpClient) {}
+
+  listaVagasToSelect(): Observable<Vagas[]> {
+    return this.http
+      .get<Observable<Vagas[]>>(`${this.API}/vagas`)
+      .pipe(
+        map((vagas: any) =>
+        vagas.map((vaga: any) => ({
+            label: vaga.vacancy,
+            value: vaga.id,
+          }))
+        )
+      );
+  }
 
   listaVagas(): Observable<Vagas[]> {
     return this.http.get<Vagas[]>(`${this.API}/vagas`);
