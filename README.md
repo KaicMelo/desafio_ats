@@ -18,7 +18,7 @@ Executar os seguintes comandos na raiz ## SERVE:
 - npm run build
 - npm run prod
 
-## TDD BACKEND
+## BDD BACKEND
 - Baixe Postman desktop
 - Importe o arquivo localizado na pasta serve/Desafio ATS - Automação.postman_collection.json e rode os testes
 
@@ -30,3 +30,9 @@ Executar os seguintes comandos na raiz ## WEB:
 
 ## NAVEGADOR
 http://localhost:4200
+
+## BDD FRONTEND
+
+Executar os seguintes comandos na raiz ## CYPRESS:
+- npm run open
+- Rode os testes
