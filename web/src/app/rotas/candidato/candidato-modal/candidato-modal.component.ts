@@ -1,3 +1,4 @@
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import Swal from 'sweetalert2';
 import { CandidatoService } from '../services/candidato.service';
 import {
@@ -21,13 +22,14 @@ import { Candidato } from '../interfaces/candidato.interface';
   styleUrls: ['./candidato-modal.component.css'],
 })
 export class CandidatoModalComponent implements OnInit {
+  literals: Literals = LiteralsFactory.getLiterals();
+
   @ViewChild('modal', { static: true }) poModal!: PoModalComponent;
   @Output() modaFechadoOuSalvo: any = new EventEmitter();
   @Input() novoRegistro!: boolean;
   @Input() titulo: string = '';
   @Input() candidatoSelecionado!: Candidato;
 
-  nomeCandidato: string = 'Nome do Candidato';
   inputCandidato: string = '';
 
   constructor(
@@ -41,7 +43,7 @@ export class CandidatoModalComponent implements OnInit {
 
   confirmar: PoModalAction = {
     action: () => this.salvarCandidato(),
-    label: 'Salvar',
+    label: this.literals.toSave,
   };
 
   fechar: PoModalAction = {
@@ -49,7 +51,7 @@ export class CandidatoModalComponent implements OnInit {
       this.modaFechadoOuSalvo.emit();
       this.poModal.close();
     },
-    label: 'Fechar',
+    label: this.literals.close,
     danger: true,
   };
 
@@ -64,7 +66,7 @@ export class CandidatoModalComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               confirmButtonColor: "var(--color-blue)",
-              title: 'Salvo com sucesso',
+              title: this.literals.savedSuccessfully,
               showConfirmButton: false,
               timer: 1500,
             });
@@ -76,7 +78,7 @@ export class CandidatoModalComponent implements OnInit {
           },
           (err) => {
             this.carregandoBotaoSalvar(false);
-            this.poNotification.warning('Preencha o campo corretamente');
+            this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     } else {
@@ -90,7 +92,7 @@ export class CandidatoModalComponent implements OnInit {
           (r) => {
             Swal.fire({
               icon: 'success',
-              title: 'Salvo com sucesso',
+              title: this.literals.savedSuccessfully,
               showConfirmButton: false,
               timer: 1500,
             });
@@ -101,7 +103,7 @@ export class CandidatoModalComponent implements OnInit {
           },
           (err) => {
             this.carregandoBotaoSalvar(false);
-            this.poNotification.warning('Preencha o campo corretamente');
+            this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     }

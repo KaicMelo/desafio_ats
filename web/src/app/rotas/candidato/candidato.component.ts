@@ -7,6 +7,7 @@ import {
   PoTableColumn,
   PoNotificationService,
 } from '@po-ui/ng-components';
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 
 @Component({
   selector: 'app-candidato',
@@ -14,9 +15,9 @@ import {
   styleUrls: ['./candidato.component.css'],
 })
 export class CandidatoComponent implements OnInit {
-  public candidatos$ = this.candidatoService.listaCandidatos();
+  literals: Literals = LiteralsFactory.getLiterals();
 
-  labelCriar: string = 'Criar';
+  public candidatos$ = this.candidatoService.listaCandidatos();
 
   candidatoSelecionado!: Candidato;
 
@@ -25,20 +26,20 @@ export class CandidatoComponent implements OnInit {
   titulo: string = '';
 
   readonly colunaCandidato: Array<PoTableColumn> = [
-    { property: 'id', label: 'Numero do Candidato' },
-    { property: 'candidate', label: 'Candidato' },
+    { property: 'id', label: this.literals.candidateNumber },
+    { property: 'candidate', label: this.literals.candidate },
   ];
 
   readonly acoes: Array<PoTableAction> = [
     {
       action: this.editarCandidato.bind(this),
       icon: 'po-icon-info',
-      label: 'Editar',
+      label: this.literals.toEdit,
     },
     {
       action: this.deletarCandidato.bind(this),
       icon: 'po-icon po-icon-delete',
-      label: 'Deletar',
+      label: this.literals.toDelete,
     },
   ];
 
@@ -50,7 +51,7 @@ export class CandidatoComponent implements OnInit {
   ngOnInit(): void {}
 
   criarCandidato() {
-    this.titulo = 'Cadastrar novo Candidato';
+    this.titulo = this.literals.registerNewCandidate;
     this.novoRegistro = true;
 
     this.mostrarModal = true;
@@ -65,7 +66,7 @@ export class CandidatoComponent implements OnInit {
   }
 
   editarCandidato(candidato: Candidato) {
-    this.titulo = 'Alterar Candidato';
+    this.titulo = this.literals.changeCandidate;
     this.novoRegistro = false;
     this.candidatoSelecionado = candidato;
 
@@ -74,11 +75,11 @@ export class CandidatoComponent implements OnInit {
 
   deletarCandidato(candidato: Candidato) {
     Swal.fire({
-      title: 'Gostaria de deletar Candidato?',
+      title: `${this.literals.wouldLikeToDeleteCandidate}`,
       showDenyButton: true,
       confirmButtonColor: "var(--color-blue)",
-      confirmButtonText: 'Deletar',
-      denyButtonText: 'Cancelar',
+      confirmButtonText: this.literals.toDelete,
+      denyButtonText: this.literals.toCancel,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -90,7 +91,7 @@ export class CandidatoComponent implements OnInit {
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",
                 icon: 'success',
-                title: 'Deletado',
+                title: this.literals.deleted,
                 timer: 2000
               });
           });

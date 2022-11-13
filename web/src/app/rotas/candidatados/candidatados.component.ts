@@ -1,3 +1,4 @@
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import { CandidatadosService } from './services/candidatados.service';
 import { Component, OnInit } from '@angular/core';
 import { Candidatados } from './interface/candidatados.interface';
@@ -9,6 +10,8 @@ import { map } from 'rxjs';
   styleUrls: ['./candidatados.component.css'],
 })
 export class CandidatadosComponent implements OnInit {
+  literals: Literals = LiteralsFactory.getLiterals();
+
   candidatados$ = this.candidatadosService.listaCandidatados().pipe(
     map((candidatados: Candidatados[]) => {
       let saida: any = [];

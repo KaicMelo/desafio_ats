@@ -1,21 +1,21 @@
 <div class="po-table-no-data po-text-center">
-  <h3 class="po-text-center header-descricao">Aqui o candidatado pode se candidatar a uma vaga</h3>
+  <h3 class="po-text-center header-descricao"> {{ literals.candidateCanApplyForVacancy }}</h3>
 </div>
 <po-divider>
 </po-divider>
 
 <div class="po-row">
   <div class="po-md-6" *ngIf="(listaDeCandidatos$ | async) as candidato; else carregar">
-    <app-selecionar [vagas]="candidato" [label]="candidatoTitulo" (valorFormulario)="candidatoValor = $event">
+    <app-selecionar [vagas]="candidato" [label]="literals.SelectTheCandidate" (valorFormulario)="candidatoValor = $event">
     </app-selecionar>
   </div>
 
   <div class="po-md-6" *ngIf="(listaDeVagas$ | async) as vagas; else carregar">
-    <app-selecionar [vagas]="vagas" [label]="vagaTitulo" (valorFormulario)="vagasValor = $event">
+    <app-selecionar [vagas]="vagas" [label]="literals.selectTheVacancy" (valorFormulario)="vagasValor = $event">
     </app-selecionar>
   </div>
 
-  <po-button class="po-md-12" [p-label]="salvarCandidato" (p-click)="salvarCandidatura()"> </po-button>
+  <po-button class="po-md-12" [p-label]="literals.apply" (p-click)="salvarCandidatura()"> </po-button>
 
 </div>
 
@@ -25,16 +25,16 @@
   <div id="lista_candidatados" class="po-md-12"
     *ngIf="(listaCandidatatos$ | async) as listaCandidatatos; else carregar">
     <div *ngFor="let listaCandidatato of listaCandidatatos">
-      <po-widget [id]="createId(listaCandidatato)" class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" p-title="Candidato"
-        p-primary-label="Deletar Candidatura" (p-primary-action)="deletarCandidatura(listaCandidatato.id)">
+      <po-widget [id]="createId(listaCandidatato)" class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" [p-title]="literals.candidate"
+        [p-primary-label]="literals.deleteApplication" (p-primary-action)="deletarCandidatura(listaCandidatato.id)">
         <div class="po-lg-12">
-          <p><strong>Candidato:</strong> {{ listaCandidatato.candidate }}</p>
-          <p><strong>Vaga:</strong> {{ listaCandidatato.vacancy }}</p>
+          <p><strong>{{ literals.candidate }}:</strong> {{ listaCandidatato.candidate }}</p>
+          <p><strong>{{ literals.vacancy }}:</strong> {{ listaCandidatato.vacancy }}</p>
         </div>
       </po-widget>
     </div>
     <div class="po-table-no-data po-text-center" *ngIf="listaCandidatatos == 0">
-      <span>Nenhum dado encontrado</span>
+      <span>{{ literals.noDataFound }}</span>
     </div>
   </div>
 </div>
