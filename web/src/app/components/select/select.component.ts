@@ -9,13 +9,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class SelectComponent {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  @Input() vagas: any;
+  @Input() options: any;
   @Input() label: string = '';
-  @Output() valorFormulario: any = new EventEmitter();
+  @Output() formValue: any = new EventEmitter();
 
   constructor() {}
 
   onChange(event: any) {
-    this.valorFormulario.emit(event);
+    this.formValue.emit(event);
   }
 }

@@ -12,7 +12,7 @@ export class CandidatadosService {
 
   constructor(private http: HttpClient) { } 
 
-  listaCandidatados(): Observable<CandidateForVacancy[]> {
+  listCandidateForVacancy(): Observable<CandidateForVacancy[]> {
     return this.http.get<CandidateForVacancy[]>(`${this.API}/lista_candidatados/lista_nomes`);
   }
 }

@@ -3,17 +3,17 @@
 </div>
 <po-divider>
 </po-divider>
-<po-button id="criar_nova_vaga" [p-label]="literals.create" (p-click)="criarVagas()"> </po-button>
+<po-button id="criar_nova_vaga" [p-label]="literals.create" (p-click)="createVacancy()"> </po-button>
 
-<div *ngIf="(vagas$ | async) as vaga; else carregar">
-    <po-table [p-items]="vaga" [p-columns]="colunaVaga" [p-actions]="acoes">
+<div *ngIf="(vacancies$ | async) as vacancy; else loading">
+    <po-table [p-items]="vacancy" [p-columns]="columnVacancy" [p-actions]="actions">
     </po-table>
 </div>
 
-<ng-template #carregar>
+<ng-template #loading>
     <app-loading></app-loading>
 </ng-template>
 
-<app-vacancy-modal *ngIf="mostrarModal" [novoRegistro]="novoRegistro" [titulo]="titulo" [vagaSelecionada]="VagaSelecionada"
-    (modaFechadoOuSalvo)="aoFecharModal($event)">
+<app-vacancy-modal *ngIf="showModal" [newRegister]="newRegister" [title]="title" [vacancySelected]="vacanciesSelected"
+    (closeOrSaveModal)="closingModal($event)">
 </app-vacancy-modal>

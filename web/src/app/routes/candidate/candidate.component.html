@@ -3,10 +3,10 @@
 </div>
 <po-divider>
 </po-divider>
-<po-button id="criar_novo_candidato" [p-label]="literals.create" (p-click)="criarCandidato()"> </po-button>
+<po-button id="create_new_candidate" [p-label]="literals.create" (p-click)="createCandidate()"> </po-button>
 
-<div *ngIf="(candidatos$ | async) as candidato; else carregar">
-    <po-table [p-items]="candidato" [p-columns]="colunaCandidato" [p-actions]="acoes">
+<div *ngIf="(candidates$ | async) as candidate; else carregar">
+    <po-table [p-items]="candidate" [p-columns]="columnCandidate" [p-actions]="actions">
     </po-table>
 </div>
 
@@ -14,6 +14,6 @@
     <app-loading></app-loading>
 </ng-template>
 
-<app-candidato-modal *ngIf="mostrarModal" [novoRegistro]="novoRegistro" [titulo]="titulo"
-    [candidatoSelecionado]="candidatoSelecionado" (modaFechadoOuSalvo)="aoFecharModal($event)">
-</app-candidato-modal>
+<app-candidate-modal *ngIf="showModal" [newRegister]="newRegister" [title]="title"
+    [candidateSelected]="candidateSelected" (closeOrSaveModal)="closingModal($event)">
+</app-candidate-modal>

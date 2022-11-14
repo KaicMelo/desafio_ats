@@ -5,22 +5,22 @@ import { CandidateForVacancy } from './interface/candidate-for-vacancy.interface
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-candidatados',
+  selector: 'app-candidate-for-vacancy',
   templateUrl: './candidate-for-vacancy.component.html',
   styleUrls: ['./candidate-for-vacancy.component.css'],
 })
 export class CandidateForVacancyComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  candidatados$ = this.candidatadosService.listaCandidatados().pipe(
-    map((candidatados: CandidateForVacancy[]) => {
-      let saida: any = [];
-      for (let i = 0; i < candidatados.length; i++) {
+  candidateForVacancy$ = this.candidatadosService.listCandidateForVacancy().pipe(
+    map((candidates: CandidateForVacancy[]) => {
+      let response: any = [];
+      for (let i = 0; i < candidates.length; i++) {
         var candidatadosIgual = false;
         for (var j = 0; j < i; j++) {
-          if (saida[j] && candidatados[i].candidate == saida[j].candidate) {
-            saida[j].vacancy.push({
-              nome: candidatados[i].vacancy,
+          if (response[j] && candidates[i].candidate == response[j].candidate) {
+            response[j].vacancy.push({
+              name: candidates[i].vacancy,
             });
             candidatadosIgual = true;
             break;
@@ -28,19 +28,19 @@ export class CandidateForVacancyComponent implements OnInit {
         }
 
         if (!candidatadosIgual) {
-          let newClass = `${candidatados[i].candidate}-${candidatados[i].vacancy}`
-          saida.push({
-            candidate: candidatados[i].candidate,
+          let newClass = `${candidates[i].candidate}-${candidates[i].vacancy}`
+          response.push({
+            candidate: candidates[i].candidate,
             classeTag: newClass.replace(/ /g, ''),
             vacancy: [
               {
-                nome: candidatados[i].vacancy,
+                name: candidates[i].vacancy,
               },
             ],
           });
         }
       }
-      return saida;
+      return response;
     })
   );
   constructor(private candidatadosService: CandidatadosService) {}

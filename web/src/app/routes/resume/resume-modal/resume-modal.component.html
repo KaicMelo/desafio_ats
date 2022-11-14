@@ -1,12 +1,12 @@
-<po-modal #modal [p-primary-action]="confirmar" [p-secondary-action]="fechar" [p-title]="titulo" [p-hide-close]="true">
-    <div class="po-row" *ngIf="novoRegistro">
+<po-modal #modal [p-primary-action]="confirm" [p-secondary-action]="close" [p-title]="title" [p-hide-close]="true">
+    <div class="po-row" *ngIf="newRegister">
         <po-dynamic-form #dynamicForm (p-form)="getForm($event)" p-auto-focus="name" [p-fields]="fields"
-            [p-value]="candidatoSelecionado">
+            [p-value]="candidateSelected">
         </po-dynamic-form>
     </div>
-    <div class="po-row" *ngIf="!novoRegistro">
+    <div class="po-row" *ngIf="!newRegister">
         <po-dynamic-form #dynamicForm (p-form)="getForm($event)" p-auto-focus="name" [p-fields]="fields"
-            [p-value]="candidatoSelecionado">
+            [p-value]="candidateSelected">
         </po-dynamic-form>
     </div>
 </po-modal>

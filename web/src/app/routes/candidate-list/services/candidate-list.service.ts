@@ -11,7 +11,7 @@ export class CandidateListService {
 
   constructor(private http: HttpClient) {}
 
-  candidateList(): Observable<any> {
+  listCandidate(): Observable<any> {
     return this.http.get<any>(`${this.API}/lista_candidatados`);
   }
   saveCandidates(candidatado: object) {

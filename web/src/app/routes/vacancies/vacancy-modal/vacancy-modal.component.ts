@@ -25,12 +25,12 @@ export class VacancyModalComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
   @ViewChild('modal', { static: true }) poModal!: PoModalComponent;
-  @Output() modaFechadoOuSalvo: any = new EventEmitter();
-  @Input() novoRegistro!: boolean;
-  @Input() titulo: string = '';
-  @Input() vagaSelecionada!: Vacancies;
+  @Output() closeOrSaveModal: any = new EventEmitter();
+  @Input() newRegister!: boolean;
+  @Input() title: string = '';
+  @Input() vacancySelected!: Vacancies; 
 
-  inputVaga: string = '';
+  inputVacancy: string = '';
 
   constructor(
     private poNotification: PoNotificationService,
@@ -41,14 +41,14 @@ export class VacancyModalComponent implements OnInit {
     this.poModal.open();
   }
 
-  confirmar: PoModalAction = {
+  confirm: PoModalAction = {
     action: () => this.salvarVaga(),
     label: this.literals.toSave,
   };
 
-  fechar: PoModalAction = {
+  close: PoModalAction = {
     action: () => {
-      this.modaFechadoOuSalvo.emit();
+      this.closeOrSaveModal.emit();
       this.poModal.close();
     },
     label: this.literals.close,
@@ -56,9 +56,9 @@ export class VacancyModalComponent implements OnInit {
   };
 
   salvarVaga() {
-    if (this.novoRegistro) {
-      this.carregandoBotaoSalvar(true);
-      this.vacanciesService.saveVacancies({ vacancy: this.inputVaga }).subscribe(
+    if (this.newRegister) {
+      this.loadingSaveButtom(true);
+      this.vacanciesService.saveVacancies({ vacancy: this.inputVacancy }).subscribe(
         (r) => {
           Swal.fire({
             icon: 'success',
@@ -66,20 +66,20 @@ export class VacancyModalComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500,
           });
-          this.modaFechadoOuSalvo.emit('salvar');
+          this.closeOrSaveModal.emit('salvar');
           this.poModal.close();
-          this.carregandoBotaoSalvar(false);
+          this.loadingSaveButtom(false);
         },
         (err) => {
-          this.carregandoBotaoSalvar(false);
+          this.loadingSaveButtom(false);
           this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
         }
       );
     } else {
-      this.carregandoBotaoSalvar(true);
+      this.loadingSaveButtom(true);
       this.vacanciesService
-        .editVacancies(this.vagaSelecionada.id, {
-          vacancy: this.vagaSelecionada.vacancy,
+        .editVacancies(this.vacancySelected.id, {
+          vacancy: this.vacancySelected.vacancy,
         })
         .subscribe(
           (r) => {
@@ -91,19 +91,19 @@ export class VacancyModalComponent implements OnInit {
               timer: 1500,
             });
 
-            this.modaFechadoOuSalvo.emit('salvar');
+            this.closeOrSaveModal.emit('salvar');
             this.poModal.close();
-            this.carregandoBotaoSalvar(true);
+            this.loadingSaveButtom(true);
           },
           (err) => {
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
             this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     }
   }
-  carregandoBotaoSalvar(status: boolean) {
-    this.confirmar.disabled = status;
-    this.confirmar.loading = status;
+  loadingSaveButtom(status: boolean) {
+    this.confirm.disabled = status;
+    this.confirm.loading = status;
   }
 }

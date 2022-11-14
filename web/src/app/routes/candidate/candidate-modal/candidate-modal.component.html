@@ -1,8 +1,8 @@
-<po-modal #modal [p-primary-action]="confirmar" [p-secondary-action]="fechar" [p-title]="titulo" [p-hide-close]="true">
-    <div class="po-row" *ngIf="novoRegistro">
-        <po-input class="po-lg-12" id="novoCandidato" name="input" [p-label]="literals.candidateName" [(ngModel)]="inputCandidato"> </po-input>
+<po-modal #modal [p-primary-action]="confirm" [p-secondary-action]="close" [p-title]="title" [p-hide-close]="true">
+    <div class="po-row" *ngIf="newRegister">
+        <po-input class="po-lg-12" id="new_candidate" name="input" [p-label]="literals.candidateName" [(ngModel)]="inputCandidate"> </po-input>
     </div>
-    <div class="po-row" *ngIf="!novoRegistro">
-        <po-input class="po-lg-12" id="alterarCandidato" name="input" [p-label]="literals.candidateName" [(ngModel)]="candidatoSelecionado.candidate"> </po-input>
+    <div class="po-row" *ngIf="!newRegister">
+        <po-input class="po-lg-12" id="update_candidate" name="input" [p-label]="literals.candidateName" [(ngModel)]="candidateSelected.candidate"> </po-input>
     </div>
 </po-modal>

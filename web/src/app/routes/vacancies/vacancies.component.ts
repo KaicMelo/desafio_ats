@@ -16,28 +16,28 @@ import Swal from 'sweetalert2';
 export class VacanciesComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  public vagas$ = this.vacanciesService.listVacancies();
+  public vacancies$ = this.vacanciesService.listVacancies();
 
-  VagaSelecionada!: Vacancies;
+  vacanciesSelected!: Vacancies;
 
-  mostrarModal: boolean = false;
-  novoRegistro: boolean = false;
+  showModal: boolean = false;
+  newRegister: boolean = false;
 
-  titulo: string = '';
+  title: string = '';
 
-  readonly colunaVaga: Array<PoTableColumn> = [
+  readonly columnVacancy: Array<PoTableColumn> = [
     { property: 'id', label: this.literals.vacancyNumber },
     { property: 'vacancy', label: this.literals.vacancies }
   ];
 
-  readonly acoes: Array<PoTableAction> = [
+  readonly actions: Array<PoTableAction> = [
     {
-      action: this.editarVaga.bind(this),
+      action: this.editVacancy.bind(this),
       icon: 'po-icon-info',
       label: this.literals.toEdit,
     },
     {
-      action: this.deletarVaga.bind(this),
+      action: this.deleteVacancy.bind(this),
       icon: 'po-icon po-icon-delete',
       label: this.literals.toDelete,
     },
@@ -48,28 +48,28 @@ export class VacanciesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  criarVagas() {
-    this.titulo = this.literals.registerNewVacancy;
-    this.novoRegistro = true;
+  createVacancy() {
+    this.title = this.literals.registerNewVacancy;
+    this.newRegister = true;
 
-    this.mostrarModal = true;
+    this.showModal = true;
   }
   
-  aoFecharModal(candidato: string) {
-    this.mostrarModal = false;
+  closingModal(candidate: any) {
+    this.showModal = false;
 
-    if (candidato == 'salvar') {
-      this.vagas$ = this.vacanciesService.listVacancies();
+    if (candidate == 'save') {
+      this.vacancies$ = this.vacanciesService.listVacancies();
     }
   }
-  editarVaga(vagas: Vacancies) {
-    this.titulo = this.literals.changeVacancy;
-    this.VagaSelecionada = vagas;
-    this.novoRegistro = false;
+  editVacancy(vacancy: Vacancies) {
+    this.title = this.literals.changeVacancy;
+    this.vacanciesSelected = vacancy;
+    this.newRegister = false;
 
-    this.mostrarModal = true;
+    this.showModal = true;
   }
-  deletarVaga(vagas: Vacancies) {
+  deleteVacancy(vacancy: Vacancies) {
     Swal.fire({
       title: `${this.literals.wouldLikeToDeleteVacancy}?`,
       showDenyButton: true,
@@ -79,9 +79,9 @@ export class VacanciesComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.vacanciesService
-          .deleteVacancies(vagas.id)
+          .deleteVacancies(vacancy.id)
           .subscribe((r) => {
-            this.vagas$ =
+            this.vacancies$ =
               this.vacanciesService.listVacancies();
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",

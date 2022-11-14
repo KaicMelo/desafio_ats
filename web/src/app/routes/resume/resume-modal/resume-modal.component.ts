@@ -1,6 +1,6 @@
 import { Resume } from '../interfaces/resume.interface';
 import Swal from 'sweetalert2';
-import { CurriculoService } from '../services/curriculo.service';
+import { ResumeService } from '../services/resume.service';
 import {
   PoDynamicFormField,
   PoModalAction,
@@ -29,10 +29,10 @@ export class ResumeModalComponent implements OnInit {
   @ViewChild('modal', { static: true }) poModal!: PoModalComponent;
   @ViewChild('dynamicForm') dynamicForm!: NgForm;
 
-  @Output() modaFechadoOuSalvo: any = new EventEmitter();
-  @Input() novoRegistro!: boolean;
-  @Input() titulo: string = '';
-  @Input() candidatoSelecionado!: Resume;
+  @Output() closeOrSaveModal: any = new EventEmitter();
+  @Input() newRegister!: boolean;
+  @Input() title: string = '';
+  @Input() candidateSelected!: Resume;
 
   fields: Array<PoDynamicFormField> = [
     {
@@ -141,21 +141,21 @@ export class ResumeModalComponent implements OnInit {
 
   constructor(
     private poNotification: PoNotificationService,
-    private curriculoService: CurriculoService
+    private resumeService: ResumeService
   ) {}
 
   ngOnInit(): void {
     this.poModal.open();
   }
 
-  confirmar: PoModalAction = {
-    action: () => this.salvarCurriculo(),
+  confirm: PoModalAction = {
+    action: () => this.saveResume(),
     label: this.literals.toSave,
   };
 
-  fechar: PoModalAction = {
+  close: PoModalAction = {
     action: () => {
-      this.modaFechadoOuSalvo.emit();
+      this.closeOrSaveModal.emit();
       this.poModal.close();
     },
     label: this.literals.close,
@@ -166,17 +166,17 @@ export class ResumeModalComponent implements OnInit {
     this.dynamicForm = form;
   }
 
-  salvarCurriculo() {
-    const id = this.candidatoSelecionado.resume_id;
-    delete this.candidatoSelecionado.candidate;
-    delete this.candidatoSelecionado.has_resume;
-    delete this.candidatoSelecionado.resume_id;
+  saveResume() {
+    const id = this.candidateSelected.resume_id;
+    delete this.candidateSelected.candidate;
+    delete this.candidateSelected.has_resume;
+    delete this.candidateSelected.resume_id;
 
-    if (this.novoRegistro) {
-      this.carregandoBotaoSalvar(true);
+    if (this.newRegister) {
+      this.loadingSaveButtom(true);
 
-      this.curriculoService
-        .salvarCurriculo(this.candidatoSelecionado)
+      this.resumeService
+        .saveResume(this.candidateSelected)
         .subscribe(
           (r) => {
             Swal.fire({
@@ -186,20 +186,20 @@ export class ResumeModalComponent implements OnInit {
               timer: 1500,
             });
 
-            this.modaFechadoOuSalvo.emit('salvar');
+            this.closeOrSaveModal.emit('save');
             this.poModal.close();
 
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
           },
           (err) => {
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
             this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     } else {
-      this.carregandoBotaoSalvar(true);
-      this.curriculoService
-        .editarCurriculo(id, this.candidatoSelecionado)
+      this.loadingSaveButtom(true);
+      this.resumeService
+        .editCurriculo(id, this.candidateSelected)
         .subscribe(
           (r) => {
             Swal.fire({
@@ -209,20 +209,20 @@ export class ResumeModalComponent implements OnInit {
               timer: 1500,
             });
 
-            this.modaFechadoOuSalvo.emit('salvar');
+            this.closeOrSaveModal.emit('save');
             this.poModal.close();
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
           },
           (err) => {
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
             this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     }
   }
 
-  carregandoBotaoSalvar(status: boolean) {
-    this.confirmar.disabled = status;
-    this.confirmar.loading = status;
+  loadingSaveButtom(status: boolean) {
+    this.confirm.disabled = status;
+    this.confirm.loading = status;
   }
 }

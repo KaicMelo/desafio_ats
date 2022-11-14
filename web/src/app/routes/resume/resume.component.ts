@@ -1,6 +1,6 @@
 import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import Swal from 'sweetalert2';
-import { CurriculoService } from './services/curriculo.service';
+import { ResumeService } from './services/resume.service';
 import { Resume } from './interfaces/resume.interface';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -17,16 +17,16 @@ import {
 export class ResumeComponent implements OnInit {
   literals: Literals= LiteralsFactory.getLiterals();
 
-  public candidatos$ = this.curriculoService.listaCurriculo();
+  public resume$ = this.resumeService.listResume(); 
 
-  candidatoSelecionado!: Resume;
+  candidateSelected!: Resume;
 
-  mostrarModal: boolean = false;
-  novoRegistro: boolean = false;
+  showModal: boolean = false;
+  newRegister: boolean = false;
 
-  titulo: string = '';
+  title: string = '';
 
-  readonly colunaCandidato: Array<PoTableColumn> = [
+  readonly columnCandidate: Array<PoTableColumn> = [
     { property: 'id', label: this.literals.candidateNumber },
     { property: 'candidate', label: this.literals.candidate },
     {
@@ -40,60 +40,60 @@ export class ResumeComponent implements OnInit {
     },
   ];
 
-  readonly acoes: Array<PoTableAction> = [
+  readonly actions: Array<PoTableAction> = [
     {
-      action: this.cadastrarCurriculo.bind(this),
+      action: this.createResume.bind(this),
       icon: 'po-icon po-icon-export',
       label: this.literals.registerCV,
     },
     {
-      action: this.visualizarCurriculo.bind(this),
+      action: this.viewResume.bind(this),
       icon: 'po-icon po-icon-eye',
       label: this.literals.viewCV,
     },
     {
-      action: this.deletarCurriculo.bind(this),
+      action: this.deleteResume.bind(this),
       icon: 'po-icon po-icon-delete',
       label: this.literals.deleteCV,
     },
   ];
   constructor(
     private poNotification: PoNotificationService,
-    private curriculoService: CurriculoService
+    private resumeService: ResumeService
   ) {}
 
   ngOnInit(): void {}
 
-  cadastrarCurriculo(req: Resume) {
+  createResume(req: Resume) {
     if (req.has_resume == 'true') {
       this.poNotification.warning(
         this.literals.youAlreadyHaveCV
       );
       return;
     }
-    this.titulo = this.literals.registerCV;
-    this.candidatoSelecionado = {
+    this.title = this.literals.registerCV;
+    this.candidateSelected = {
       candidate_id: req.id,
       candidate: req.candidate,
     };
-    this.novoRegistro = true;
-    this.mostrarModal = true;
+    this.newRegister = true;
+    this.showModal = true;
   }
-  visualizarCurriculo(req: Resume) {
+  viewResume(req: Resume) {
     if (req.has_resume == 'false') {
       this.poNotification.warning(
         this.literals.youDontHaveCV
       );
       return;
     }
-    this.titulo = this.literals.changeCV;
+    this.title = this.literals.changeCV;
 
-    this.candidatoSelecionado = req;
+    this.candidateSelected = req;
 
-    this.novoRegistro = false;
-    this.mostrarModal = true;
+    this.newRegister = false;
+    this.showModal = true;
   }
-  deletarCurriculo(curriculo: Resume) {
+  deleteResume(curriculo: Resume) {
     if (curriculo.has_resume == 'false') {
       this.poNotification.warning(this.literals.dontHaveCVToDelete);
       return;
@@ -108,10 +108,10 @@ export class ResumeComponent implements OnInit {
     }).then((result: any) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.curriculoService
-          .deletarCurriculo(curriculo.resume_id)
+        this.resumeService
+          .deleteCurriculo(curriculo.resume_id)
           .subscribe((r) => {
-            this.candidatos$ = this.curriculoService.listaCurriculo();
+            this.resume$ = this.resumeService.listResume();
             Swal.fire({
               confirmButtonColor: "var(--color-blue)",
               icon: 'success',
@@ -122,11 +122,11 @@ export class ResumeComponent implements OnInit {
       }
     });
   }
-  aoFecharModal(candidato: string) {
-    this.mostrarModal = false;
+  closingModal(candidate: any) { 
+    this.showModal = false;
 
-    if (candidato == 'salvar') {
-      this.candidatos$ = this.curriculoService.listaCurriculo();
+    if (candidate == 'save') {
+      this.resume$ = this.resumeService.listResume();
     }
   }
 }

@@ -5,41 +5,41 @@
 </po-divider>
 
 <div class="po-row">
-  <div class="po-md-6" *ngIf="(listaDeCandidatos$ | async) as candidato; else carregar">
-    <app-select [vagas]="candidato" [label]="literals.SelectTheCandidate" (valorFormulario)="candidatoValor = $event">
+  <div class="po-md-6" *ngIf="(candidateList$ | async) as candidate; else loading">
+    <app-select [options]="candidate" [label]="literals.SelectTheCandidate" (formValue)="candidateValue = $event">
     </app-select>
   </div>
 
-  <div class="po-md-6" *ngIf="(listaDeVagas$ | async) as vagas; else carregar">
-    <app-select [vagas]="vagas" [label]="literals.selectTheVacancy" (valorFormulario)="vagasValor = $event">
+  <div class="po-md-6" *ngIf="(vacancyList$ | async) as vacancy; else loading">
+    <app-select [options]="vacancy" [label]="literals.selectTheVacancy" (formValue)="vacancyValue = $event">
     </app-select>
   </div>
 
-  <po-button class="po-md-12" [p-label]="literals.apply" (p-click)="salvarCandidatura()"> </po-button>
+  <po-button class="po-md-12" [p-label]="literals.apply" (p-click)="saveApplication()"> </po-button>
 
 </div>
 
 <po-divider></po-divider>
 <div class="po-row">
 
-  <div id="lista_candidatados" class="po-md-12"
-    *ngIf="(listaCandidatatos$ | async) as listaCandidatatos; else carregar">
-    <div *ngFor="let listaCandidatato of listaCandidatatos">
-      <po-widget [id]="createId(listaCandidatato)" class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" [p-title]="literals.candidate"
-        [p-primary-label]="literals.deleteApplication" (p-primary-action)="deletarCandidatura(listaCandidatato.id)">
+  <div id="candidates_list" class="po-md-12"
+    *ngIf="(candidateForVacancyList$ | async) as candidateForVacancyList; else loading">
+    <div *ngFor="let candidateList of candidateForVacancyList">
+      <po-widget [id]="createId(candidateList)" class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" [p-title]="literals.candidate"
+        [p-primary-label]="literals.deleteApplication" (p-primary-action)="deletarCandidatura(candidateList.id)">
         <div class="po-lg-12">
-          <p><strong>{{ literals.candidate }}:</strong> {{ listaCandidatato.candidate }}</p>
-          <p><strong>{{ literals.vacancy }}:</strong> {{ listaCandidatato.vacancy }}</p>
+          <p><strong>{{ literals.candidate }}:</strong> {{ candidateList.candidate }}</p>
+          <p><strong>{{ literals.vacancy }}:</strong> {{ candidateList.vacancy }}</p>
         </div>
       </po-widget>
     </div>
-    <div class="po-table-no-data po-text-center" *ngIf="listaCandidatatos == 0">
+    <div class="po-table-no-data po-text-center" *ngIf="candidateForVacancyList == 0">
       <span>{{ literals.noDataFound }}</span>
     </div>
   </div>
 </div>
 
 
-<ng-template #carregar>
+<ng-template #loading>
   <app-loading></app-loading>
 </ng-template>

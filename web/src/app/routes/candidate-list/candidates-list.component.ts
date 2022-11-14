@@ -14,39 +14,39 @@ import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 export class CandidateListComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  public listaDeVagas$ = this.vacanciesService.listVacanciesToSelect();
-  public listaDeCandidatos$ = this.candidateService.listCandidatesToSelect();
-  public listaCandidatatos$ = this.listaCandidatadosService.candidateList();
+  public vacancyList$ = this.vacanciesService.listVacanciesToSelect();
+  public candidateList$ = this.candidateService.listCandidatesToSelect();
+  public candidateForVacancyList$ = this.candidateListService.listCandidate();
 
-  listaDeCandidatos: any[] = [];
-  listaDeVagas: any[] = [];
-  candidatoValor: any;
-  vagasValor: any;
+  candidateList: any[] = [];
+  vacancyList: any[] = [];
+  candidateValue: any;
+  vacancyValue: any;
 
   constructor(
     private vacanciesService: VacanciesService,
     private candidateService: CandidateService,
-    private listaCandidatadosService: CandidateListService,
+    private candidateListService: CandidateListService,
     private poNotification: PoNotificationService
   ) {}
 
   ngOnInit(): void {}
 
-  salvarCandidatura() {
-    if (!this.candidatoValor)
+  saveApplication() {
+    if (!this.candidateValue)
       return this.poNotification.warning(this.literals.SelectTheCandidate);
-    if (!this.vagasValor)
+    if (!this.vacancyValue)
       return this.poNotification.warning(this.literals.selectTheVacancy);
 
-    this.listaCandidatadosService
+    this.candidateListService
       .saveCandidates({
-        vacancy_id: this.vagasValor,
-        candidate_id: this.candidatoValor,
+        vacancy_id: this.vacancyValue,
+        candidate_id: this.candidateValue,
       })
       .subscribe(
         (r) => {
-          this.listaCandidatatos$ =
-            this.listaCandidatadosService.candidateList();
+          this.candidateForVacancyList$ =
+            this.candidateListService.listCandidate();
 
           Swal.fire({
             icon: 'success',
@@ -75,11 +75,11 @@ export class CandidateListComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.listaCandidatadosService
+        this.candidateListService
           .deleteCandidates(req)
           .subscribe((r) => {
-            this.listaCandidatatos$ =
-              this.listaCandidatadosService.candidateList();
+            this.candidateForVacancyList$ =
+              this.candidateListService.listCandidate();
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",
                 icon: 'success',

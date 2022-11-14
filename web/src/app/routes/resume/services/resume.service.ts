@@ -7,21 +7,21 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CurriculoService {
+export class ResumeService {
   API = environment.API;
 
   constructor(private http: HttpClient) { }
 
-  listaCurriculo(): Observable<Resume[]> {
+  listResume(): Observable<Resume[]> {
     return this.http.get<Resume[]>(`${this.API}/curriculo`);
   }
-  salvarCurriculo(req: Resume) {
+  saveResume(req: Resume) {
     return this.http.post(`${this.API}/curriculo`, req);
   }
-  editarCurriculo(id: number, req: Resume) {
+  editCurriculo(id: number, req: Resume) {
     return this.http.put(`${this.API}/curriculo/${id}`, req);
   }
-  deletarCurriculo(id: number) {
+  deleteCurriculo(id: number) {
     return this.http.delete(`${this.API}/curriculo/${id}`);
   }
 }

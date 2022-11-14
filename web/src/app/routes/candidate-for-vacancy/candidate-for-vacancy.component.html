@@ -2,8 +2,8 @@
     <h3 class="po-text-center header-descricao"> {{ literals.listOfCandidatesApplyingForVacancy }}</h3>
 </div>
 <po-divider></po-divider>
-<div *ngIf="(candidatados$ | async) as candidatados; else carregar">
-    <div *ngFor="let candidatado of candidatados">
+<div *ngIf="(candidateForVacancy$ | async) as candidateForVacancy; else loading">
+    <div *ngFor="let candidatado of candidateForVacancy">
 
         <po-widget [id]="candidatado.classeTag" class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200"
             [p-title]="literals.groupedByCandidates">
@@ -22,10 +22,10 @@
             </div>
         </po-widget>
     </div>
-    <div class="po-table-no-data po-text-center" *ngIf="candidatados == 0">
+    <div class="po-table-no-data po-text-center" *ngIf="candidateForVacancy == 0">
         <span>{{ literals.noDataFound }}</span>
     </div>
 </div>
-<ng-template #carregar>
+<ng-template #loading>
     <app-loading></app-loading>
 </ng-template>

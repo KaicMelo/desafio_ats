@@ -17,27 +17,27 @@ import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 export class CandidateComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  public candidatos$ = this.candidateService.listCandidate();
+  public candidates$ = this.candidateService.listCandidate();
 
-  candidatoSelecionado!: Candidate;
+  candidateSelected!: Candidate;
 
-  mostrarModal: boolean = false;
-  novoRegistro: boolean = false;
-  titulo: string = '';
+  showModal: boolean = false;
+  newRegister: boolean = false;
+  title: string = '';
 
-  readonly colunaCandidato: Array<PoTableColumn> = [
+  readonly columnCandidate: Array<PoTableColumn> = [
     { property: 'id', label: this.literals.candidateNumber },
     { property: 'candidate', label: this.literals.candidate },
   ];
 
-  readonly acoes: Array<PoTableAction> = [
+  readonly actions: Array<PoTableAction> = [
     {
-      action: this.editarCandidato.bind(this),
+      action: this.editCandidate.bind(this),
       icon: 'po-icon-info',
       label: this.literals.toEdit,
     },
     {
-      action: this.deletarCandidato.bind(this),
+      action: this.deleteCandidate.bind(this),
       icon: 'po-icon po-icon-delete',
       label: this.literals.toDelete,
     },
@@ -49,30 +49,30 @@ export class CandidateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  criarCandidato() {
-    this.titulo = this.literals.registerNewCandidate;
-    this.novoRegistro = true;
+  createCandidate() {
+    this.title = this.literals.registerNewCandidate;
+    this.newRegister = true;
 
-    this.mostrarModal = true;
+    this.showModal = true;
   }
 
-  aoFecharModal(candidato: string) {
-    this.mostrarModal = false;
+  closingModal(candidate: any) {
+    this.showModal = false;
 
-    if (candidato == 'salvar') {
-      this.candidatos$ = this.candidateService.listCandidate();
+    if (candidate == 'save') {
+      this.candidates$ = this.candidateService.listCandidate();
     }
   }
 
-  editarCandidato(candidato: Candidate) {
-    this.titulo = this.literals.changeCandidate;
-    this.novoRegistro = false;
-    this.candidatoSelecionado = candidato;
+  editCandidate(candidate: Candidate) {
+    this.title = this.literals.changeCandidate;
+    this.newRegister = false;
+    this.candidateSelected = candidate;
 
-    this.mostrarModal = true;
+    this.showModal = true;
   }
 
-  deletarCandidato(candidato: Candidate) {
+  deleteCandidate(candidate: Candidate) {
     Swal.fire({
       title: `${this.literals.wouldLikeToDeleteCandidate}`,
       showDenyButton: true,
@@ -83,9 +83,9 @@ export class CandidateComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.candidateService
-          .deleteCandidates(candidato.id)
+          .deleteCandidates(candidate.id)
           .subscribe((r) => {
-            this.candidatos$ =
+            this.candidates$ =
               this.candidateService.listCandidate();
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",

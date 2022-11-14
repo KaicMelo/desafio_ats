@@ -17,7 +17,7 @@ import {
 import { Candidate } from '../interfaces/candidate.interface';
 
 @Component({
-  selector: 'app-candidato-modal',
+  selector: 'app-candidate-modal',
   templateUrl: './candidate-modal.component.html',
   styleUrls: ['./candidate-modal.component.css'],
 })
@@ -25,12 +25,12 @@ export class CandidateModalComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
   @ViewChild('modal', { static: true }) poModal!: PoModalComponent;
-  @Output() modaFechadoOuSalvo: any = new EventEmitter();
-  @Input() novoRegistro!: boolean;
-  @Input() titulo: string = '';
-  @Input() candidatoSelecionado!: Candidate;
+  @Output() closeOrSaveModal: any = new EventEmitter();
+  @Input() newRegister!: boolean;
+  @Input() title: string = '';
+  @Input() candidateSelected!: Candidate; 
 
-  inputCandidato: string = '';
+  inputCandidate: string = '';
 
   constructor(
     private poNotification: PoNotificationService,
@@ -41,26 +41,26 @@ export class CandidateModalComponent implements OnInit {
     this.poModal.open();
   }
 
-  confirmar: PoModalAction = {
-    action: () => this.salvarCandidato(),
+  confirm: PoModalAction = {
+    action: () => this.saveCandidate(),
     label: this.literals.toSave,
   };
 
-  fechar: PoModalAction = {
+  close: PoModalAction = {
     action: () => {
-      this.modaFechadoOuSalvo.emit();
+      this.closeOrSaveModal.emit();
       this.poModal.close();
     },
     label: this.literals.close,
     danger: true,
   };
 
-  salvarCandidato() {
-    if (this.novoRegistro) {
-      this.carregandoBotaoSalvar(true);
+  saveCandidate() {
+    if (this.newRegister) {
+      this.loadingSaveButtom(true);
 
       this.candidateService
-        .saveCandidates({ candidate: this.inputCandidato })
+        .saveCandidates({ candidate: this.inputCandidate })
         .subscribe(
           (r) => {
             Swal.fire({
@@ -71,22 +71,22 @@ export class CandidateModalComponent implements OnInit {
               timer: 1500,
             });
 
-            this.modaFechadoOuSalvo.emit('salvar');
+            this.closeOrSaveModal.emit('save');
             this.poModal.close();
 
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
           },
           (err) => {
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
             this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     } else {
-      this.carregandoBotaoSalvar(true);
+      this.loadingSaveButtom(true);
 
       this.candidateService
-        .editCandidates(this.candidatoSelecionado.id, {
-          candidate: this.candidatoSelecionado.candidate,
+        .editCandidates(this.candidateSelected.id, {
+          candidate: this.candidateSelected.candidate,
         })
         .subscribe(
           (r) => {
@@ -97,20 +97,20 @@ export class CandidateModalComponent implements OnInit {
               timer: 1500,
             });
 
-            this.modaFechadoOuSalvo.emit('salvar');
+            this.closeOrSaveModal.emit('save');
             this.poModal.close();
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
           },
           (err) => {
-            this.carregandoBotaoSalvar(false);
+            this.loadingSaveButtom(false);
             this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     }
   }
 
-  carregandoBotaoSalvar(status: boolean) {
-    this.confirmar.disabled = status;
-    this.confirmar.loading = status;
+  loadingSaveButtom(status: boolean) {
+    this.confirm.disabled = status;
+    this.confirm.loading = status;
   }
 }
