@@ -10,27 +10,27 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () =>
-      import('./routes/lista-candidatos/lista-candidatos.module').then((m) => m.ListaCandidatosModule),
+      import('./routes/candidate-list/candidates-list.module').then((m) => m.CandidateListModule),
   },
   {
     path: 'candidato',
     loadChildren: () =>
-      import('./routes/candidato/candidato.module').then((m) => m.CandidatoModule),
+      import('./routes/candidate/candidate.module').then((m) => m.CandidateModule),
   },
   {
     path: 'vagas',
     loadChildren: () =>
-      import('./routes/vagas/vagas.module').then((m) => m.VagasModule),
+      import('./routes/vacancies/vacancies.module').then((m) => m.VacanciesModule),
   },
   {
     path: 'candidaturas',
     loadChildren: () =>
-      import('./routes/candidatados/candidatados.module').then((m) => m.CandidatadoModule),
+      import('./routes/candidate-for-vacancy/candidate-for-vacancy.module').then((m) => m.CandidateForVacancyModule),
   },
   {
     path: 'curriculo',
     loadChildren: () =>
-      import('./routes/curriculo/curriculo.module').then((m) => m.CurriculoModule),
+      import('./routes/resume/resume.module').then((m) => m.ResumeModule),
   },
   {
     path: '**',
