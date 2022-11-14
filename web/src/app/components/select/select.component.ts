@@ -2,11 +2,11 @@ import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-selecionar',
-  templateUrl: './selecionar.component.html',
-  styleUrls: ['./selecionar.component.css'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.css']
 })
-export class SelecionarComponent {
+export class SelectComponent {
   literals: Literals = LiteralsFactory.getLiterals();
 
   @Input() vagas: any;

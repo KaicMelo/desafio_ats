@@ -1,20 +1,20 @@
 import { PoFieldModule } from '@po-ui/ng-components';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelecionarComponent } from './selecionar.component';
+import { SelectComponent } from './select.component';
 
 
 
 @NgModule({
   declarations: [
-    SelecionarComponent
+    SelectComponent
   ],
   exports:[
-    SelecionarComponent
+    SelectComponent
   ],
   imports: [
     CommonModule,
     PoFieldModule
   ]
 })
-export class SelecionarModule { }
+export class SelectModule { }

@@ -1,10 +1,10 @@
-import { VagaModalModule } from './vaga-modal/vaga-modal.module';
-import { CarregandoModule } from './../../componentes/carregando/carregando.module';
 import { PoButtonModule, PoTableModule, PoDividerModule } from '@po-ui/ng-components';
-import { VagasRoutingModule } from './vagas-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { VagasRoutingModule } from './vagas-routing.module';
 import { VagasComponent } from './vagas.component';
+import { LoadingModule } from './../../components/loading/loading.module';
+import { VagaModalModule } from './vaga-modal/vaga-modal.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { VagasComponent } from './vagas.component';
     PoTableModule,
     VagaModalModule,
     PoDividerModule,
-    CarregandoModule
+    LoadingModule
   ]
 })
 export class VagasModule { }

@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { PoModule, PoMenuModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
-import { VagasModule } from './rotas/vagas/vagas.module';
+import { VagasModule } from './routes/vagas/vagas.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CandidatoModule } from './rotas/candidato/candidato.module';
-import { CurriculoModule } from './rotas/curriculo/curriculo.module';
-import { ListaCandidatosModule } from './rotas/lista-candidatos/lista-candidatos.module';
+import { CandidatoModule } from './routes/candidato/candidato.module';
+import { CurriculoModule } from './routes/curriculo/curriculo.module';
+import { ListaCandidatosModule } from './routes/lista-candidatos/lista-candidatos.module';
 
 @NgModule({
   declarations: [

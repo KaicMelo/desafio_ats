@@ -1,10 +1,10 @@
-import { SelecionarModule } from './../../componentes/selecionar/selecionar.module';
+import { SelectModule } from './../../components/select/select.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CarregandoModule } from './../../componentes/carregando/carregando.module';
 import { PoFieldModule, PoButtonModule, PoDividerModule, PoDropdownModule, PoNotificationModule, PoWidgetModule } from '@po-ui/ng-components';
-import { ListaCandidatosRoutingModule } from './lista-candidatos-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoadingModule } from './../../components/loading/loading.module';
+import { ListaCandidatosRoutingModule } from './lista-candidatos-routing.module';
 import { ListaCandidatosComponent } from './lista-candidatos.component';
 
 @NgModule({
@@ -16,15 +16,15 @@ import { ListaCandidatosComponent } from './lista-candidatos.component';
     PoFieldModule,
     PoButtonModule,
     PoDividerModule,
-    CarregandoModule,
+    LoadingModule,
     PoFieldModule,
     FormsModule,
     PoDropdownModule,
     ReactiveFormsModule,
-    SelecionarModule,
     PoNotificationModule,
     PoWidgetModule,
     PoDividerModule,
+    SelectModule,
     ListaCandidatosRoutingModule
   ]
 })

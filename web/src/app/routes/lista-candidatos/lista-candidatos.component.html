@@ -6,13 +6,13 @@
 
 <div class="po-row">
   <div class="po-md-6" *ngIf="(listaDeCandidatos$ | async) as candidato; else carregar">
-    <app-selecionar [vagas]="candidato" [label]="literals.SelectTheCandidate" (valorFormulario)="candidatoValor = $event">
-    </app-selecionar>
+    <app-select [vagas]="candidato" [label]="literals.SelectTheCandidate" (valorFormulario)="candidatoValor = $event">
+    </app-select>
   </div>
 
   <div class="po-md-6" *ngIf="(listaDeVagas$ | async) as vagas; else carregar">
-    <app-selecionar [vagas]="vagas" [label]="literals.selectTheVacancy" (valorFormulario)="vagasValor = $event">
-    </app-selecionar>
+    <app-select [vagas]="vagas" [label]="literals.selectTheVacancy" (valorFormulario)="vagasValor = $event">
+    </app-select>
   </div>
 
   <po-button class="po-md-12" [p-label]="literals.apply" (p-click)="salvarCandidatura()"> </po-button>
@@ -41,5 +41,5 @@
 
 
 <ng-template #carregar>
-  <app-carregando></app-carregando>
+  <app-loading></app-loading>
 </ng-template>
