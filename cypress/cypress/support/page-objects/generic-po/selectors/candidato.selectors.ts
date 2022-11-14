@@ -1,4 +1,4 @@
 
 export enum CandidatoSelectors {
-    criarNovoCandidato = "#criar_novo_candidato > .po-button",
+    criarNovoCandidato = "#create_new_candidate > .po-button",
 }

@@ -1,0 +1,45 @@
+<div class="po-table-no-data po-text-center">
+  <h3 class="po-text-center header-descricao"> {{ literals.candidateCanApplyForVacancy }}</h3>
+</div>
+<po-divider>
+</po-divider>
+
+<div class="po-row">
+  <div class="po-md-6" *ngIf="(candidateList$ | async) as candidate; else loading">
+    <app-select [options]="candidate" [label]="literals.SelectTheCandidate" (formValue)="candidateValue = $event">
+    </app-select>
+  </div>
+
+  <div class="po-md-6" *ngIf="(vacancyList$ | async) as vacancy; else loading">
+    <app-select [options]="vacancy" [label]="literals.selectTheVacancy" (formValue)="vacancyValue = $event">
+    </app-select>
+  </div>
+
+  <po-button class="po-md-12" [p-label]="literals.apply" (p-click)="saveApplication()"> </po-button>
+
+</div>
+
+<po-divider></po-divider>
+<div class="po-row">
+
+  <div id="candidates_list" class="po-md-12"
+    *ngIf="(candidateForVacancyList$ | async) as candidateForVacancyList; else loading">
+    <div *ngFor="let candidateList of candidateForVacancyList">
+      <po-widget [id]="createId(candidateList)" class="po-sm-12 po-md-6 po-lg-3" [p-height]="200" [p-title]="literals.candidate"
+        [p-primary-label]="literals.deleteApplication" (p-primary-action)="deletarCandidatura(candidateList.id)">
+        <div class="po-lg-12">
+          <p><strong>{{ literals.candidate }}:</strong> {{ candidateList.candidate }}</p>
+          <p><strong>{{ literals.vacancy }}:</strong> {{ candidateList.vacancy }}</p>
+        </div>
+      </po-widget>
+    </div>
+    <div class="po-table-no-data po-text-center" *ngIf="candidateForVacancyList == 0">
+      <span>{{ literals.noDataFound }}</span>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

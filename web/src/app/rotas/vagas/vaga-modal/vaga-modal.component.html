@@ -1,8 +1,0 @@
-<po-modal #modal [p-primary-action]="confirmar" [p-secondary-action]="fechar" [p-title]="titulo" [p-hide-close]="true">
-    <div class="po-row" *ngIf="novoRegistro">
-        <po-input class="po-lg-12" id="novaVaga" name="input" [p-label]="literals.jobName" [(ngModel)]="inputVaga"> </po-input>
-    </div>
-    <div class="po-row" *ngIf="!novoRegistro">
-        <po-input class="po-lg-12" id="alterarVaga" name="input" [p-label]="literals.jobName" [(ngModel)]="vagaSelecionada.vacancy"> </po-input>
-    </div>
-</po-modal>

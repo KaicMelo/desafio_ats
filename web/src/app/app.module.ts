@@ -1,14 +1,14 @@
+import { CandidateModule } from './routes/candidate/candidate.module';
+import { VacanciesModule } from './routes/vacancies/vacancies.module';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { PoModule, PoMenuModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
-import { VagasModule } from './rotas/vagas/vagas.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CandidatoModule } from './rotas/candidato/candidato.module';
-import { CurriculoModule } from './rotas/curriculo/curriculo.module';
-import { ListaCandidatosModule } from './rotas/lista-candidatos/lista-candidatos.module';
+import { ResumeModule } from './routes/resume/resume.module';
+import { CandidateListModule } from './routes/candidate-list/candidates-list.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +19,11 @@ import { ListaCandidatosModule } from './rotas/lista-candidatos/lista-candidatos
     PoModule,
     RouterModule.forRoot([]),
     AppRoutingModule,
-    CandidatoModule,
-    CurriculoModule,
-    ListaCandidatosModule,
+    CandidateModule,
+    ResumeModule,
+    CandidateListModule,
     PoMenuModule,
-    VagasModule,
+    VacanciesModule,
     RouterModule
   ],
   providers: [],

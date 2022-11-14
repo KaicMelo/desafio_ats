@@ -1,0 +1,16 @@
+<div class="po-table-no-data po-text-center">
+    <h3 class="po-text-center header-descricao">{{ literals.candidateCanUploadCV }}</h3>
+</div>
+<po-divider></po-divider>
+<div *ngIf="(resume$ | async) as candidato; else loading">
+    <po-table [p-items]="candidato" [p-columns]="columnCandidate" [p-actions]="actions">
+    </po-table>
+</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<app-resume-modal *ngIf="showModal" [newRegister]="newRegister" [title]="title"
+    [candidateSelected]="candidateSelected" (closeOrSaveModal)="closingModal($event)">
+</app-resume-modal>

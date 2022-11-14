@@ -16,24 +16,24 @@ const subscribersListController = new SubscribersListController();
 const resumeController = new ResumeController();
 
 
-app.get('/candidatos', candidateController.index);
-app.post('/candidatos', candidateController.store);
-app.put('/candidatos/:id', candidateController.update);
-app.delete('/candidatos/:id', candidateController.destroy);
+app.get('/candidates', candidateController.index);
+app.post('/candidates', candidateController.store);
+app.put('/candidates/:id', candidateController.update);
+app.delete('/candidates/:id', candidateController.destroy);
 
-app.get('/vagas', vacanciesController.index);
-app.post('/vagas', vacanciesController.store);
-app.put('/vagas/:id', vacanciesController.update);
-app.delete('/vagas/:id', vacanciesController.destroy);
+app.get('/vacancies', vacanciesController.index);
+app.post('/vacancies', vacanciesController.store);
+app.put('/vacancies/:id', vacanciesController.update);
+app.delete('/vacancies/:id', vacanciesController.destroy);
 
-app.get('/lista_candidatados', subscribersListController.index);
-app.get('/lista_candidatados/lista_nomes', subscribersListController.candidateAndVacancyJoin);
-app.post('/lista_candidatados', subscribersListController.store);
-app.delete('/lista_candidatados/:id', subscribersListController.destroy);
+app.get('/list_candidates', subscribersListController.index);
+app.get('/list_candidates/list_names', subscribersListController.candidateAndVacancyJoin);
+app.post('/list_candidates', subscribersListController.store);
+app.delete('/list_candidates/:id', subscribersListController.destroy);
 
-app.get("/curriculo", resumeController.indexWithResume);
-app.post("/curriculo", resumeController.store);
-app.put("/curriculo/:id", resumeController.update);
-app.delete("/curriculo/:id", resumeController.destroy);
+app.get("/resume", resumeController.indexWithResume);
+app.post("/resume", resumeController.store);
+app.put("/resume/:id", resumeController.update);
+app.delete("/resume/:id", resumeController.destroy);
 
 app.listen(process.env.SERVE_PORT)

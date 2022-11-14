@@ -1,0 +1,19 @@
+<div class="po-table-no-data po-text-center">
+    <h3 class="po-text-center header-descricao"> {{ literals.candidateCRUD }}</h3>
+</div>
+<po-divider>
+</po-divider>
+<po-button id="create_new_candidate" [p-label]="literals.create" (p-click)="createCandidate()"> </po-button>
+
+<div *ngIf="(candidates$ | async) as candidate; else carregar">
+    <po-table [p-items]="candidate" [p-columns]="columnCandidate" [p-actions]="actions">
+    </po-table>
+</div>
+
+<ng-template #carregar>
+    <app-loading></app-loading>
+</ng-template>
+
+<app-candidate-modal *ngIf="showModal" [newRegister]="newRegister" [title]="title"
+    [candidateSelected]="candidateSelected" (closeOrSaveModal)="closingModal($event)">
+</app-candidate-modal>
