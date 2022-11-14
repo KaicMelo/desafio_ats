@@ -1,12 +1,13 @@
+import { Literals } from './../../i18n/literals';
 import Swal from 'sweetalert2';
 import {
   PoTableAction,
   PoTableColumn,
-  PoNotificationService,
 } from '@po-ui/ng-components';
 import { VagasService } from './services/vagas.service';
 import { Component, OnInit } from '@angular/core';
 import { Vagas } from './interfaces/vagas.interface';
+import LiteralsFactory from 'src/app/i18n/literals';
 
 @Component({
   selector: 'app-vagas',
@@ -14,9 +15,9 @@ import { Vagas } from './interfaces/vagas.interface';
   styleUrls: ['./vagas.component.css'],
 })
 export class VagasComponent implements OnInit {
-  public vagas$ = this.vagasService.listaVagas();
+  literals: Literals = LiteralsFactory.getLiterals();
 
-  labelCriar: string = 'Criar';
+  public vagas$ = this.vagasService.listaVagas();
 
   VagaSelecionada!: Vagas;
 
@@ -26,31 +27,30 @@ export class VagasComponent implements OnInit {
   titulo: string = '';
 
   readonly colunaVaga: Array<PoTableColumn> = [
-    { property: 'id', label: 'Numero da Vaga' },
-    { property: 'vacancy', label: 'Vagas' }
+    { property: 'id', label: this.literals.vacancyNumber },
+    { property: 'vacancy', label: this.literals.vacancies }
   ];
 
   readonly acoes: Array<PoTableAction> = [
     {
       action: this.editarVaga.bind(this),
       icon: 'po-icon-info',
-      label: 'Editar',
+      label: this.literals.toEdit,
     },
     {
       action: this.deletarVaga.bind(this),
       icon: 'po-icon po-icon-delete',
-      label: 'Deletar',
+      label: this.literals.toDelete,
     },
   ];
 
   constructor(
     private vagasService: VagasService,
-    private poNotification: PoNotificationService
   ) {}
 
   ngOnInit(): void {}
   criarVagas() {
-    this.titulo = 'Cadastrar nova vaga';
+    this.titulo = this.literals.registerNewVacancy;
     this.novoRegistro = true;
 
     this.mostrarModal = true;
@@ -64,7 +64,7 @@ export class VagasComponent implements OnInit {
     }
   }
   editarVaga(vagas: Vagas) {
-    this.titulo = 'Alterar Vaga';
+    this.titulo = this.literals.changeVacancy;
     this.VagaSelecionada = vagas;
     this.novoRegistro = false;
 
@@ -72,13 +72,12 @@ export class VagasComponent implements OnInit {
   }
   deletarVaga(vagas: Vagas) {
     Swal.fire({
-      title: 'Gostaria de deletar Vaga?',
+      title: `${this.literals.wouldLikeToDeleteVacancy}?`,
       showDenyButton: true,
-      confirmButtonText: 'Deletar',
+      confirmButtonText: this.literals.toDelete,
       confirmButtonColor: "var(--color-blue)",
-      denyButtonText: 'Cancelar',
+      denyButtonText: this.literals.toCancel,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.vagasService
           .deletarVagas(vagas.id)
@@ -88,7 +87,7 @@ export class VagasComponent implements OnInit {
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",
                 icon: 'success',
-                title: 'Deletado',
+                title: this.literals.deleted,
                 timer: 2000
               });
           });

@@ -5,7 +5,6 @@ import { CandidatoRoutingModule } from './candidato-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CandidatoComponent } from './candidato.component';
-import { PageFilterModule } from 'src/app/componentes/page-filter/page-filter.module';
 import { PoButtonModule, PoTableModule, PoNotificationModule, PoDividerModule } from '@po-ui/ng-components';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { PoButtonModule, PoTableModule, PoNotificationModule, PoDividerModule } 
   imports: [
     CommonModule,
     CandidatoRoutingModule,
-    PageFilterModule,
     PoButtonModule,
     PoTableModule,
     CarregandoModule,

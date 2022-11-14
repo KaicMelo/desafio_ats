@@ -1,3 +1,4 @@
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import Swal from 'sweetalert2';
 import { VagasService } from './../services/vagas.service';
 import { Vagas } from './../interfaces/vagas.interface';
@@ -21,13 +22,14 @@ import {
   styleUrls: ['./vaga-modal.component.css'],
 })
 export class VagaModalComponent implements OnInit {
+  literals: Literals = LiteralsFactory.getLiterals();
+
   @ViewChild('modal', { static: true }) poModal!: PoModalComponent;
   @Output() modaFechadoOuSalvo: any = new EventEmitter();
   @Input() novoRegistro!: boolean;
   @Input() titulo: string = '';
   @Input() vagaSelecionada!: Vagas;
 
-  nomeVaga: string = 'Nome da Vaga';
   inputVaga: string = '';
 
   constructor(
@@ -41,7 +43,7 @@ export class VagaModalComponent implements OnInit {
 
   confirmar: PoModalAction = {
     action: () => this.salvarVaga(),
-    label: 'Salvar',
+    label: this.literals.toSave,
   };
 
   fechar: PoModalAction = {
@@ -49,7 +51,7 @@ export class VagaModalComponent implements OnInit {
       this.modaFechadoOuSalvo.emit();
       this.poModal.close();
     },
-    label: 'Fechar',
+    label: this.literals.close,
     danger: true,
   };
 
@@ -60,7 +62,7 @@ export class VagaModalComponent implements OnInit {
         (r) => {
           Swal.fire({
             icon: 'success',
-            title: 'Salvo com sucesso',
+            title: this.literals.savedSuccessfully,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -70,7 +72,7 @@ export class VagaModalComponent implements OnInit {
         },
         (err) => {
           this.carregandoBotaoSalvar(false);
-          this.poNotification.warning('Preencha o campo corretamente');
+          this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
         }
       );
     } else {
@@ -83,19 +85,19 @@ export class VagaModalComponent implements OnInit {
           (r) => {
             Swal.fire({
               icon: 'success',
-              confirmButtonColor: "var(--color-blue)",
-              title: 'Salvo com sucesso',
+              confirmButtonColor: 'var(--color-blue)',
+              title: this.literals.savedSuccessfully,
               showConfirmButton: false,
               timer: 1500,
             });
-            
+
             this.modaFechadoOuSalvo.emit('salvar');
             this.poModal.close();
             this.carregandoBotaoSalvar(true);
           },
           (err) => {
             this.carregandoBotaoSalvar(false);
-            this.poNotification.warning('Preencha o campo corretamente');
+            this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     }

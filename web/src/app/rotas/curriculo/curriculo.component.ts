@@ -83,11 +83,11 @@ export class CurriculoComponent implements OnInit {
   visualizarCurriculo(req: Curriculo) {
     if (req.has_resume == 'false') {
       this.poNotification.warning(
-        'Voçê não possui currículo. Clique em cadastrar currículo'
+        this.literals.youDontHaveCV
       );
       return;
     }
-    this.titulo = 'Alterar Currículo';
+    this.titulo = this.literals.changeCV;
 
     this.candidatoSelecionado = req;
 
@@ -96,16 +96,16 @@ export class CurriculoComponent implements OnInit {
   }
   deletarCurriculo(curriculo: Curriculo) {
     if (curriculo.has_resume == 'false') {
-      this.poNotification.warning('Voçê não possui currículo para deletar');
+      this.poNotification.warning(this.literals.dontHaveCVToDelete);
       return;
     }
 
     Swal.fire({
-      title: 'Gostaria de deletar Curriculo?',
+      title: `${this.literals.wouldLikeToDeleteCV}?`,
       showDenyButton: true,
       confirmButtonColor: "var(--color-blue)",
-      confirmButtonText: 'Deletar',
-      denyButtonText: 'Cancelar',
+      confirmButtonText: this.literals.toDelete,
+      denyButtonText: this.literals.toCancel,
     }).then((result: any) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -116,7 +116,7 @@ export class CurriculoComponent implements OnInit {
             Swal.fire({
               confirmButtonColor: "var(--color-blue)",
               icon: 'success',
-              title: 'Deletado',
+              title: this.literals.deleted,
               timer: 2000
             });
           });

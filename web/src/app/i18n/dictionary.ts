@@ -167,9 +167,9 @@ export const literals: RawLiterals | any = {
     en: 'Have CV',
   },
   dontHaveCV: {
-    pt: 'Agrupado por candidatados',
+    pt: 'Não tem Currículo',
     es: 'No tengo currículum',
-    en: "don't have CV",
+    en: "Don't have CV",
   },
   registerCV: {
     pt: 'Cadastrar Curriculo',
@@ -190,5 +190,210 @@ export const literals: RawLiterals | any = {
     pt: 'Voçê já possui currículo. Clique em visualizar currículo',
     es: 'Ya tienes un currículum. Haga clic en Ver currículum',
     en: "You already have a CV. Click on View Resume",
+  },
+  youDontHaveCV: {
+    pt: 'Voçê não possui currículo. Clique em cadastrar currículo',
+    es: 'No tienes currículum. Haga clic en registrar CV',
+    en: "You don't have a resume. Click on register CV",
+  },
+  changeCV: {
+    pt: 'Alterar Currículo',
+    es: 'Cambiar plan de estudios',
+    en: "Change CV",
+  },
+  dontHaveCVToDelete: {
+    pt: 'Voçê não possui currículo para deletar',
+    es: 'No tienes un currículum para eliminar',
+    en: "You don't have a CV to delete",
+  },
+  wouldLikeToDeleteCV: {
+    pt: 'Gostaria de deletar Curriculo',
+    es: 'Quisiera eliminar currículum',
+    en: 'I would like to delete CV',
+  },
+  candidateCanUploadCV: {
+    pt: 'Aqui o candidato pode cadastrar seu currículo :)',
+    es: 'Aquí el candidato puede subir su CV :)',
+    en: 'Here the candidate can upload their CV :)',
+  },
+  name: {
+    pt: 'Nome',
+    es: 'Nombre',
+    en: 'Name',
+  },
+  personalData: {
+    pt: 'DADOS PESSOAIS',
+    es: 'DATOS PERSONALES',
+    en: 'PERSONAL DATA',
+  },
+  typeYourName: {
+    pt: 'Digite seu nome',
+    es: 'Escriba su nombre',
+    en: 'Type your name',
+  },
+  birthDate: {
+    pt: 'Data Nascimento',
+    es: 'Fecha de nacimiento',
+    en: 'Birth date',
+  },
+  salaryExpectation: {
+    pt: 'Pretenção Salarial',
+    es: 'Expectativa de salario',
+    en: 'Salary Expectation',
+  },
+  man: {
+    pt: 'Homem',
+    es: 'Hombre',
+    en: 'Man',
+  },
+  women: {
+    pt: 'Mulher',
+    es: 'Mulher',
+    en: 'Women',
+  },
+  other: {
+    pt: 'Outro',
+    es: 'Otro',
+    en: 'Other',
+  },
+  contacts: {
+    pt: 'CONTATOS',
+    es: 'CONTACTOS',
+    en: 'CONTACTS',
+  },
+  cell: {
+    pt: 'Celular',
+    es: 'Célula',
+    en: 'Cell',
+  },
+  address: {
+    pt: 'Endereço',
+    es: 'Dirección',
+    en: 'Address',
+  },
+  addressNumber: {
+    pt: 'Numero Endereço',
+    es: 'Número de dirección',
+    en: 'Address number',
+  },
+  state: {
+    pt: 'Estado',
+    es: 'Estado',
+    en: 'State',
+  },
+  santaCatarina: {
+    pt: 'Santa Catarina',
+    es: 'Santa Catarina',
+    en: 'Santa Catarina',
+  },
+  saoPaulo: {
+    pt: 'São Paulo',
+    es: 'São Paulo',
+    en: 'São Paulo',
+  },
+  rioDeJaneiro: {
+    pt: 'Rio de Janeiro',
+    es: 'Rio de Janeiro',
+    en: 'Rio de Janeiro',
+  },
+  minasGerais: {
+    pt: 'Minas Gerais',
+    es: 'Minas Gerais',
+    en: 'Minas Gerais',
+  },
+  rioGrandeDoSul: {
+    pt: 'Rio Grande do Sul',
+    es: 'Rio Grande do Sul',
+    en: 'Rio Grande do Sul',
+  },
+  description: {
+    pt: 'Descrição',
+    es: 'Descripción',
+    en: 'Description',
+  },
+  descriptionAboutYou: {
+    pt: 'Breve descrição sobre voçê',
+    es: 'Breve descripción sobre ti',
+    en: 'Brief description about you',
+  },
+  additionalInformation: {
+    pt: 'Informações Adicionais',
+    es: 'Informaciones adicionales',
+    en: 'Additional Information',
+  },
+  football: {
+    pt: 'Futebol',
+    es: 'Fútbol',
+    en: 'Football',
+  },
+  watchMovie: {
+    pt: 'Assistir filme',
+    es: 'Ver la película',
+    en: 'Watch movie',
+  },
+  bicycle: {
+    pt: 'Bicicleta',
+    es: 'Bicicleta',
+    en: 'Bicycle',
+  },
+  yoga: {
+    pt: 'Yoga',
+    es: 'Yoga',
+    en: 'Yoga',
+  },
+  travel: {
+    pt: 'Viajar',
+    es: 'Viaje',
+    en: 'Travel',
+  },
+  run: {
+    pt: 'Correr',
+    es: 'Correr',
+    en: 'Run',
+  },
+  loading: {
+    pt: 'Carregando',
+    es: 'Cargando',
+    en: 'Loading',
+  },
+  select: {
+    pt: 'Selecione',
+    es: 'Seleccione',
+    en: 'select',
+  },
+  candidateCRUD: {
+    pt: 'CRUD de candidatos',
+    es: 'candidato CRUD',
+    en: 'candidate CRUD',
+  },
+  jobName: {
+    pt: 'Nome da Vaga',
+    es: 'Nombre del trabajo',
+    en: 'Job Name',
+  },
+  vacancyNumber: {
+    pt: 'Numero da Vaga',
+    es: 'Número de vacante',
+    en: 'Vacancy number',
+  },
+  registerNewVacancy: {
+    pt: 'Cadastrar nova vaga',
+    es: 'Registrar nueva vacante',
+    en: 'Register new vacancy',
+  },
+  changeVacancy: {
+    pt: 'Alterar Vaga',
+    es: 'Cambiar vacante',
+    en: 'Change vacancy',
+  },
+  wouldLikeToDeleteVacancy: {
+    pt: 'Gostaria de deletar Vaga',
+    es: 'Me gustaría eliminar la vacante',
+    en: 'I would like to delete Vacancy',
+  },
+  vacanciesCRUD: {
+    pt: 'CRUD de vagas',
+    es: 'CRUD de vacantes',
+    en: 'Vacancies CRUD',
   },
 };

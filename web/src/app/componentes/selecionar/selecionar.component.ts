@@ -1,23 +1,21 @@
-import { empty } from 'rxjs';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-selecionar',
   templateUrl: './selecionar.component.html',
-  styleUrls: ['./selecionar.component.css']
+  styleUrls: ['./selecionar.component.css'],
 })
-export class SelecionarComponent implements OnInit {
+export class SelecionarComponent {
+  literals: Literals = LiteralsFactory.getLiterals();
+
   @Input() vagas: any;
   @Input() label: string = '';
-  @Output() valorFormulario:any = new EventEmitter();
+  @Output() valorFormulario: any = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-
-  }
-
-  onChange(event: any){
+  onChange(event: any) {
     this.valorFormulario.emit(event);
   }
 }
