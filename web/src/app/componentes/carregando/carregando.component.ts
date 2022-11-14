@@ -1,3 +1,4 @@
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carregando.component.css']
 })
 export class CarregandoComponent implements OnInit {
-  carregando: string = 'Carregando Candidatos';
+  literals: Literals = LiteralsFactory.getLiterals();
   
   constructor() { }
 

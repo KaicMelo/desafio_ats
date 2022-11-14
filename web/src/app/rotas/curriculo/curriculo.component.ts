@@ -1,3 +1,4 @@
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import Swal from 'sweetalert2';
 import { CurriculoService } from './services/curriculo.service';
 import { Curriculo } from './interfaces/curriculo.interface';
@@ -15,6 +16,8 @@ import {
   styleUrls: ['./curriculo.component.css'],
 })
 export class CurriculoComponent implements OnInit {
+  literals: Literals= LiteralsFactory.getLiterals();
+
   public candidatos$ = this.curriculoService.listaCurriculo();
 
   candidatoSelecionado!: Curriculo;
@@ -25,15 +28,15 @@ export class CurriculoComponent implements OnInit {
   titulo: string = '';
 
   readonly colunaCandidato: Array<PoTableColumn> = [
-    { property: 'id', label: 'Numero do Candidato' },
-    { property: 'candidate', label: 'Candidato' },
+    { property: 'id', label: this.literals.candidateNumber },
+    { property: 'candidate', label: this.literals.candidate },
     {
       property: 'has_resume',
-      label: 'Currículo',
+      label: this.literals.resume,
       type: 'label',
       labels: [
-        { value: 'true', color: 'color-11', label: 'Tem Currículo' },
-        { value: 'false', color: 'color-07', label: 'Não tem Currículo' },
+        { value: 'true', color: 'color-11', label: this.literals.haveCV },
+        { value: 'false', color: 'color-07', label: this.literals.dontHaveCV },
       ],
     },
   ];
@@ -42,17 +45,17 @@ export class CurriculoComponent implements OnInit {
     {
       action: this.cadastrarCurriculo.bind(this),
       icon: 'po-icon po-icon-export',
-      label: 'Cadastrar Curriculo',
+      label: this.literals.registerCV,
     },
     {
       action: this.visualizarCurriculo.bind(this),
       icon: 'po-icon po-icon-eye',
-      label: 'Visualizar Curriculo',
+      label: this.literals.viewCV,
     },
     {
       action: this.deletarCurriculo.bind(this),
       icon: 'po-icon po-icon-delete',
-      label: 'Deletar Curriculo',
+      label: this.literals.deleteCV,
     },
   ];
   constructor(
@@ -65,11 +68,11 @@ export class CurriculoComponent implements OnInit {
   cadastrarCurriculo(req: Curriculo) {
     if (req.has_resume == 'true') {
       this.poNotification.warning(
-        'Voçê já possui currículo. Clique em visualizar currículo'
+        this.literals.youAlreadyHaveCV
       );
       return;
     }
-    this.titulo = 'Cadastrar Currículo';
+    this.titulo = this.literals.registerCV;
     this.candidatoSelecionado = {
       candidate_id: req.id,
       candidate: req.candidate,
@@ -80,11 +83,11 @@ export class CurriculoComponent implements OnInit {
   visualizarCurriculo(req: Curriculo) {
     if (req.has_resume == 'false') {
       this.poNotification.warning(
-        'Voçê não possui currículo. Clique em cadastrar currículo'
+        this.literals.youDontHaveCV
       );
       return;
     }
-    this.titulo = 'Alterar Currículo';
+    this.titulo = this.literals.changeCV;
 
     this.candidatoSelecionado = req;
 
@@ -93,16 +96,16 @@ export class CurriculoComponent implements OnInit {
   }
   deletarCurriculo(curriculo: Curriculo) {
     if (curriculo.has_resume == 'false') {
-      this.poNotification.warning('Voçê não possui currículo para deletar');
+      this.poNotification.warning(this.literals.dontHaveCVToDelete);
       return;
     }
 
     Swal.fire({
-      title: 'Gostaria de deletar Curriculo?',
+      title: `${this.literals.wouldLikeToDeleteCV}?`,
       showDenyButton: true,
       confirmButtonColor: "var(--color-blue)",
-      confirmButtonText: 'Deletar',
-      denyButtonText: 'Cancelar',
+      confirmButtonText: this.literals.toDelete,
+      denyButtonText: this.literals.toCancel,
     }).then((result: any) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -113,7 +116,7 @@ export class CurriculoComponent implements OnInit {
             Swal.fire({
               confirmButtonColor: "var(--color-blue)",
               icon: 'success',
-              title: 'Deletado',
+              title: this.literals.deleted,
               timer: 2000
             });
           });

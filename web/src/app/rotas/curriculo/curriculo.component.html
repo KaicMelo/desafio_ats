@@ -1,5 +1,5 @@
 <div class="po-table-no-data po-text-center">
-    <h3 class="po-text-center header-descricao">Aqui o candidato pode cadastrar seu currículo :)</h3>
+    <h3 class="po-text-center header-descricao">{{ literals.candidateCanUploadCV }}</h3>
 </div>
 <po-divider></po-divider>
 <div *ngIf="(candidatos$ | async) as candidato; else carregar">

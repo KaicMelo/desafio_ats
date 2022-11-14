@@ -4,6 +4,7 @@ import { CandidatoService } from './../candidato/services/candidato.service';
 import { VagasService } from './../vagas/services/vagas.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 
 @Component({
   selector: 'app-lista-candidatos',
@@ -11,18 +12,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./lista-candidatos.component.css'],
 })
 export class ListaCandidatosComponent implements OnInit {
+  literals: Literals = LiteralsFactory.getLiterals();
+
   public listaDeVagas$ = this.vagasService.listaVagasToSelect();
   public listaDeCandidatos$ = this.candidatoService.listaCandidatosToSelect();
-
   public listaCandidatatos$ = this.listaCandidatadosService.listaCandidatados();
 
   listaDeCandidatos: any[] = [];
   listaDeVagas: any[] = [];
-
-  vagaTitulo: string = 'Selecione a vaga';
-  candidatoTitulo: string = 'Selecione o Candidato';
-  salvarCandidato: string = 'Candidatar';
-
   candidatoValor: any;
   vagasValor: any;
 
@@ -37,9 +34,9 @@ export class ListaCandidatosComponent implements OnInit {
 
   salvarCandidatura() {
     if (!this.candidatoValor)
-      return this.poNotification.warning('Selecione o candidato');
+      return this.poNotification.warning(this.literals.SelectTheCandidate);
     if (!this.vagasValor)
-      return this.poNotification.warning('Selecione a vaga');
+      return this.poNotification.warning(this.literals.selectTheVacancy);
 
     this.listaCandidatadosService
       .salvarCandidatados({
@@ -53,7 +50,7 @@ export class ListaCandidatosComponent implements OnInit {
 
           Swal.fire({
             icon: 'success',
-            title: 'Salvo com sucesso',
+            title: this.literals.savedSuccessfully,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -61,7 +58,7 @@ export class ListaCandidatosComponent implements OnInit {
         (error) => {
           error.status == 402
             ? this.poNotification.warning(
-                'Usuário já se cadastrou para essa vaga'
+                this.literals.alreadyRegisteredForThisJob
               )
             : null;
         }
@@ -70,11 +67,11 @@ export class ListaCandidatosComponent implements OnInit {
 
   deletarCandidatura(req: any) {
     Swal.fire({
-      title: 'Gostaria de deletar candidatura?',
+      title: `${this.literals.wouldLikeToDeleteCandidacy} ?`,
       showDenyButton: true,
       confirmButtonColor: "var(--color-blue)",
-      confirmButtonText: 'Deletar',
-      denyButtonText: 'Cancelar',
+      confirmButtonText: this.literals.toDelete,
+      denyButtonText: this.literals.toCancel,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -86,7 +83,7 @@ export class ListaCandidatosComponent implements OnInit {
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",
                 icon: 'success',
-                title: 'Deletado',
+                title: this.literals.deleted,
                 timer: 2000
               });
           });

@@ -1,9 +1,9 @@
 <div class="po-table-no-data po-text-center">
-    <h3 class="po-text-center header-descricao">CRUD de candidatos</h3>
+    <h3 class="po-text-center header-descricao"> {{ literals.candidateCRUD }}</h3>
 </div>
 <po-divider>
 </po-divider>
-<po-button id="criar_novo_candidato" [p-label]="labelCriar" (p-click)="criarCandidato()"> </po-button>
+<po-button id="criar_novo_candidato" [p-label]="literals.create" (p-click)="criarCandidato()"> </po-button>
 
 <div *ngIf="(candidatos$ | async) as candidato; else carregar">
     <po-table [p-items]="candidato" [p-columns]="colunaCandidato" [p-actions]="acoes">

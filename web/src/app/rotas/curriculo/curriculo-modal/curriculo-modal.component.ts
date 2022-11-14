@@ -17,6 +17,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 
 @Component({
   selector: 'app-curriculo-modal',
@@ -24,6 +25,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./curriculo-modal.component.css'],
 })
 export class CurriculoModalComponent implements OnInit {
+  literals: Literals = LiteralsFactory.getLiterals();
+
   @ViewChild('modal', { static: true }) poModal!: PoModalComponent;
   @ViewChild('dynamicForm') dynamicForm!: NgForm;
 
@@ -35,20 +38,20 @@ export class CurriculoModalComponent implements OnInit {
   fields: Array<PoDynamicFormField> = [
     {
       property: 'candidate',
-      divider: 'Dados Pessoais',
+      divider: this.literals.personalData,
       disabled: true,
-      label: 'Nome',
+      label: this.literals.name,
       required: true,
       minLength: 4,
       maxLength: 50,
       gridColumns: 6,
       gridSmColumns: 12,
       order: 1,
-      placeholder: 'Digite seu nome',
+      placeholder: this.literals.typeYourName,
     },
     {
       property: 'birthday',
-      label: 'Data Nascimento',
+      label: this.literals.birthDate,
       type: 'date',
       format: 'dd/mm/yyyy',
       gridColumns: 6,
@@ -56,7 +59,7 @@ export class CurriculoModalComponent implements OnInit {
     },
     {
       property: 'wage',
-      label: 'Pretenção Salarial',
+      label: this.literals.salaryExpectation,
       type: 'currency',
       gridColumns: 3,
       gridSmColumns: 12,
@@ -68,55 +71,71 @@ export class CurriculoModalComponent implements OnInit {
       property: 'genre',
       gridColumns: 6,
       gridSmColumns: 12,
-      options: ['Homem', 'Mulher', 'Outro'],
+      options: [this.literals.man, this.literals.women, this.literals.other],
       order: 2,
     },
     {
       property: 'email',
-      divider: 'CONTACTS',
+      divider: this.literals.contacts,
       gridColumns: 6,
       icon: 'po-icon-mail',
     },
     {
       property: 'phone',
-      label: 'Celular',
+      label: this.literals.cell,
       mask: '(99) 99999-9999',
       gridColumns: 6,
     },
-    { property: 'address', label: 'Endereço', gridColumns: 6 },
+    { property: 'address', label: this.literals.address, gridColumns: 6 },
     {
       property: 'address_number',
-      label: 'Numero Endereço',
+      label: this.literals.addressNumber,
       type: 'number',
       gridColumns: 6,
     },
     {
       property: 'state',
-      label: 'Estado',
+      label: this.literals.state,
       gridColumns: 6,
       options: [
-        { label: 'Santa Catarina', value: 'Santa Catarina' },
-        { label: 'São Paulo', value: 'São Paulo' },
-        { label: 'Rio de Janeiro', value: 'Rio de Janeiro' },
-        { label: 'Minas Gerais', value: 'Minas Gerais' },
-        { label: 'Rio Grande do Sul', value: 'Rio Grande do Sul' },
+        {
+          label: this.literals.santaCatarina,
+          value: this.literals.santaCatarina,
+        },
+        { label: this.literals.saoPaulo, value: this.literals.saoPaulo },
+        {
+          label: this.literals.rioDeJaneiro,
+          value: this.literals.rioDeJaneiro,
+        },
+        { label: this.literals.minasGerais, value: this.literals.minasGerais },
+        {
+          label: this.literals.rioGrandeDoSul,
+          value: this.literals.rioGrandeDoSul,
+        },
       ],
     },
     {
       property: 'short_description',
-      label: 'Descrição',
+      label: this.literals.description,
       gridColumns: 12,
       gridSmColumns: 12,
       rows: 5,
-      placeholder: 'Breve descrição sobre voçê',
+      placeholder: this.literals.descriptionAboutYou,
     },
     {
       property: 'hobbies',
-      divider: 'Informações Adicionais',
+      divider: this.literals.additionalInformation,
       gridColumns: 6,
       gridSmColumns: 12,
       optional: true,
-      options: ['Futebol', 'Assistir filme', 'Bicicleta', 'Yoga', 'Viajar', 'Correr'],
+      options: [
+        this.literals.football,
+        this.literals.watchMovie,
+        this.literals.bicycle,
+        this.literals.yoga,
+        this.literals.travel,
+        this.literals.run,
+      ],
       optionsMulti: false,
     },
   ];
@@ -132,7 +151,7 @@ export class CurriculoModalComponent implements OnInit {
 
   confirmar: PoModalAction = {
     action: () => this.salvarCurriculo(),
-    label: 'Salvar',
+    label: this.literals.toSave,
   };
 
   fechar: PoModalAction = {
@@ -140,7 +159,7 @@ export class CurriculoModalComponent implements OnInit {
       this.modaFechadoOuSalvo.emit();
       this.poModal.close();
     },
-    label: 'Fechar',
+    label: this.literals.close,
     danger: true,
   };
 
@@ -153,29 +172,31 @@ export class CurriculoModalComponent implements OnInit {
     delete this.candidatoSelecionado.candidate;
     delete this.candidatoSelecionado.has_resume;
     delete this.candidatoSelecionado.resume_id;
-    
+
     if (this.novoRegistro) {
       this.carregandoBotaoSalvar(true);
 
-      this.curriculoService.salvarCurriculo(this.candidatoSelecionado).subscribe(
-        (r) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Salvo com sucesso',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+      this.curriculoService
+        .salvarCurriculo(this.candidatoSelecionado)
+        .subscribe(
+          (r) => {
+            Swal.fire({
+              icon: 'success',
+              title: this.literals.savedSuccessfully,
+              showConfirmButton: false,
+              timer: 1500,
+            });
 
-          this.modaFechadoOuSalvo.emit('salvar');
-          this.poModal.close();
+            this.modaFechadoOuSalvo.emit('salvar');
+            this.poModal.close();
 
-          this.carregandoBotaoSalvar(false);
-        },
-        (err) => {
-          this.carregandoBotaoSalvar(false);
-          this.poNotification.warning('Preencha o campo corretamente');
-        }
-      );
+            this.carregandoBotaoSalvar(false);
+          },
+          (err) => {
+            this.carregandoBotaoSalvar(false);
+            this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
+          }
+        );
     } else {
       this.carregandoBotaoSalvar(true);
       this.curriculoService
@@ -184,7 +205,7 @@ export class CurriculoModalComponent implements OnInit {
           (r) => {
             Swal.fire({
               icon: 'success',
-              title: 'Salvo com sucesso',
+              title: this.literals.savedSuccessfully,
               showConfirmButton: false,
               timer: 1500,
             });
@@ -195,7 +216,7 @@ export class CurriculoModalComponent implements OnInit {
           },
           (err) => {
             this.carregandoBotaoSalvar(false);
-            this.poNotification.warning('Preencha o campo corretamente');
+            this.poNotification.warning(this.literals.fillInTheFieldCorrectly);
           }
         );
     }
