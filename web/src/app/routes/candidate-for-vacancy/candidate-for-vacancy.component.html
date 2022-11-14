@@ -3,19 +3,19 @@
 </div>
 <po-divider></po-divider>
 <div *ngIf="(candidateForVacancy$ | async) as candidateForVacancy; else loading">
-    <div *ngFor="let candidatado of candidateForVacancy">
+    <div *ngFor="let candidate of candidateForVacancy">
 
-        <po-widget [id]="candidatado.classeTag" class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200"
+        <po-widget [id]="candidate.classeTag" class="po-sm-12 po-md-6 po-lg-3 po-text-center" [p-height]="200"
             [p-title]="literals.groupedByCandidates">
             <div class="po-row">
                 <div class="po-lg-12">
-                    <h3><strong>{{candidatado.candidate}}</strong></h3>
+                    <h3><strong>{{candidate.candidate}}</strong></h3>
                 </div>
             </div>
             <div class="po-row">
                 <div class="po-lg-12">
-                    <span *ngFor="let candidatadosVacancy of candidatado.vacancy">
-                        <h3>{{ candidatadosVacancy.nome }}.</h3>
+                    <span *ngFor="let candidateVacancy of candidate.vacancy">
+                        <h3>{{ candidateVacancy.name }}.</h3>
                     </span>
 
                 </div>

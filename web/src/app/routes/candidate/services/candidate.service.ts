@@ -14,7 +14,7 @@ export class CandidateService {
 
   listCandidatesToSelect(): Observable<Candidate[]> {
     return this.http
-      .get<Observable<Candidate[]>>(`${this.API}/candidatos`)
+      .get<Observable<Candidate[]>>(`${this.API}/candidates`)
       .pipe(
         map((candidatos: any) =>
           candidatos.map((candidato: any) => ({
@@ -25,16 +25,16 @@ export class CandidateService {
       );
   }
 
-  listCandidate(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(`${this.API}/candidatos`);
+  listCandidates(): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(`${this.API}/candidates`);
   }
   saveCandidates(req: Candidate) {
-    return this.http.post(`${this.API}/candidatos`, req);
+    return this.http.post(`${this.API}/candidates`, req);
   }
   editCandidates(id: number, req: Candidate) {
-    return this.http.put(`${this.API}/candidatos/${id}`, req);
+    return this.http.put(`${this.API}/candidates/${id}`, req);
   }
   deleteCandidates(id: number) {
-    return this.http.delete(`${this.API}/candidatos/${id}`);
+    return this.http.delete(`${this.API}/candidates/${id}`);
   }
 }

@@ -3,7 +3,7 @@
 </div>
 <po-divider>
 </po-divider>
-<po-button id="criar_nova_vaga" [p-label]="literals.create" (p-click)="createVacancy()"> </po-button>
+<po-button id="create_new_vacancy" [p-label]="literals.create" (p-click)="createVacancy()"> </po-button>
 
 <div *ngIf="(vacancies$ | async) as vacancy; else loading">
     <po-table [p-items]="vacancy" [p-columns]="columnVacancy" [p-actions]="actions">

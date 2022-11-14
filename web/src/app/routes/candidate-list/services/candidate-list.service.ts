@@ -12,12 +12,12 @@ export class CandidateListService {
   constructor(private http: HttpClient) {}
 
   listCandidate(): Observable<any> {
-    return this.http.get<any>(`${this.API}/lista_candidatados`);
+    return this.http.get<any>(`${this.API}/list_candidates`);
   }
-  saveCandidates(candidatado: object) {
-    return this.http.post(`${this.API}/lista_candidatados`, candidatado);
+  saveCandidates(candidate: object) {
+    return this.http.post(`${this.API}/list_candidates`, candidate);
   }
   deleteCandidates(id: number) {
-    return this.http.delete(`${this.API}/lista_candidatados/${id}`);
+    return this.http.delete(`${this.API}/list_candidates/${id}`);
   }
 }

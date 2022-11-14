@@ -42,7 +42,7 @@ export class VacancyModalComponent implements OnInit {
   }
 
   confirm: PoModalAction = {
-    action: () => this.salvarVaga(),
+    action: () => this.saveVacancy(),
     label: this.literals.toSave,
   };
 
@@ -55,7 +55,7 @@ export class VacancyModalComponent implements OnInit {
     danger: true,
   };
 
-  salvarVaga() {
+  saveVacancy() {
     if (this.newRegister) {
       this.loadingSaveButtom(true);
       this.vacanciesService.saveVacancies({ vacancy: this.inputVacancy }).subscribe(
@@ -66,7 +66,7 @@ export class VacancyModalComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500,
           });
-          this.closeOrSaveModal.emit('salvar');
+          this.closeOrSaveModal.emit('save');
           this.poModal.close();
           this.loadingSaveButtom(false);
         },
@@ -91,7 +91,7 @@ export class VacancyModalComponent implements OnInit {
               timer: 1500,
             });
 
-            this.closeOrSaveModal.emit('salvar');
+            this.closeOrSaveModal.emit('save');
             this.poModal.close();
             this.loadingSaveButtom(true);
           },

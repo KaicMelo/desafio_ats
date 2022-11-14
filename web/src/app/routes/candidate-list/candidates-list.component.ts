@@ -30,7 +30,7 @@ export class CandidateListComponent implements OnInit {
     private poNotification: PoNotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {} 
 
   saveApplication() {
     if (!this.candidateValue)

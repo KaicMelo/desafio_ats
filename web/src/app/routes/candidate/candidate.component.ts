@@ -17,7 +17,7 @@ import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 export class CandidateComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  public candidates$ = this.candidateService.listCandidate();
+  public candidates$ = this.candidateService.listCandidates();
 
   candidateSelected!: Candidate;
 
@@ -60,7 +60,7 @@ export class CandidateComponent implements OnInit {
     this.showModal = false;
 
     if (candidate == 'save') {
-      this.candidates$ = this.candidateService.listCandidate();
+      this.candidates$ = this.candidateService.listCandidates();
     }
   }
 
@@ -86,7 +86,7 @@ export class CandidateComponent implements OnInit {
           .deleteCandidates(candidate.id)
           .subscribe((r) => {
             this.candidates$ =
-              this.candidateService.listCandidate();
+              this.candidateService.listCandidates();
               Swal.fire({
                 confirmButtonColor: "var(--color-blue)",
                 icon: 'success',

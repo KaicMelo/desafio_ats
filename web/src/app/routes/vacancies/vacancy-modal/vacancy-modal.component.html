@@ -1,8 +1,8 @@
 <po-modal #modal [p-primary-action]="confirm" [p-secondary-action]="close" [p-title]="title" [p-hide-close]="true">
     <div class="po-row" *ngIf="newRegister">
-        <po-input class="po-lg-12" id="novaVaga" name="input" [p-label]="literals.jobName" [(ngModel)]="inputVacancy"> </po-input>
+        <po-input class="po-lg-12" id="newVacancy" name="input" [p-label]="literals.jobName" [(ngModel)]="inputVacancy"> </po-input>
     </div>
     <div class="po-row" *ngIf="!newRegister">
-        <po-input class="po-lg-12" id="alterarVaga" name="input" [p-label]="literals.jobName" [(ngModel)]="vacancySelected.vacancy"> </po-input>
+        <po-input class="po-lg-12" id="pdateVacancy" name="input" [p-label]="literals.jobName" [(ngModel)]="vacancySelected.vacancy"> </po-input>
     </div>
 </po-modal>
