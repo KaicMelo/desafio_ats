@@ -33,6 +33,11 @@ const routes: Routes = [
       import('./routes/resume/resume.module').then((m) => m.ResumeModule),
   },
   {
+    path: 'error',
+    loadChildren: () =>
+      import('./errors/global-error/globalError.module').then((m) => m.GlobalErrorModule),
+  },
+  {
     path: '**',
     redirectTo:'inicio'
   }
