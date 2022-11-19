@@ -1,6 +1,6 @@
+import { ErrorsModule } from './errors/errors.module';
 import { CandidateModule } from './routes/candidate/candidate.module';
 import { VacanciesModule } from './routes/vacancies/vacancies.module';
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -24,7 +24,8 @@ import { CandidateListModule } from './routes/candidate-list/candidates-list.mod
     CandidateListModule,
     PoMenuModule,
     VacanciesModule,
-    RouterModule
+    RouterModule,
+    ErrorsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

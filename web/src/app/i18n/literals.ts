@@ -117,6 +117,8 @@ export interface RawLiterals {
   changeVacancy: LiteralObject;
   wouldLikeToDeleteVacancy: LiteralObject;
   vacanciesCRUD: LiteralObject;
+  errorHasOcurred: LiteralObject;
+  dontWorryOurTeamAreResolving: LiteralObject;
 }
 export interface Literals {
   candidateApplies: string;
@@ -198,4 +200,6 @@ export interface Literals {
   changeVacancy: string;
   wouldLikeToDeleteVacancy: string;
   vacanciesCRUD: string;
+  errorHasOcurred: string;
+  dontWorryOurTeamAreResolving: string;
 }

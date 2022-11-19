@@ -9,11 +9,13 @@ import CandidateController from './controllers/candidateController';
 import VacanciesController from './controllers/vacanciesController';
 import SubscribersListController from './controllers/subscribersListController';
 import ResumeController from './controllers/resumeController';
+import ServerLogController from './controllers/ServerLogController';
 
 const candidateController = new CandidateController();
 const vacanciesController = new VacanciesController();
 const subscribersListController = new SubscribersListController();
 const resumeController = new ResumeController();
+const serverLogController = new ServerLogController();
 
 
 app.get('/candidates', candidateController.index);
@@ -35,5 +37,8 @@ app.get("/resume", resumeController.indexWithResume);
 app.post("/resume", resumeController.store);
 app.put("/resume/:id", resumeController.update);
 app.delete("/resume/:id", resumeController.destroy);
+
+app.get('/log', serverLogController.index);
+app.post('/log', serverLogController.store);
 
 app.listen(process.env.SERVE_PORT)

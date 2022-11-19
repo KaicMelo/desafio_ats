@@ -21,8 +21,10 @@
     "@fontsource/roboto": "^4.5.8",
     "@po-ui/ng-components": "^14.4.0",
     "@po-ui/ng-templates": "^14.4.0",
+    "@types/stacktrace-js": "^2.0.3",
     "roboto-regular": "^1.0.0",
     "rxjs": "~7.5.5",
+    "stacktrace-js": "^2.0.2",
     "sweetalert2": "^11.4.33",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
