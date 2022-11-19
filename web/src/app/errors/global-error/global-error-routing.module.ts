@@ -1,4 +1,4 @@
-import { GlobalErrorComponent } from '../global-error/global-error.component';
+import { GlobalErrorComponent } from './global-error.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

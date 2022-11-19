@@ -32,7 +32,7 @@ export class GlobalErrorHandler implements ErrorHandler {
         .subscribe(
           () => {
             console.log('Error logged on server')
-            router.navigate(['/error']);
+            // router.navigate(['/error']);
           },
           (err) => {
             console.log(err);
