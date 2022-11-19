@@ -5,7 +5,7 @@ export async function up(knex: Knex) {
     table.increments("id").primary();
     table.string("message").nullable();
     table.string("url").nullable();
-    table.string("stack").nullable();
+    table.text("stack").nullable();
     table.timestamp("created_at").notNullable();
   });
 }
