@@ -396,4 +396,14 @@ export const literals: RawLiterals | any = {
     es: 'CRUD de vacantes',
     en: 'Vacancies CRUD',
   },
+  errorHasOcurred: {
+    pt: 'Ops! Ocorreu um erro!',
+    es: 'Ups! Ocurrio un error!',
+    en: 'Ops! An error has ocurred!',
+  },
+  dontWorryOurTeamAreResolving: {
+    pt: 'Não se preocupe, nossa equipe está cuidando do problema!',
+    es: 'No te preocupes, nuestro equipo es consciente del problema!!',
+    en: 'Don´t worry, our team is aware of the problem!',
+  },
 };
