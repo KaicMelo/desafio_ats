@@ -1,13 +1,12 @@
-import Swal from 'sweetalert2';
 import { Candidate } from './interfaces/candidate.interface';
 import { CandidateService } from './services/candidate.service';
 import { Component, OnInit } from '@angular/core';
 import {
   PoTableAction,
   PoTableColumn,
-  PoNotificationService,
 } from '@po-ui/ng-components';
 import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
+import {CandidateEntity} from 'src/app/entities/candidate/candidate.entity';
 
 @Component({
   selector: 'app-candidate',
@@ -43,9 +42,7 @@ export class CandidateComponent implements OnInit {
     },
   ];
 
-  constructor(
-    private candidateService: CandidateService
-  ) {}
+  constructor(private candidateService: CandidateService, private candidateEntity:CandidateEntity) {}
 
   ngOnInit(): void {}
 
@@ -72,29 +69,8 @@ export class CandidateComponent implements OnInit {
     this.showModal = true;
   }
 
-  deleteCandidate(candidate: Candidate) {
-    Swal.fire({
-      title: `${this.literals.wouldLikeToDeleteCandidate}`,
-      showDenyButton: true,
-      confirmButtonColor: "var(--color-blue)",
-      confirmButtonText: this.literals.toDelete,
-      denyButtonText: this.literals.toCancel,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        this.candidateService
-          .deleteCandidates(candidate.id)
-          .subscribe((r) => {
-            this.candidates$ =
-              this.candidateService.listCandidates();
-              Swal.fire({
-                confirmButtonColor: "var(--color-blue)",
-                icon: 'success',
-                title: this.literals.deleted,
-                timer: 2000
-              });
-          });
-      }
-    });
+  async deleteCandidate(candidate: Candidate) {
+    this.candidates$ = this.candidateEntity.deleteCandidate(candidate)
+    // this.candidates$ = this.candidateService.listCandidates();
   }
 }
