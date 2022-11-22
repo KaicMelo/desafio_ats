@@ -1,9 +1,7 @@
+import { Observable } from 'rxjs';
 import { VacanciesService } from './services/vacancies.service';
 import { Component, OnInit } from '@angular/core';
-import {
-  PoTableAction,
-  PoTableColumn,
-} from '@po-ui/ng-components';
+import { PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import { Vacancies } from './interfaces/vacancies.interface';
 import Swal from 'sweetalert2';
@@ -11,12 +9,13 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-vacancies',
   templateUrl: './vacancies.component.html',
-  styleUrls: ['./vacancies.component.css']
+  styleUrls: ['./vacancies.component.css'],
 })
 export class VacanciesComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  public vacancies$ = this.vacanciesService.listVacancies();
+  public vacancies$!: Observable<Vacancies[]> 
+  
 
   vacanciesSelected!: Vacancies;
 
@@ -27,7 +26,7 @@ export class VacanciesComponent implements OnInit {
 
   readonly columnVacancy: Array<PoTableColumn> = [
     { property: 'id', label: this.literals.vacancyNumber },
-    { property: 'vacancy', label: this.literals.vacancies }
+    { property: 'vacancy', label: this.literals.vacancies },
   ];
 
   readonly actions: Array<PoTableAction> = [
@@ -43,18 +42,18 @@ export class VacanciesComponent implements OnInit {
     },
   ];
 
-  constructor(
-    private vacanciesService: VacanciesService,
-  ) {}
+  constructor(public vacanciesService: VacanciesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.vacancies$ = this.vacanciesService.listVacancies();
+  }
+
   createVacancy() {
     this.title = this.literals.registerNewVacancy;
     this.newRegister = true;
 
     this.showModal = true;
   }
-  
   closingModal(candidate: any) {
     this.showModal = false;
 

@@ -23,7 +23,6 @@ import { CandidateListComponent } from './candidates-list.component';
     ReactiveFormsModule,
     PoNotificationModule,
     PoWidgetModule,
-    PoDividerModule,
     SelectModule,
     CandidateListRoutingModule
   ]

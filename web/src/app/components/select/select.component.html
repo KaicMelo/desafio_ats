@@ -1,2 +1,2 @@
-<po-select (p-change)="onChange($event)" [p-label]="label" [p-placeholder]="literals.select" [p-options]="options">
+<po-select *ngIf="options && label" (p-change)="onChange($event)" [p-label]="label" [p-placeholder]="literals.select" [p-options]="options">
 </po-select> 

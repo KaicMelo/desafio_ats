@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { VacancyModalModule } from './vacancy-modal/vacancy-modal.module';
 import { LoadingModule } from './../../components/loading/loading.module';
 import { PoButtonModule, PoTableModule, PoDividerModule } from '@po-ui/ng-components';
