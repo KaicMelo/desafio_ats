@@ -5,27 +5,23 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VacanciesService {
-
   API = environment.API;
 
   constructor(private http: HttpClient) {}
 
   listVacanciesToSelect(): Observable<Vacancies[]> {
-    return this.http
-      .get<Observable<Vacancies[]>>(`${this.API}/vacancies`)
-      .pipe(
-        map((vacancies: any) =>
+    return this.http.get<Observable<Vacancies[]>>(`${this.API}/vacancies`).pipe(
+      map((vacancies: any) =>
         vacancies.map((vaga: any) => ({
-            label: vaga.vacancy,
-            value: vaga.id,
-          }))
-        )
-      );
+          label: vaga.vacancy,
+          value: vaga.id,
+        }))
+      )
+    );
   }
-
   listVacancies(): Observable<Vacancies[]> {
     return this.http.get<Vacancies[]>(`${this.API}/vacancies`);
   }

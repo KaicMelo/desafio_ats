@@ -1,3 +1,7 @@
+import { Candidate } from './../candidate/interfaces/candidate.interface';
+import { CandidateList } from './interfaces/candidates-list.interface';
+import { Vacancies } from './../vacancies/interfaces/vacancies.interface';
+import { Observable } from 'rxjs';
 import { PoNotificationService } from '@po-ui/ng-components';
 import { CandidateListService } from './services/candidate-list.service';
 import { CandidateService } from './../candidate/services/candidate.service';
@@ -14,9 +18,9 @@ import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 export class CandidateListComponent implements OnInit {
   literals: Literals = LiteralsFactory.getLiterals();
 
-  public vacancyList$ = this.vacanciesService.listVacanciesToSelect();
-  public candidateList$ = this.candidateService.listCandidatesToSelect();
-  public candidateForVacancyList$ = this.candidateListService.listCandidate();
+  public vacancyList$!: Observable<Vacancies[]>;
+  public candidateList$!: Observable<Candidate[]>;
+  public candidateForVacancyList$!: Observable<CandidateList[]>;
 
   candidateList: any[] = [];
   vacancyList: any[] = [];
@@ -30,7 +34,11 @@ export class CandidateListComponent implements OnInit {
     private poNotification: PoNotificationService
   ) {}
 
-  ngOnInit(): void {} 
+  ngOnInit(): void {
+    this.vacancyList$ = this.vacanciesService.listVacanciesToSelect();
+    this.candidateList$ = this.candidateService.listCandidatesToSelect();
+    this.candidateForVacancyList$ = this.candidateListService.listCandidate();
+  }
 
   saveApplication() {
     if (!this.candidateValue)
@@ -69,24 +77,22 @@ export class CandidateListComponent implements OnInit {
     Swal.fire({
       title: `${this.literals.wouldLikeToDeleteCandidacy} ?`,
       showDenyButton: true,
-      confirmButtonColor: "var(--color-blue)",
+      confirmButtonColor: 'var(--color-blue)',
       confirmButtonText: this.literals.toDelete,
       denyButtonText: this.literals.toCancel,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.candidateListService
-          .deleteCandidates(req)
-          .subscribe((r) => {
-            this.candidateForVacancyList$ =
-              this.candidateListService.listCandidate();
-              Swal.fire({
-                confirmButtonColor: "var(--color-blue)",
-                icon: 'success',
-                title: this.literals.deleted,
-                timer: 2000
-              });
+        this.candidateListService.deleteCandidates(req).subscribe((r) => {
+          this.candidateForVacancyList$ =
+            this.candidateListService.listCandidate();
+          Swal.fire({
+            confirmButtonColor: 'var(--color-blue)',
+            icon: 'success',
+            title: this.literals.deleted,
+            timer: 2000,
           });
+        });
       }
     });
   }

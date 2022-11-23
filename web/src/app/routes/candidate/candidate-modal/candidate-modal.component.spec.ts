@@ -1,23 +1,25 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CandidatoModalModule } from './candidate-modal.module';
+import { map } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { CandidateModalComponent } from './candidate-modal.component';
+import { CandidateModalComponent } from './candidate-modal.component';
 
-// describe('CandidateModalComponent', () => {
-//   let component: CandidateModalComponent;
-//   let fixture: ComponentFixture<CandidateModalComponent>;
+describe('CandidateModalComponent', () => {
+  let component: CandidateModalComponent;
+  let fixture: ComponentFixture<CandidateModalComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ CandidateModalComponent ]
-//     })
-//     .compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CandidateModalComponent ],
+      imports:[CandidatoModalModule]
+    })
+    .compileComponents();
 
-//     fixture = TestBed.createComponent(CandidateModalComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+    fixture = TestBed.createComponent(CandidateModalComponent);
+    component = fixture.componentInstance;
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

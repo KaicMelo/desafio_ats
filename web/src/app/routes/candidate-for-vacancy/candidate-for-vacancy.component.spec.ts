@@ -1,23 +1,25 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CandidateForVacancyModule } from './candidate-for-vacancy.module';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { CandidateForVacancyComponent } from './candidate-for-vacancy.component';
+import { CandidateForVacancyComponent } from './candidate-for-vacancy.component';
 
-// describe('CandidateForVacancyComponent', () => {
-//   let component: CandidateForVacancyComponent;
-//   let fixture: ComponentFixture<CandidateForVacancyComponent>;
+describe('CandidateForVacancyComponent', () => {
+  let component: CandidateForVacancyComponent;
+  let fixture: ComponentFixture<CandidateForVacancyComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ CandidateForVacancyComponent ]
-//     })
-//     .compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CandidateForVacancyComponent ],
+      imports:[CandidateForVacancyModule]
+    })
+    .compileComponents();
 
-//     fixture = TestBed.createComponent(CandidateForVacancyComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+    fixture = TestBed.createComponent(CandidateForVacancyComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
