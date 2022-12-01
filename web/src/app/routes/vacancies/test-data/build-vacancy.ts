@@ -1,4 +1,4 @@
-import { Vacancies } from './../interfaces/vacancies.interface';
+import { Vacancies } from '../interfaces/vacancies.interface';
 
 export function getObservableVacancy(): Vacancies[] {
   const vacancy: Vacancies[] = [

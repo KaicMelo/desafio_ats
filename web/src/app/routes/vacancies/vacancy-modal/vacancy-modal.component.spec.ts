@@ -3,7 +3,7 @@ import { VacancyModalModule } from './vacancy-modal.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VacancyModalComponent } from './vacancy-modal.component';
-import { getSimpleVacancy } from '../test/build-vacancy';
+import { getSimpleVacancy } from '../test-data/build-vacancy';
 import Swal from 'sweetalert2';
 
 describe(VacancyModalComponent.name, () => {

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import LiteralsFactory, { Literals } from 'src/app/i18n/literals';
 import Swal from 'sweetalert2';
 import { ResumeService } from './services/resume.service';
@@ -17,7 +18,7 @@ import {
 export class ResumeComponent implements OnInit {
   literals: Literals= LiteralsFactory.getLiterals();
 
-  public resume$ = this.resumeService.listResume(); 
+  public resume$!:Observable<Resume[]> 
 
   candidateSelected!: Resume;
 
@@ -62,7 +63,9 @@ export class ResumeComponent implements OnInit {
     private resumeService: ResumeService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.resume$ = this.resumeService.listResume(); 
+  }
 
   createResume(req: Resume) {
     if (req.has_resume == 'true') {
@@ -93,6 +96,7 @@ export class ResumeComponent implements OnInit {
     this.newRegister = false;
     this.showModal = true;
   }
+
   deleteResume(curriculo: Resume) {
     if (curriculo.has_resume == 'false') {
       this.poNotification.warning(this.literals.dontHaveCVToDelete);

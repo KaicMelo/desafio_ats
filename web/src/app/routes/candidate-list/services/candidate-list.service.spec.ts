@@ -2,7 +2,7 @@ import { Candidate } from './../../candidate/interfaces/candidate.interface';
 import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { getSimpleCandidate } from '../../candidate/test/build-candidate';
+import { getSimpleCandidate } from '../../candidate/test-data/build-candidate';
 import { CandidateListService } from './candidate-list.service';
 
 describe(CandidateListService.name, () => {
@@ -26,9 +26,10 @@ describe(CandidateListService.name, () => {
     spyOn(service, 'saveCandidates').and.returnValue(of(candidate));
 
     service.saveCandidates(candidate).subscribe((response: any) => {
+      done();
+      expect(response).toBeTruthy();
       expect(response.id).toEqual(candidate.id);
       expect(response.candidate).toEqual(candidate.candidate);
-      done();
     });
   });
 
@@ -38,9 +39,10 @@ describe(CandidateListService.name, () => {
     spyOn(service, 'deleteCandidates').and.returnValue(of(candidate));
 
     service.deleteCandidates(candidate.id).subscribe((response: any) => {
+      done();
+      expect(response).toBeTruthy();
       expect(response.id).toEqual(candidate.id);
       expect(response.candidate).toEqual(candidate.candidate);
-      done();
     });
   });
 
@@ -50,9 +52,9 @@ describe(CandidateListService.name, () => {
     spyOn(service, 'listCandidate').and.returnValue(of(candidate));
 
     service.listCandidate().subscribe((response: any) => {
+      done();
       expect(response.id).toEqual(candidate.id);
       expect(response.candidate).toEqual(candidate.candidate);
-      done();
     });
   });
 });

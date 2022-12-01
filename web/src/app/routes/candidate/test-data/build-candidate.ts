@@ -1,4 +1,4 @@
-import { Candidate } from './../interfaces/candidate.interface';
+import { Candidate } from '../interfaces/candidate.interface';
 
 export function getObservableCandidate(): Candidate[] {
   const candidate: Candidate[] = [

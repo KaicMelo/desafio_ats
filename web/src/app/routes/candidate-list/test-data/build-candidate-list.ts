@@ -1,4 +1,4 @@
-import { CandidateList, CandidateListToSave } from './../interfaces/candidates-list.interface';
+import { CandidateList, CandidateListToSave } from '../interfaces/candidates-list.interface';
 
 export function getObservableCandidateList(): CandidateList[] {
   const candidateList: CandidateList[] = [
@@ -18,13 +18,4 @@ export function getSimpleCandidateList(): CandidateList {
     vacancy: 'Analista',
   };
   return candidateList;
-}
-
-export function getSimpleCandidateToSave() {
-  const candidate: CandidateListToSave = {
-    id: 1,
-    vacancy_id: 1,
-    candidate_id: 2,
-  };
-  return candidate;
 }

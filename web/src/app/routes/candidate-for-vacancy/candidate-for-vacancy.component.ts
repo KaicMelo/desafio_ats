@@ -9,7 +9,7 @@ import { map } from 'rxjs';
   templateUrl: './candidate-for-vacancy.component.html',
   styleUrls: ['./candidate-for-vacancy.component.css'],
 })
-export class CandidateForVacancyComponent implements OnInit {
+export class CandidateForVacancyComponent {
   literals: Literals = LiteralsFactory.getLiterals();
 
   candidateForVacancy$ = this.candidatadosService.listCandidateForVacancy().pipe(
@@ -20,7 +20,7 @@ export class CandidateForVacancyComponent implements OnInit {
         for (var j = 0; j < i; j++) {
           if (response[j] && candidates[i].candidate == response[j].candidate) {
             response[j].vacancy.push({
-              name: candidates[i].vacancy,
+              name: candidates[i].vacancy,  
             });
             candidatadosIgual = true;
             break;
@@ -44,7 +44,4 @@ export class CandidateForVacancyComponent implements OnInit {
     })
   );
   constructor(private candidatadosService: CandidatadosService) {}
-
-  ngOnInit(): void {}
-
 }

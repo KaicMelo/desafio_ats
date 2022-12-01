@@ -1,13 +1,13 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import Swal, { SweetAlertOptions } from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { VacanciesService } from './services/vacancies.service';
 import { Vacancies } from './interfaces/vacancies.interface';
 import { VacanciesModule } from './vacancies.module';
 import { VacanciesComponent } from './vacancies.component';
-import { getObservableVacancy, getSimpleVacancy } from './test/build-vacancy';
+import { getObservableVacancy, getSimpleVacancy } from './test-data/build-vacancy';
 
 describe(VacanciesComponent.name, () => {
   let component: VacanciesComponent;
@@ -53,7 +53,7 @@ describe(VacanciesComponent.name, () => {
   });
 
   it(`#${VacanciesComponent.prototype.editVacancy.name} should open modal to edit vacancy when called`, () => {
-    const vacancy: Vacancies = getSimpleVacancy()
+    const vacancy: Vacancies = getSimpleVacancy();
 
     component.editVacancy(vacancy);
 
@@ -77,8 +77,8 @@ describe(VacanciesComponent.name, () => {
   });
 
   it(`#${VacanciesComponent.prototype.deleteVacancy.name} should delete vacancy when called`, async () => {
-    const vacancy: Vacancies = getSimpleVacancy()
-    
+    const vacancy: Vacancies = getSimpleVacancy();
+
     component.deleteVacancy(vacancy);
 
     spyOn(service, 'deleteVacancies').and.returnValue(of(vacancy));
@@ -88,4 +88,3 @@ describe(VacanciesComponent.name, () => {
     Swal.clickConfirm();
   });
 });
-
