@@ -27,28 +27,30 @@ describe(ResumeModalComponent.name, () => {
     expect(component).toBeTruthy();
   });
 
-  it(`#${ResumeModalComponent.prototype.loadingSaveButtom.name} should set status in PoModalAction  when called with value`, () => {
-    component.loadingSaveButtom(false);
+  // it(`#${ResumeModalComponent.prototype.loadingSaveButtom.name} should set status in PoModalAction  when called with value`, () => {
+  //   component.loadingSaveButtom(false);
 
-    expect(component.confirm.disabled).toBe(false);
-    expect(component.confirm.loading).toBe(false);
-  });
+  //   expect(component.confirm.disabled).toBe(false);
+  //   expect(component.confirm.loading).toBe(false);
+  // });
 
-  // it(`#${ResumeModalComponent.prototype.saveResume.name} should save new resume when called`, (done) => {
-  //   const candidate: Resume = getSimpleResume();
+  // it(`${ResumeModalComponent.prototype.saveResume.name} should save new resume when called`, (done) => {
+  //   const resume: Resume = getSimpleResume();
 
   //   component.newRegister = true;
-  //   component.candidateSelected = candidate;
+  //   component.candidateSelected = resume;
 
   //   component.saveResume();
 
-  //   spyOn(service, 'saveResume').and.returnValue(of(candidate));
+  //   spyOn(service, 'saveResume').and.returnValue(of(resume));
 
   //   fixture.detectChanges();
 
-  //   service.saveResume(candidate).subscribe((response) => {
-  //     expect(response).toBeTruthy();
-  //     done();
-  //   });
+  //   service
+  //     .saveResume(resume)
+  //     .subscribe((response) => {
+  //       expect(response).toBeTruthy();
+  //       done();
+  //     });
   // });
 });

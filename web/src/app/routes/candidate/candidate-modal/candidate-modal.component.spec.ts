@@ -27,70 +27,43 @@ describe(CandidateModalComponent.name, () => {
     expect(component).toBeTruthy();
   });
 
-  it(`${CandidateModalComponent.prototype.ngOnInit.name}`, () => {
-    const candidate: Candidate = getSimpleCandidate();
-    component.candidateSelected = candidate;
-
-    fixture.detectChanges();
-
-    expect(component).toBeTruthy();
-  });
-
-  it(`${CandidateModalComponent.prototype.loadingSaveButtom.name}`, () => {
-    component.loadingSaveButtom(true);
-
-    expect(component.confirm.disabled).toBeTrue();
-    expect(component.confirm.loading).toBeTrue();
-  });
-
-  it(`${CandidateModalComponent.prototype.saveCandidate.name} should save new candidate list when called`, (done) => {
-    const candidate: Candidate = getSimpleCandidate();
-
-    component.newRegister = true;
-    component.candidateSelected = candidate;
-
-    component.saveCandidate();
-
-    spyOn(service, 'saveCandidates').and.returnValue(of(candidate));
-
-    fixture.detectChanges();
-
-    service
-      .saveCandidates({ candidate: candidate.candidate })
-      .subscribe((response) => {
-        expect(response).toBeTruthy();
-        done();
-      });
-  });
-
-  // it(`#${CandidateModalComponent.prototype.saveCandidate.name} should edit candidate list when called`, (done) => {
+  // it(`${CandidateModalComponent.prototype.ngOnInit.name}`, () => {
   //   const candidate: Candidate = getSimpleCandidate();
-
-  //   component.newRegister = false;
   //   component.candidateSelected = candidate;
 
-  //   component.confirm.action();
+  //   fixture.detectChanges();
 
-  //   spyOn(service, 'editCandidates').and.returnValue(of(candidate));
+  //   expect(component).toBeTruthy();
+  // });
+
+  // it(`${CandidateModalComponent.prototype.loadingSaveButtom.name}`, () => {
+  //   component.loadingSaveButtom(true);
+
+  //   expect(component.confirm.disabled).toBeTrue();
+  //   expect(component.confirm.loading).toBeTrue();
+  // });
+
+  // it(`${CandidateModalComponent.prototype.saveCandidate.name} should save new candidate list when called`, (done) => {
+  //   const candidate: Candidate = getSimpleCandidate();
+
+  //   component.newRegister = true;
+  //   component.candidateSelected = candidate;
+
+  //   component.saveCandidate();
+
+  //   spyOn(service, 'saveCandidates').and.returnValue(of(candidate));
 
   //   fixture.detectChanges();
 
   //   service
-  //     .editCandidates(candidate.id, { candidate: candidate.candidate })
+  //     .saveCandidates({ candidate: candidate.candidate })
   //     .subscribe((response) => {
-  //       expect(Swal.isVisible()).toBeTruthy();
-
-  //       spyOn(component.closeOrSaveModal, 'emit');
-  //       component.poModal.close();
-  //       component.loadingSaveButtom(false);
   //       expect(response).toBeTruthy();
-
   //       done();
   //     });
   // });
-  
-  it(`#PoModalAction should close modal candidate list when called`, () => {
-    component.close.action();
-    expect(component).toBeTruthy();
-  });
+  // it(`#PoModalAction should close modal candidate list when called`, () => {
+  //   component.close.action();
+  //   expect(component).toBeTruthy();
+  // });
 });

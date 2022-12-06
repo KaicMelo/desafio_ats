@@ -1,16 +1,17 @@
-import LiteralsFactory, { Literals } from './../../../i18n/literals';
+import { VacanciesService } from './../services/vacancies.service';
+import { Vacancies } from './../interfaces/vacancies.interface';
+import { of } from 'rxjs';
 import { VacancyModalModule } from './vacancy-modal.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VacancyModalComponent } from './vacancy-modal.component';
 import { getSimpleVacancy } from '../test-data/build-vacancy';
-import Swal from 'sweetalert2';
 
 describe(VacancyModalComponent.name, () => {
   let component: VacancyModalComponent;
   let fixture: ComponentFixture<VacancyModalComponent>;
-  let literals: Literals = LiteralsFactory.getLiterals();
-  
+  let service: VacanciesService;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VacancyModalComponent],
@@ -19,26 +20,51 @@ describe(VacancyModalComponent.name, () => {
 
     fixture = TestBed.createComponent(VacancyModalComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(VacanciesService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
-  // it('(D)closeOrSaveModal should close modal when called', (done) => {
-  //   component.newRegister = true;
-  //   component.title = literals.changeVacancy
-  //   component.vacancySelected = getSimpleVacancy();
 
-  //   spyOn(component.closeOrSaveModal,'emit');
+  // it(`${VacancyModalComponent.prototype.ngOnInit.name}`, () => {
+  //   const vacancies: Vacancies = getSimpleVacancy();
+  //   component.vacancySelected = vacancies;
 
   //   fixture.detectChanges();
 
-  //   component.closeOrSaveModal.subscribe((next: any) => {
-  //      expect(Swal.isVisible()).toBeTruthy();
+  //   expect(component).toBeTruthy();
+  // });
 
-  //   Swal.clickConfirm();
-  //     done()
-  //   }); 
+  // it(`${VacancyModalComponent.prototype.loadingSaveButtom.name}`, () => {
+  //   component.loadingSaveButtom(true);
+
+  //   expect(component.confirm.disabled).toBeTrue();
+  //   expect(component.confirm.loading).toBeTrue();
+  // });
+
+  // it(`${VacancyModalComponent.prototype.saveVacancy.name} should save new Vacancy when called`, (done) => {
+  //   const vacancies: Vacancies = getSimpleVacancy();
+
+  //   component.newRegister = true;
+  //   component.vacancySelected = vacancies;
+
+  //   component.saveVacancy();
+
+  //   spyOn(service, 'saveVacancies').and.returnValue(of(vacancies));
+
+  //   fixture.detectChanges();
+
+  //   service
+  //     .saveVacancies({ vacancy: vacancies.vacancy })
+  //     .subscribe((response) => {
+  //       expect(response).toBeTruthy();
+  //       done();
+  //     });
+  // });
+
+  // it(`#PoModalAction should close modal Vacancy when called`, () => {
+  //   component.close.action();
+  //   expect(component).toBeTruthy();
   // });
 });
